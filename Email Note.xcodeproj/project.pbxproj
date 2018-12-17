@@ -1,0 +1,499 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B2A922D21C82B9000A1955C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0B2A922C21C82B9000A1955C /* .gitignore */; };
+		0B2A922F21C82D2400A1955C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0B2A922E21C82D2400A1955C /* Podfile */; };
+		0B8C421A21C317CF00B68F4D /* NoteToSelfPro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C421921C317CF00B68F4D /* NoteToSelfPro.swift */; };
+		0B8C421C21C31DD100B68F4D /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C421B21C31DD100B68F4D /* IAPHelper.swift */; };
+		0B8C421E21C32A2300B68F4D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8C421D21C32A2300B68F4D /* StoreKit.framework */; };
+		0BC833FE21936567002A9A6F /* SecureMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC833FD21936567002A9A6F /* SecureMail.swift */; };
+		0BF626EB21C01D43001E4551 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EA21C01D43001E4551 /* User.swift */; };
+		0BF626ED21C03133001E4551 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EC21C03133001E4551 /* SettingsTableViewController.swift */; };
+		0BF626EF21C03A75001E4551 /* Emails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EE21C03A75001E4551 /* Emails.swift */; };
+		0BF626F121C17148001E4551 /* AlertDarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626F021C17148001E4551 /* AlertDarkMode.swift */; };
+		D49CC1F52186992500B07B6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC1F42186992500B07B6D /* AppDelegate.swift */; };
+		D49CC1F72186992500B07B6D /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC1F62186992500B07B6D /* NoteViewController.swift */; };
+		D49CC1FA2186992500B07B6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D49CC1F82186992500B07B6D /* Main.storyboard */; };
+		D49CC1FC2186992700B07B6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49CC1FB2186992700B07B6D /* Assets.xcassets */; };
+		D49CC1FF2186992700B07B6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D49CC1FD2186992700B07B6D /* LaunchScreen.storyboard */; };
+		D4FB9D4921C349BD00F3A10E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4FB9D4821C349BD00F3A10E /* GoogleService-Info.plist */; };
+		F7B7A8D1CBE35B77165AAB16 /* Pods_Email_Note.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E1134CB874E0C3C852E862 /* Pods_Email_Note.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0B2A922C21C82B9000A1955C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		0B2A922E21C82D2400A1955C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		0B8C421921C317CF00B68F4D /* NoteToSelfPro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteToSelfPro.swift; sourceTree = "<group>"; };
+		0B8C421B21C31DD100B68F4D /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
+		0B8C421D21C32A2300B68F4D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0BC833FD21936567002A9A6F /* SecureMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureMail.swift; sourceTree = "<group>"; };
+		0BF626EA21C01D43001E4551 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0BF626EC21C03133001E4551 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		0BF626EE21C03A75001E4551 /* Emails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emails.swift; sourceTree = "<group>"; };
+		0BF626F021C17148001E4551 /* AlertDarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDarkMode.swift; sourceTree = "<group>"; };
+		1F85F174635A8FF74A39B664 /* Pods-Email Note.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Email Note.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Email Note/Pods-Email Note.debug.xcconfig"; sourceTree = "<group>"; };
+		BEC5CDFB5A564AE16F1B8FD5 /* Pods-Email Note.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Email Note.release.xcconfig"; path = "Pods/Target Support Files/Pods-Email Note/Pods-Email Note.release.xcconfig"; sourceTree = "<group>"; };
+		D49CC1F12186992500B07B6D /* Email Note.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Email Note.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D49CC1F42186992500B07B6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D49CC1F62186992500B07B6D /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		D49CC1F92186992500B07B6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D49CC1FB2186992700B07B6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D49CC1FE2186992700B07B6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D49CC2002186992700B07B6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4FB9D4821C349BD00F3A10E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D9E1134CB874E0C3C852E862 /* Pods_Email_Note.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Email_Note.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D49CC1EE2186992500B07B6D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7B7A8D1CBE35B77165AAB16 /* Pods_Email_Note.framework in Frameworks */,
+				0B8C421E21C32A2300B68F4D /* StoreKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4222A632D7B0420C7E40D748 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0B8C421D21C32A2300B68F4D /* StoreKit.framework */,
+				D9E1134CB874E0C3C852E862 /* Pods_Email_Note.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5DF38385F87E38877C366226 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1F85F174635A8FF74A39B664 /* Pods-Email Note.debug.xcconfig */,
+				BEC5CDFB5A564AE16F1B8FD5 /* Pods-Email Note.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D49CC1E82186992500B07B6D = {
+			isa = PBXGroup;
+			children = (
+				D49CC1F32186992500B07B6D /* Email Note */,
+				D49CC1F22186992500B07B6D /* Products */,
+				5DF38385F87E38877C366226 /* Pods */,
+				4222A632D7B0420C7E40D748 /* Frameworks */,
+				0B2A922E21C82D2400A1955C /* Podfile */,
+				0B2A922C21C82B9000A1955C /* .gitignore */,
+			);
+			sourceTree = "<group>";
+		};
+		D49CC1F22186992500B07B6D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D49CC1F12186992500B07B6D /* Email Note.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D49CC1F32186992500B07B6D /* Email Note */ = {
+			isa = PBXGroup;
+			children = (
+				D49CC1F42186992500B07B6D /* AppDelegate.swift */,
+				D4FB9D4621C347E900F3A10E /* View Controllers */,
+				D4FB9D4721C3480600F3A10E /* In-App Purchase */,
+				D4FB9D4A21C3612600F3A10E /* Utilities */,
+				D49CC1F82186992500B07B6D /* Main.storyboard */,
+				D49CC1FB2186992700B07B6D /* Assets.xcassets */,
+				D49CC1FD2186992700B07B6D /* LaunchScreen.storyboard */,
+				D49CC2002186992700B07B6D /* Info.plist */,
+				D4FB9D4821C349BD00F3A10E /* GoogleService-Info.plist */,
+			);
+			path = "Email Note";
+			sourceTree = "<group>";
+		};
+		D4FB9D4621C347E900F3A10E /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D49CC1F62186992500B07B6D /* NoteViewController.swift */,
+				0BF626EC21C03133001E4551 /* SettingsTableViewController.swift */,
+				0BF626F021C17148001E4551 /* AlertDarkMode.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D4FB9D4721C3480600F3A10E /* In-App Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				0B8C421921C317CF00B68F4D /* NoteToSelfPro.swift */,
+				0B8C421B21C31DD100B68F4D /* IAPHelper.swift */,
+			);
+			path = "In-App Purchase";
+			sourceTree = "<group>";
+		};
+		D4FB9D4A21C3612600F3A10E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0BF626EA21C01D43001E4551 /* User.swift */,
+				0BF626EE21C03A75001E4551 /* Emails.swift */,
+				0BC833FD21936567002A9A6F /* SecureMail.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D49CC1F02186992500B07B6D /* Email Note */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D49CC2032186992700B07B6D /* Build configuration list for PBXNativeTarget "Email Note" */;
+			buildPhases = (
+				598E305927A31AABC61EF72D /* [CP] Check Pods Manifest.lock */,
+				D49CC1ED2186992500B07B6D /* Sources */,
+				D49CC1EE2186992500B07B6D /* Frameworks */,
+				D49CC1EF2186992500B07B6D /* Resources */,
+				A6C712AC9CD0D74E6A2B918E /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Email Note";
+			productName = "Email Note";
+			productReference = D49CC1F12186992500B07B6D /* Email Note.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D49CC1E92186992500B07B6D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = "Blake Gordon";
+				TargetAttributes = {
+					D49CC1F02186992500B07B6D = {
+						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = D49CC1EC2186992500B07B6D /* Build configuration list for PBXProject "Email Note" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D49CC1E82186992500B07B6D;
+			productRefGroup = D49CC1F22186992500B07B6D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D49CC1F02186992500B07B6D /* Email Note */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D49CC1EF2186992500B07B6D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B2A922F21C82D2400A1955C /* Podfile in Resources */,
+				0B2A922D21C82B9000A1955C /* .gitignore in Resources */,
+				D49CC1FF2186992700B07B6D /* LaunchScreen.storyboard in Resources */,
+				D4FB9D4921C349BD00F3A10E /* GoogleService-Info.plist in Resources */,
+				D49CC1FC2186992700B07B6D /* Assets.xcassets in Resources */,
+				D49CC1FA2186992500B07B6D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		598E305927A31AABC61EF72D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Email Note-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6C712AC9CD0D74E6A2B918E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Email Note/Pods-Email Note-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Email Note/Pods-Email Note-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D49CC1ED2186992500B07B6D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B8C421C21C31DD100B68F4D /* IAPHelper.swift in Sources */,
+				0BF626EF21C03A75001E4551 /* Emails.swift in Sources */,
+				0BF626F121C17148001E4551 /* AlertDarkMode.swift in Sources */,
+				0BF626EB21C01D43001E4551 /* User.swift in Sources */,
+				0B8C421A21C317CF00B68F4D /* NoteToSelfPro.swift in Sources */,
+				0BF626ED21C03133001E4551 /* SettingsTableViewController.swift in Sources */,
+				D49CC1F72186992500B07B6D /* NoteViewController.swift in Sources */,
+				0BC833FE21936567002A9A6F /* SecureMail.swift in Sources */,
+				D49CC1F52186992500B07B6D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D49CC1F82186992500B07B6D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D49CC1F92186992500B07B6D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D49CC1FD2186992700B07B6D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D49CC1FE2186992700B07B6D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D49CC2012186992700B07B6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D49CC2022186992700B07B6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D49CC2042186992700B07B6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F85F174635A8FF74A39B664 /* Pods-Email Note.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W28XDYH3BU;
+				INFOPLIST_FILE = "Email Note/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.BlakeGordon.Email-Note";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D49CC2052186992700B07B6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BEC5CDFB5A564AE16F1B8FD5 /* Pods-Email Note.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W28XDYH3BU;
+				INFOPLIST_FILE = "Email Note/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.BlakeGordon.Email-Note";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D49CC1EC2186992500B07B6D /* Build configuration list for PBXProject "Email Note" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D49CC2012186992700B07B6D /* Debug */,
+				D49CC2022186992700B07B6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D49CC2032186992700B07B6D /* Build configuration list for PBXNativeTarget "Email Note" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D49CC2042186992700B07B6D /* Debug */,
+				D49CC2052186992700B07B6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D49CC1E92186992500B07B6D /* Project object */;
+}

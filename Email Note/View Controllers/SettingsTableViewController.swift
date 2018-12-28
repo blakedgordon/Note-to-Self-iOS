@@ -80,6 +80,11 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
                                   darkMode: User.darkMode)
             SVProgressHUD.dismiss()
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 90) {
+            if SVProgressHUD.isVisible() {
+                SVProgressHUD.showError(withStatus: "Timeout Error")
+            }
+        }
     }
     
     @IBAction func restorePurchasesPressed(_ sender: Any) {
@@ -93,6 +98,11 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
                                   actions: [UIAlertAction(title: "Ok", style: .default)],
                                   darkMode: User.darkMode)
             SVProgressHUD.dismiss()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+            if SVProgressHUD.isVisible() {
+                SVProgressHUD.showError(withStatus: "Timeout Error")
+            }
         }
     }
     

@@ -165,20 +165,20 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
             darkModeSwitch.isEnabled = false
             darkModeSwitch.isOn = false
             if Emails.remainingEmails > 0 {
-                let emailText = (Emails.remainingEmails == 1) ? "email" : "emails"
-                let remainingTime = (Emails.remainingTime == "00:00:00") ? "24 hours" : Emails.remainingTime
-                let label = "Send \(Emails.remainingEmails) more \(emailText) for the next \(remainingTime)"
-                remainingEmailsLabel.text = label
+                var emailText = (Emails.remainingEmails == 1) ? "email" : "emails"
+                var remainingTime = (Emails.remainingTime == "00:00:00") ? "24 hours" : Emails.remainingTime
+                remainingEmailsLabel.text = "Send \(Emails.remainingEmails) more \(emailText) for the next \(remainingTime)"
                 if remainingTime != "24 hours" {
                     timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                        self.remainingEmailsLabel.text = label
+                        emailText = (Emails.remainingEmails == 1) ? "email" : "emails"
+                        remainingTime = (Emails.remainingTime == "00:00:00") ? "24 hours" : Emails.remainingTime
+                        self.remainingEmailsLabel.text = "Send \(Emails.remainingEmails) more \(emailText) for the next \(remainingTime)"
                     }
                 }
             } else {
-                let label = "Please wait \(Emails.remainingTime) to send another email"
-                remainingEmailsLabel.text = label
+                remainingEmailsLabel.text = "Please wait \(Emails.remainingTime) to send another email"
                 timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                    self.remainingEmailsLabel.text = label
+                    self.remainingEmailsLabel.text = "Please wait \(Emails.remainingTime) to send another email"
                 }
             }
         }

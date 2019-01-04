@@ -133,7 +133,7 @@ class Emails {
         // 86,400 seconds is 24 hours
         // Remove dates that are older than 24 hours
         if sentDates.count > 0 {
-            while sentDates[sentDates.count - 1].timeIntervalSinceNow < -86400 {
+            while sentDates.count > 0 && sentDates[sentDates.count - 1].timeIntervalSinceNow < -86400 {
                 sentDates.removeLast()
             }
         }

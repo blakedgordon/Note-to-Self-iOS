@@ -102,7 +102,11 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
                 var timer: Timer?
                 if setTimer {
                     timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                        self.sendingLabel.text = message
+                        if message.contains("Please wait") {
+                            self.sendingLabel.text = "Please wait \(Emails.remainingTime) to send email,\nor upgrade to Pro!"
+                        } else {
+                            self.sendingLabel.text = message
+                        }
                     }
                 }
                 self.sending = false

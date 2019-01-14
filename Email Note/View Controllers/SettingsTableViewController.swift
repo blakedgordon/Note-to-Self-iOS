@@ -7,22 +7,25 @@
 //
 
 import UIKit
+import MessageUI
 import StoreKit
 import SVProgressHUD
 
-class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
+class SettingsTableViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
 
     @IBOutlet weak var validateEmailButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var darkModeLabel: UILabel!
     @IBOutlet weak var darkModeSwitch: UISwitch!
+    @IBOutlet weak var privacyLabel: UILabel!
+    @IBOutlet weak var contactLabel: UILabel!
     @IBOutlet weak var upgradeProButton: UIButton!
     @IBOutlet weak var restorePurchasesButton: UIButton!
     @IBOutlet weak var remainingEmailsLabel: UILabel!
     
     var timer: Timer? = nil
-    let numberOfTotalSections = 4
+    let numberOfTotalSections = 5
     
     var productsAvailable: [SKProduct]?
     
@@ -113,6 +116,9 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
         subjectTextField.delegate = self
         
         NoteToSelfPro.validateReceipt()
+        upgradeProButton.layer.cornerRadius = 2.5
+        upgradeProButton.setTitle(NoteToSelfPro.proPriceLabel, for: .normal)
+        upgradeProButton.updateConstraints()
         
         NotificationCenter.default.addObserver(self, selector: #selector(purchase),
                                                name: NSNotification.Name(rawValue: NoteToSelfPro.purchaseNotification), object: nil)
@@ -196,6 +202,20 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
         return sections
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(tableView.headerView(forSection: indexPath.section)?.textLabel?.text as Any)
+        if tableView.headerView(forSection: indexPath.section)?.textLabel?.text?.lowercased() == "support" {
+            if indexPath.row == 0 {
+                if let url = URL(string: "https://notetoselfapp.com#privacy"){
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            } else if indexPath.row == 1 {
+                sendEmailButtonTapped()
+            }
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -203,13 +223,15 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
     
     func darkMode(on: Bool) {
         self.view.backgroundColor = (on) ? UIColor.black : UIColor.groupTableViewBackground
-        self.tableView.separatorColor = (on) ? UIColor.darkGray : UIColor.lightGray
+        self.tableView.separatorColor = (on) ? UIColor.black : UIColor.lightGray
         self.navigationController?.navigationBar.barStyle = (on) ? .black : .default
         self.navigationController?.view.backgroundColor = (on) ? UIColor.black : UIColor.white
         emailTextField.textColor = (on) ? UIColor.white : UIColor.black
         subjectTextField.textColor = (on) ? UIColor.white : UIColor.black
         darkModeLabel.textColor = (on) ? UIColor.white : UIColor.black
         remainingEmailsLabel.textColor = (on) ? UIColor.white : UIColor.black
+        privacyLabel.textColor = (on) ? UIColor.white : UIColor.black
+        contactLabel.textColor = (on) ? UIColor.white : UIColor.black
         
         emailTextField.keyboardAppearance = (on) ? .dark : .light
         subjectTextField.keyboardAppearance = (on) ? .dark : .light
@@ -222,4 +244,31 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
                 UIColor.groupTableViewBackground
         }
     }
+    
+    // FUNCTIONS BELOW RECIEVED FROM STACK OVERFLOW TO SEND AN EMAIL
+    private func sendEmailButtonTapped() {
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        }
+    }
+    
+    private func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+        mailComposerVC.mailComposeDelegate = self
+        
+        mailComposerVC.setToRecipients(["support@notetoselfapp.com"])
+        
+        return mailComposerVC
+    }
+    
+    // MARK: MFMailComposeViewControllerDelegate
+    
+    private func mailComposeController(_ controller: MFMailComposeViewController,
+                                       didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+        
+    }
+    // END
 }

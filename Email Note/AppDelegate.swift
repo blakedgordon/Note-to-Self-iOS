@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         NoteToSelfPro.validateReceipt()
+        // Request products to load the price of Pro
+        NoteToSelfPro.store.requestProducts { (_, nil) in
+            return
+        }
         return true
     }
 

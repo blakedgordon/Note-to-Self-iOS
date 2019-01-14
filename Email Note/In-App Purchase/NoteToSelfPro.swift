@@ -33,6 +33,15 @@ class NoteToSelfPro {
         }
     }
     
+    static var proPriceLabel: String {
+        get {
+            return UserDefaults.standard.string(forKey: "proPriceLabel") ?? "$0.99/mo"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "proPriceLabel")
+        }
+    }
+    
     static func proAvailable(products: [SKProduct]?) -> Bool {
         return products?.contains(where: { (product) -> Bool in
             return product.productIdentifier == proProductKey

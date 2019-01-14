@@ -246,26 +246,26 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     }
     
     // FUNCTIONS BELOW RECIEVED FROM STACK OVERFLOW TO SEND AN EMAIL
-    private func sendEmailButtonTapped() {
+    func sendEmailButtonTapped() {
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
             self.present(mailComposeViewController, animated: true, completion: nil)
         }
     }
     
-    private func configuredMailComposeViewController() -> MFMailComposeViewController {
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
         mailComposerVC.mailComposeDelegate = self
         
-        mailComposerVC.setToRecipients(["support@notetoselfapp.com"])
+        mailComposerVC.setToRecipients(["Note to Self Support <support@notetoselfapp.com>"])
         
         return mailComposerVC
     }
     
     // MARK: MFMailComposeViewControllerDelegate
     
-    private func mailComposeController(_ controller: MFMailComposeViewController,
+    func mailComposeController(_ controller: MFMailComposeViewController,
                                        didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
         

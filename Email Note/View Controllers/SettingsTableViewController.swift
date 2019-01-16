@@ -71,23 +71,30 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     }
     
     @IBAction func upgradeToProPressed(_ sender: Any) {
-        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
-        SVProgressHUD.show(withStatus: "Processing...")
-        if NoteToSelfPro.proAvailable(products: productsAvailable) {
-            NoteToSelfPro.store.buyProduct(
-                NoteToSelfPro.getProduct(NoteToSelfPro.proProductKey, products: productsAvailable)!)
-        } else {
-            self.presentDarkAlert(title: "Unavailable",
-                                  message: "Looks like we've hit a snag and we can't seem to purchase this. Please contact support.",
-                                  actions: [UIAlertAction(title: "Ok", style: .default)],
-                                  darkMode: User.darkMode)
-            SVProgressHUD.dismiss()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 90) {
-            if SVProgressHUD.isVisible() {
-                SVProgressHUD.showError(withStatus: "Timeout Error")
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let purchaseAction = UIAlertAction(title: "Buy Pro", style: .default) { (_) in
+            SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
+            SVProgressHUD.show(withStatus: "Processing...")
+            if NoteToSelfPro.proAvailable(products: self.productsAvailable) {
+                NoteToSelfPro.store.buyProduct(
+                    NoteToSelfPro.getProduct(NoteToSelfPro.proProductKey, products: self.productsAvailable)!)
+            } else {
+                self.presentDarkAlert(title: "Unavailable",
+                                      message: "Looks like we've hit a snag and we can't seem to purchase this. Please contact support.",
+                                      actions: [UIAlertAction(title: "Ok", style: .default)],
+                                      darkMode: User.darkMode)
+                SVProgressHUD.dismiss()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 90) {
+                if SVProgressHUD.isVisible() {
+                    SVProgressHUD.showError(withStatus: "Timeout Error")
+                }
             }
         }
+        self.presentDarkAlert(title: "Upgrade to Pro",
+                              message: "You are about to subscribe to Pro for \(NoteToSelfPro.proPriceLabel). This is an auto-renewing subscription. Your iTunes Account will be charged within 24-hours prior to the end of the current period. To unsubscribe, visit your iTunes Account Settings to manage your subscription. If you unsubscribe from Pro, you will lose access to Pro features.",
+                              actions: [cancelAction, purchaseAction],
+                              darkMode: User.darkMode)
     }
     
     @IBAction func restorePurchasesPressed(_ sender: Any) {
@@ -116,7 +123,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         subjectTextField.delegate = self
         
         NoteToSelfPro.validateReceipt()
-        upgradeProButton.layer.cornerRadius = 2.5
+        upgradeProButton.layer.cornerRadius = 4
         upgradeProButton.setTitle(NoteToSelfPro.proPriceLabel, for: .normal)
         upgradeProButton.updateConstraints()
         

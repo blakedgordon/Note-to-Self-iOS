@@ -15,10 +15,12 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
 
     @IBOutlet weak var validateEmailButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var newEmailButton: UIButton!
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var darkModeLabel: UILabel!
     @IBOutlet weak var darkModeSwitch: UISwitch!
     @IBOutlet weak var privacyLabel: UILabel!
+    @IBOutlet weak var termsLabel: UILabel!
     @IBOutlet weak var contactLabel: UILabel!
     @IBOutlet weak var upgradeProButton: UIButton!
     @IBOutlet weak var restorePurchasesButton: UIButton!
@@ -164,12 +166,10 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
             self.productsAvailable = products
         }
         
-        if User.purchasedPro {
-            darkModeSwitch.isEnabled = true
-            darkModeSwitch.isOn = User.darkMode
-        } else {
-            darkModeSwitch.isEnabled = false
-            darkModeSwitch.isOn = false
+        newEmailButton.isEnabled = User.purchasedPro
+        darkModeSwitch.isEnabled = User.purchasedPro
+        darkModeSwitch.isOn = (User.purchasedPro) ? User.darkMode : false
+        if !User.purchasedPro {
             if Emails.remainingEmails > 0 {
                 var emailText = (Emails.remainingEmails == 1) ? "email" : "emails"
                 var remainingTime = (Emails.remainingTime == "00:00:00") ? "24 hours" : Emails.remainingTime
@@ -235,6 +235,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         darkModeLabel.textColor = (on) ? UIColor.white : UIColor.black
         remainingEmailsLabel.textColor = (on) ? UIColor.white : UIColor.black
         privacyLabel.textColor = (on) ? UIColor.white : UIColor.black
+        termsLabel.textColor = (on) ? UIColor.white : UIColor.black
         contactLabel.textColor = (on) ? UIColor.white : UIColor.black
         
         emailTextField.keyboardAppearance = (on) ? .dark : .light
@@ -245,6 +246,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         }
         for i in (0..<tableView.numberOfSections) {
             self.tableView.headerView(forSection: i)?.backgroundView?.backgroundColor = (on) ? UIColor.black :
+                UIColor.groupTableViewBackground
+            self.tableView.footerView(forSection: i)?.backgroundView?.backgroundColor = (on) ? UIColor.black :
                 UIColor.groupTableViewBackground
         }
     }

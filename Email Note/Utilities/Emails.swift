@@ -32,7 +32,6 @@ class Emails {
         }
     }
     
-    // Work in progress to transition this function out of the View Controller
     static func sendEmail(note: String,
                           completionHandler: @escaping (_ success: Bool, _ message: String, _ hideProgress: Bool, _ setTimer: Bool) -> ()) {
         SecureMail.validateCode(text: note)

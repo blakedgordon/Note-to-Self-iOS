@@ -12,11 +12,13 @@
 		0B8C421A21C317CF00B68F4D /* NoteToSelfPro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C421921C317CF00B68F4D /* NoteToSelfPro.swift */; };
 		0B8C421C21C31DD100B68F4D /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C421B21C31DD100B68F4D /* IAPHelper.swift */; };
 		0B8C421E21C32A2300B68F4D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8C421D21C32A2300B68F4D /* StoreKit.framework */; };
-		0BC833FE21936567002A9A6F /* SecureMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC833FD21936567002A9A6F /* SecureMail.swift */; };
 		0BF626EB21C01D43001E4551 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EA21C01D43001E4551 /* User.swift */; };
 		0BF626ED21C03133001E4551 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EC21C03133001E4551 /* SettingsTableViewController.swift */; };
 		0BF626EF21C03A75001E4551 /* Emails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EE21C03A75001E4551 /* Emails.swift */; };
 		0BF626F121C17148001E4551 /* AlertDarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626F021C17148001E4551 /* AlertDarkMode.swift */; };
+		D44537E822F621AA00950419 /* EmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44537E622F621AA00950419 /* EmailCell.swift */; };
+		D44537E922F621AA00950419 /* SettingsTableViewController+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44537E722F621AA00950419 /* SettingsTableViewController+Cells.swift */; };
+		D44537EB22F6220900950419 /* SecureMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44537EA22F6220900950419 /* SecureMail.swift */; };
 		D49CC1F52186992500B07B6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC1F42186992500B07B6D /* AppDelegate.swift */; };
 		D49CC1F72186992500B07B6D /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC1F62186992500B07B6D /* NoteViewController.swift */; };
 		D49CC1FA2186992500B07B6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D49CC1F82186992500B07B6D /* Main.storyboard */; };
@@ -32,13 +34,15 @@
 		0B8C421921C317CF00B68F4D /* NoteToSelfPro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteToSelfPro.swift; sourceTree = "<group>"; };
 		0B8C421B21C31DD100B68F4D /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		0B8C421D21C32A2300B68F4D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		0BC833FD21936567002A9A6F /* SecureMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureMail.swift; sourceTree = "<group>"; };
 		0BF626EA21C01D43001E4551 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0BF626EC21C03133001E4551 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		0BF626EE21C03A75001E4551 /* Emails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emails.swift; sourceTree = "<group>"; };
 		0BF626F021C17148001E4551 /* AlertDarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDarkMode.swift; sourceTree = "<group>"; };
 		1F85F174635A8FF74A39B664 /* Pods-Email Note.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Email Note.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Email Note/Pods-Email Note.debug.xcconfig"; sourceTree = "<group>"; };
 		BEC5CDFB5A564AE16F1B8FD5 /* Pods-Email Note.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Email Note.release.xcconfig"; path = "Pods/Target Support Files/Pods-Email Note/Pods-Email Note.release.xcconfig"; sourceTree = "<group>"; };
+		D44537E622F621AA00950419 /* EmailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailCell.swift; sourceTree = "<group>"; };
+		D44537E722F621AA00950419 /* SettingsTableViewController+Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SettingsTableViewController+Cells.swift"; sourceTree = "<group>"; };
+		D44537EA22F6220900950419 /* SecureMail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureMail.swift; sourceTree = "<group>"; };
 		D49CC1F12186992500B07B6D /* Email Note.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Email Note.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49CC1F42186992500B07B6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D49CC1F62186992500B07B6D /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 			children = (
 				D49CC1F62186992500B07B6D /* NoteViewController.swift */,
 				0BF626EC21C03133001E4551 /* SettingsTableViewController.swift */,
+				D44537E722F621AA00950419 /* SettingsTableViewController+Cells.swift */,
+				D44537E622F621AA00950419 /* EmailCell.swift */,
 				0BF626F021C17148001E4551 /* AlertDarkMode.swift */,
 			);
 			path = "View Controllers";
@@ -141,7 +147,7 @@
 			children = (
 				0BF626EA21C01D43001E4551 /* User.swift */,
 				0BF626EE21C03A75001E4551 /* Emails.swift */,
-				0BC833FD21936567002A9A6F /* SecureMail.swift */,
+				D44537EA22F6220900950419 /* SecureMail.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -287,9 +293,11 @@
 				0BF626F121C17148001E4551 /* AlertDarkMode.swift in Sources */,
 				0BF626EB21C01D43001E4551 /* User.swift in Sources */,
 				0B8C421A21C317CF00B68F4D /* NoteToSelfPro.swift in Sources */,
+				D44537EB22F6220900950419 /* SecureMail.swift in Sources */,
 				0BF626ED21C03133001E4551 /* SettingsTableViewController.swift in Sources */,
 				D49CC1F72186992500B07B6D /* NoteViewController.swift in Sources */,
-				0BC833FE21936567002A9A6F /* SecureMail.swift in Sources */,
+				D44537E922F621AA00950419 /* SettingsTableViewController+Cells.swift in Sources */,
+				D44537E822F621AA00950419 /* EmailCell.swift in Sources */,
 				D49CC1F52186992500B07B6D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

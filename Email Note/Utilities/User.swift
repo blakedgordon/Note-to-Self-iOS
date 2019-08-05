@@ -70,7 +70,7 @@ class User {
     }
     
     static func validateRequest(email: String) {
-        Auth.auth().fetchProviders(forEmail: email) { (providers, error) in
+        Auth.auth().fetchSignInMethods(forEmail: email) { (providers, error) in
             if let prov = providers, prov.count > 0 {
                 Auth.auth().signIn(withEmail: email, password: email, completion: { (result, error) in
                     result?.user.sendEmailVerification(completion: nil)
@@ -94,7 +94,7 @@ class User {
             return
         }
         for (index, email) in self.emails.enumerated() {
-            Auth.auth().fetchProviders(forEmail: email) { (providers, error) in
+            Auth.auth().fetchSignInMethods(forEmail: email) { (providers, error) in
                 if let prov = providers, prov.count > 0 {
                     Auth.auth().signIn(withEmail: email, password: email, completion: { (result, error) in
                         invalidEmails = self.verified(verified: (result?.user.isEmailVerified ?? false),

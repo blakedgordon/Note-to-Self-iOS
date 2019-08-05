@@ -63,6 +63,11 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                               actions: [UIAlertAction(title: "Ok", style: .default)], darkMode: User.darkMode)
     }
     
+    @IBAction func addNewEmailPressed(_ sender: Any) {
+        User.emails.append("")
+        tableView.reloadData()
+    }
+    
     @IBAction func darkSwitched(_ sender: UISwitch) {
         view.endEditing(true)
         User.darkMode = sender.isOn
@@ -136,6 +141,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                                   darkMode: User.darkMode)
             self.tableView.reloadData()
             darkModeSwitch.isEnabled = true
+            newEmailButton.isEnabled = true
         } else if result == "expired" {
             self.presentDarkAlert(title: "Expired",
                                   message: "Looks like your Pro subscription expired. Please renew your subscription by upgrading again.",
@@ -166,7 +172,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
             self.productsAvailable = products
         }
         
-        newEmailButton.isEnabled = User.purchasedPro
+        newEmailButton.isEnabled = (User.purchasedPro && User.emails.count < 5)
         darkModeSwitch.isEnabled = User.purchasedPro
         darkModeSwitch.isOn = (User.purchasedPro) ? User.darkMode : false
         if !User.purchasedPro {

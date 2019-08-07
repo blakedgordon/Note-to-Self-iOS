@@ -127,7 +127,7 @@
                         <sections>
                             <tableViewSection headerTitle="Emails" footerTitle="Pro subscribers have access to add up to 5 total emails to send notes to at the same time" id="Fne-ex-rzy">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="cvz-EQ-oGY">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EmailCell" id="cvz-EQ-oGY" customClass="EmailCell" customModule="Email_Note" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cvz-EQ-oGY" id="oto-eu-dLq">
@@ -135,12 +135,12 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LUi-or-tnn">
-                                                    <rect key="frame" x="38" y="0.0" width="360" height="44"/>
+                                                    <rect key="frame" x="38" y="0.0" width="332" height="44"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" textContentType="email"/>
                                                     <connections>
-                                                        <action selector="emailValueChanged:" destination="zeu-dI-Smr" eventType="editingChanged" id="90r-sT-W95"/>
+                                                        <action selector="emailValueChanged:" destination="cvz-EQ-oGY" eventType="editingChanged" id="u5y-P1-w11"/>
                                                     </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPJ-WF-XKa">
@@ -151,179 +151,39 @@
                                                     </constraints>
                                                     <color key="tintColor" red="0.94467798223350252" green="0.75202440674737481" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <connections>
-                                                        <action selector="validateEmail:" destination="zeu-dI-Smr" eventType="touchUpInside" id="Qwf-3I-NWO"/>
+                                                        <action selector="validateEmail:" destination="cvz-EQ-oGY" eventType="touchUpInside" id="3l2-G7-sjn"/>
                                                     </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NKd-9S-RDp">
+                                                    <rect key="frame" x="378" y="8" width="28" height="28"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="NKd-9S-RDp" secondAttribute="height" multiplier="1:1" id="AhP-iH-O3o"/>
+                                                    </constraints>
+                                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal" title="Button" image="xmark.circle" catalog="system"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="TPJ-WF-XKa" firstAttribute="centerY" secondItem="oto-eu-dLq" secondAttribute="centerY" id="AE8-VO-hfF"/>
+                                                <constraint firstAttribute="bottom" secondItem="NKd-9S-RDp" secondAttribute="bottom" constant="8" id="GWc-SP-FK4"/>
                                                 <constraint firstAttribute="bottom" secondItem="LUi-or-tnn" secondAttribute="bottom" id="Mbq-bk-OQF"/>
-                                                <constraint firstAttribute="trailing" secondItem="LUi-or-tnn" secondAttribute="trailing" constant="16" id="O9h-DK-J2b"/>
                                                 <constraint firstItem="LUi-or-tnn" firstAttribute="top" secondItem="oto-eu-dLq" secondAttribute="top" id="RCT-F6-hie"/>
+                                                <constraint firstItem="NKd-9S-RDp" firstAttribute="leading" secondItem="LUi-or-tnn" secondAttribute="trailing" constant="8" id="Tuo-0N-lhb"/>
                                                 <constraint firstItem="LUi-or-tnn" firstAttribute="leading" secondItem="TPJ-WF-XKa" secondAttribute="trailing" constant="8" id="a8K-fe-JEZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="NKd-9S-RDp" secondAttribute="trailing" constant="8" id="ddF-T1-Hze"/>
                                                 <constraint firstItem="TPJ-WF-XKa" firstAttribute="leading" secondItem="oto-eu-dLq" secondAttribute="leading" constant="8" id="rxW-J9-Ixk"/>
+                                                <constraint firstItem="NKd-9S-RDp" firstAttribute="top" secondItem="oto-eu-dLq" secondAttribute="top" constant="8" id="z76-Tl-Ze5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="clearButton" destination="NKd-9S-RDp" id="l6P-t3-rKe"/>
+                                            <outlet property="emailField" destination="LUi-or-tnn" id="eIG-Ih-E7U"/>
+                                            <outlet property="validateButton" destination="TPJ-WF-XKa" id="U8J-yF-bV1"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="L92-4b-ork">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NewEmailCell" id="8bG-Sp-IVc" customClass="NewEmailCell" customModule="Email_Note" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99.333332061767578" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L92-4b-ork" id="jbZ-AV-uCl">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vRc-Sd-GvJ">
-                                                    <rect key="frame" x="38" y="0.0" width="360" height="44"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" textContentType="email"/>
-                                                    <connections>
-                                                        <action selector="emailValueChanged:" destination="zeu-dI-Smr" eventType="editingChanged" id="6IW-1B-gOf"/>
-                                                    </connections>
-                                                </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5zO-c4-AFC">
-                                                    <rect key="frame" x="8" y="11" width="22" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="kZk-cl-Cgv"/>
-                                                        <constraint firstAttribute="width" constant="22" id="l9x-Pl-SKY"/>
-                                                    </constraints>
-                                                    <color key="tintColor" red="0.94467798219999999" green="0.75202440670000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <connections>
-                                                        <action selector="validateEmail:" destination="zeu-dI-Smr" eventType="touchUpInside" id="TYh-4z-99b"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="vRc-Sd-GvJ" secondAttribute="bottom" id="6Gp-f0-i8C"/>
-                                                <constraint firstItem="vRc-Sd-GvJ" firstAttribute="leading" secondItem="5zO-c4-AFC" secondAttribute="trailing" constant="8" id="6Xi-HV-leu"/>
-                                                <constraint firstItem="vRc-Sd-GvJ" firstAttribute="top" secondItem="jbZ-AV-uCl" secondAttribute="top" id="Fkh-97-GLH"/>
-                                                <constraint firstItem="5zO-c4-AFC" firstAttribute="leading" secondItem="jbZ-AV-uCl" secondAttribute="leading" constant="8" id="JPw-mf-kN7"/>
-                                                <constraint firstAttribute="trailing" secondItem="vRc-Sd-GvJ" secondAttribute="trailing" constant="16" id="ai2-Tp-r9V"/>
-                                                <constraint firstItem="5zO-c4-AFC" firstAttribute="centerY" secondItem="jbZ-AV-uCl" secondAttribute="centerY" id="xrr-q6-Ong"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="t3u-gn-rlv">
-                                        <rect key="frame" x="0.0" y="143.33333206176758" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t3u-gn-rlv" id="zlc-fX-hEk">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pXd-fS-iQZ">
-                                                    <rect key="frame" x="38" y="0.0" width="360" height="44"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" textContentType="email"/>
-                                                    <connections>
-                                                        <action selector="emailValueChanged:" destination="zeu-dI-Smr" eventType="editingChanged" id="gOF-C0-yiU"/>
-                                                    </connections>
-                                                </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IwA-om-KGp">
-                                                    <rect key="frame" x="8" y="11" width="22" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="9al-F1-1H8"/>
-                                                        <constraint firstAttribute="width" constant="22" id="fBR-qz-sW6"/>
-                                                    </constraints>
-                                                    <color key="tintColor" red="0.94467798219999999" green="0.75202440670000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <connections>
-                                                        <action selector="validateEmail:" destination="zeu-dI-Smr" eventType="touchUpInside" id="Q03-Hc-oIn"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="IwA-om-KGp" firstAttribute="centerY" secondItem="zlc-fX-hEk" secondAttribute="centerY" id="2kC-eK-21B"/>
-                                                <constraint firstItem="pXd-fS-iQZ" firstAttribute="top" secondItem="zlc-fX-hEk" secondAttribute="top" id="44s-ez-3MI"/>
-                                                <constraint firstAttribute="trailing" secondItem="pXd-fS-iQZ" secondAttribute="trailing" constant="16" id="OOt-QJ-nBU"/>
-                                                <constraint firstAttribute="bottom" secondItem="pXd-fS-iQZ" secondAttribute="bottom" id="ZQc-rS-am0"/>
-                                                <constraint firstItem="pXd-fS-iQZ" firstAttribute="leading" secondItem="IwA-om-KGp" secondAttribute="trailing" constant="8" id="iyi-6v-6eD"/>
-                                                <constraint firstItem="IwA-om-KGp" firstAttribute="leading" secondItem="zlc-fX-hEk" secondAttribute="leading" constant="8" id="jfs-ZQ-Kdb"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Gbh-Py-In1">
-                                        <rect key="frame" x="0.0" y="187.33333206176758" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gbh-Py-In1" id="6ha-YO-Usm">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oBq-F1-4rw">
-                                                    <rect key="frame" x="38" y="0.0" width="360" height="44"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" textContentType="email"/>
-                                                    <connections>
-                                                        <action selector="emailValueChanged:" destination="zeu-dI-Smr" eventType="editingChanged" id="bVL-tk-YdS"/>
-                                                    </connections>
-                                                </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Msu-Jb-W5R">
-                                                    <rect key="frame" x="8" y="11" width="22" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="22" id="SeW-Ar-hh5"/>
-                                                        <constraint firstAttribute="height" constant="22" id="q7m-X0-ONW"/>
-                                                    </constraints>
-                                                    <color key="tintColor" red="0.94467798219999999" green="0.75202440670000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <connections>
-                                                        <action selector="validateEmail:" destination="zeu-dI-Smr" eventType="touchUpInside" id="ctX-hD-S2c"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Msu-Jb-W5R" firstAttribute="centerY" secondItem="6ha-YO-Usm" secondAttribute="centerY" id="7Gl-hp-LP3"/>
-                                                <constraint firstAttribute="trailing" secondItem="oBq-F1-4rw" secondAttribute="trailing" constant="16" id="QOX-QR-cpH"/>
-                                                <constraint firstAttribute="bottom" secondItem="oBq-F1-4rw" secondAttribute="bottom" id="TT0-4x-N2r"/>
-                                                <constraint firstItem="Msu-Jb-W5R" firstAttribute="leading" secondItem="6ha-YO-Usm" secondAttribute="leading" constant="8" id="fru-S7-c71"/>
-                                                <constraint firstItem="oBq-F1-4rw" firstAttribute="top" secondItem="6ha-YO-Usm" secondAttribute="top" id="gHM-dG-xJP"/>
-                                                <constraint firstItem="oBq-F1-4rw" firstAttribute="leading" secondItem="Msu-Jb-W5R" secondAttribute="trailing" constant="8" id="oqm-7X-sH4"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="pQU-f5-RJf">
-                                        <rect key="frame" x="0.0" y="231.33333206176758" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pQU-f5-RJf" id="dgg-Lr-VrX">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="IEp-X3-InR">
-                                                    <rect key="frame" x="38" y="0.0" width="360" height="44"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" textContentType="email"/>
-                                                    <connections>
-                                                        <action selector="emailValueChanged:" destination="zeu-dI-Smr" eventType="editingChanged" id="bOL-po-SYh"/>
-                                                    </connections>
-                                                </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cth-RT-cJF">
-                                                    <rect key="frame" x="8" y="11" width="22" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="22" id="hSY-Ik-To1"/>
-                                                        <constraint firstAttribute="height" constant="22" id="qlR-5l-R25"/>
-                                                    </constraints>
-                                                    <color key="tintColor" red="0.94467798219999999" green="0.75202440670000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <connections>
-                                                        <action selector="validateEmail:" destination="zeu-dI-Smr" eventType="touchUpInside" id="dqW-r2-vfg"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="cth-RT-cJF" firstAttribute="leading" secondItem="dgg-Lr-VrX" secondAttribute="leading" constant="8" id="1Ht-S4-TGu"/>
-                                                <constraint firstAttribute="trailing" secondItem="IEp-X3-InR" secondAttribute="trailing" constant="16" id="1e7-Pk-mSL"/>
-                                                <constraint firstItem="cth-RT-cJF" firstAttribute="centerY" secondItem="dgg-Lr-VrX" secondAttribute="centerY" id="Bab-vA-LvO"/>
-                                                <constraint firstItem="IEp-X3-InR" firstAttribute="leading" secondItem="cth-RT-cJF" secondAttribute="trailing" constant="8" id="Ky2-5P-6gh"/>
-                                                <constraint firstItem="IEp-X3-InR" firstAttribute="top" secondItem="dgg-Lr-VrX" secondAttribute="top" id="MMM-e1-0YS"/>
-                                                <constraint firstAttribute="bottom" secondItem="IEp-X3-InR" secondAttribute="bottom" id="hT5-8O-hyr"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="8bG-Sp-IVc">
-                                        <rect key="frame" x="0.0" y="275.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8bG-Sp-IVc" id="cCP-61-ctl">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -333,7 +193,7 @@
                                                     <rect key="frame" x="8" y="8" width="398" height="28"/>
                                                     <state key="normal" title="+ Add New Email"/>
                                                     <connections>
-                                                        <action selector="addNewEmailPressed:" destination="zeu-dI-Smr" eventType="touchUpInside" id="pnu-B8-Sic"/>
+                                                        <action selector="addNewEmailPressed:" destination="8bG-Sp-IVc" eventType="touchUpInside" id="6Yl-kU-yLO"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -351,7 +211,7 @@
                             <tableViewSection headerTitle="Email Subject Line" id="BPb-bq-8Ni">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="FDI-is-R5B">
-                                        <rect key="frame" x="0.0" y="403.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="227.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FDI-is-R5B" id="8ai-0I-zLY">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -376,7 +236,7 @@
                             <tableViewSection headerTitle="Dark Mode" id="WHk-sN-6CS">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="eKt-Jw-qD7">
-                                        <rect key="frame" x="0.0" y="503.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="327.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eKt-Jw-qD7" id="08R-jJ-Ytk">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -409,7 +269,7 @@
                             <tableViewSection headerTitle="Support" id="IC0-0n-nnE" userLabel="Support">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="g8x-bn-Xaf">
-                                        <rect key="frame" x="0.0" y="603.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="427.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g8x-bn-Xaf" id="Qpm-uI-lwY">
                                             <rect key="frame" x="0.0" y="0.0" width="382.66666666666669" height="44"/>
@@ -431,7 +291,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="UuN-3j-SqC">
-                                        <rect key="frame" x="0.0" y="647.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="471.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UuN-3j-SqC" id="eAw-8E-lG2">
                                             <rect key="frame" x="0.0" y="0.0" width="382.66666666666669" height="44"/>
@@ -453,7 +313,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="l9K-x5-6t5">
-                                        <rect key="frame" x="0.0" y="691.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="515.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l9K-x5-6t5" id="ycb-xe-B80">
                                             <rect key="frame" x="0.0" y="0.0" width="382.66666666666669" height="44"/>
@@ -480,7 +340,7 @@
                                 <string key="footerTitle">Subscribe to Pro and get Unlimited Emails, up to 5 emails to send to simultaneously, and Dark Mode. Pro Subscription is Auto-Renewing and will be charged to your iTunes Account within 24h before the end of the current period. Manage your subscription at your iTunes Account Settings.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="PqQ-Lo-HK7">
-                                        <rect key="frame" x="0.0" y="798.66666412353516" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="622.66666412353516" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PqQ-Lo-HK7" id="C9C-AE-qql">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -517,7 +377,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="f01-L4-hrj">
-                                        <rect key="frame" x="0.0" y="842.66666412353516" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="666.66666412353516" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f01-L4-hrj" id="Jil-1d-jWi">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -541,7 +401,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="h9z-V4-YhA">
-                                        <rect key="frame" x="0.0" y="886.66666412353516" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="710.66666412353516" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h9z-V4-YhA" id="DYj-DC-joc">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -581,7 +441,6 @@
                         <outlet property="contactLabel" destination="opJ-kh-jV0" id="KIQ-1s-iVe"/>
                         <outlet property="darkModeLabel" destination="oP1-nn-e4w" id="yth-7s-y9q"/>
                         <outlet property="darkModeSwitch" destination="FUm-XY-N7U" id="zFN-G5-rNb"/>
-                        <outlet property="emailTextField" destination="LUi-or-tnn" id="1zb-3V-sQ8"/>
                         <outlet property="newEmailButton" destination="PsD-PN-emf" id="rlR-Ud-9Gf"/>
                         <outlet property="privacyLabel" destination="b2T-ol-D4P" id="uJO-zl-U6Z"/>
                         <outlet property="remainingEmailsLabel" destination="wmN-Hi-sMc" id="0pj-oM-W9Y"/>
@@ -589,7 +448,6 @@
                         <outlet property="subjectTextField" destination="SM5-ax-csM" id="Hnh-3a-JkV"/>
                         <outlet property="termsLabel" destination="K7r-9g-gGE" id="P52-OV-6Nu"/>
                         <outlet property="upgradeProButton" destination="ycc-VP-hW4" id="GQ4-hr-6av"/>
-                        <outlet property="validateEmailButton" destination="TPJ-WF-XKa" id="GRr-TL-ais"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UdL-Am-cHq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -615,5 +473,6 @@
     </scenes>
     <resources>
         <image name="gear" width="20" height="20"/>
+        <image name="xmark.circle" catalog="system" width="64" height="62"/>
     </resources>
 </document>

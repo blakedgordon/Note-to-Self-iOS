@@ -12,10 +12,12 @@
 		0B8C421A21C317CF00B68F4D /* NoteToSelfPro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C421921C317CF00B68F4D /* NoteToSelfPro.swift */; };
 		0B8C421C21C31DD100B68F4D /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C421B21C31DD100B68F4D /* IAPHelper.swift */; };
 		0B8C421E21C32A2300B68F4D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8C421D21C32A2300B68F4D /* StoreKit.framework */; };
+		0BDD231222FB82AF00204D66 /* NewEmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDD231122FB82AF00204D66 /* NewEmailCell.swift */; };
 		0BF626EB21C01D43001E4551 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EA21C01D43001E4551 /* User.swift */; };
 		0BF626ED21C03133001E4551 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EC21C03133001E4551 /* SettingsTableViewController.swift */; };
 		0BF626EF21C03A75001E4551 /* Emails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EE21C03A75001E4551 /* Emails.swift */; };
 		0BF626F121C17148001E4551 /* AlertDarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626F021C17148001E4551 /* AlertDarkMode.swift */; };
+		5DA18FE99EF9F4A4D5F49ED3 /* Pods_Email_Note.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B81C71D186F6275ACF7CE63 /* Pods_Email_Note.framework */; };
 		D44537E822F621AA00950419 /* EmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44537E622F621AA00950419 /* EmailCell.swift */; };
 		D44537E922F621AA00950419 /* SettingsTableViewController+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44537E722F621AA00950419 /* SettingsTableViewController+Cells.swift */; };
 		D44537EB22F6220900950419 /* SecureMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44537EA22F6220900950419 /* SecureMail.swift */; };
@@ -25,21 +27,22 @@
 		D49CC1FC2186992700B07B6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49CC1FB2186992700B07B6D /* Assets.xcassets */; };
 		D49CC1FF2186992700B07B6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D49CC1FD2186992700B07B6D /* LaunchScreen.storyboard */; };
 		D4FB9D4921C349BD00F3A10E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4FB9D4821C349BD00F3A10E /* GoogleService-Info.plist */; };
-		F7B7A8D1CBE35B77165AAB16 /* Pods_Email_Note.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E1134CB874E0C3C852E862 /* Pods_Email_Note.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0B2A922C21C82B9000A1955C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		0B2A922E21C82D2400A1955C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		0B2A922E21C82D2400A1955C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0B8C421921C317CF00B68F4D /* NoteToSelfPro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteToSelfPro.swift; sourceTree = "<group>"; };
 		0B8C421B21C31DD100B68F4D /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		0B8C421D21C32A2300B68F4D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0BDD231122FB82AF00204D66 /* NewEmailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEmailCell.swift; sourceTree = "<group>"; };
 		0BF626EA21C01D43001E4551 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0BF626EC21C03133001E4551 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		0BF626EE21C03A75001E4551 /* Emails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emails.swift; sourceTree = "<group>"; };
 		0BF626F021C17148001E4551 /* AlertDarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDarkMode.swift; sourceTree = "<group>"; };
-		1F85F174635A8FF74A39B664 /* Pods-Email Note.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Email Note.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Email Note/Pods-Email Note.debug.xcconfig"; sourceTree = "<group>"; };
-		BEC5CDFB5A564AE16F1B8FD5 /* Pods-Email Note.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Email Note.release.xcconfig"; path = "Pods/Target Support Files/Pods-Email Note/Pods-Email Note.release.xcconfig"; sourceTree = "<group>"; };
+		6B81C71D186F6275ACF7CE63 /* Pods_Email_Note.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Email_Note.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A497449623A4A138CB6EB7F6 /* Pods-Email Note.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Email Note.release.xcconfig"; path = "Target Support Files/Pods-Email Note/Pods-Email Note.release.xcconfig"; sourceTree = "<group>"; };
+		B78414B622D908CB802408E0 /* Pods-Email Note.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Email Note.debug.xcconfig"; path = "Target Support Files/Pods-Email Note/Pods-Email Note.debug.xcconfig"; sourceTree = "<group>"; };
 		D44537E622F621AA00950419 /* EmailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailCell.swift; sourceTree = "<group>"; };
 		D44537E722F621AA00950419 /* SettingsTableViewController+Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SettingsTableViewController+Cells.swift"; sourceTree = "<group>"; };
 		D44537EA22F6220900950419 /* SecureMail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureMail.swift; sourceTree = "<group>"; };
@@ -51,7 +54,6 @@
 		D49CC1FE2186992700B07B6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D49CC2002186992700B07B6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4FB9D4821C349BD00F3A10E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		D9E1134CB874E0C3C852E862 /* Pods_Email_Note.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Email_Note.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7B7A8D1CBE35B77165AAB16 /* Pods_Email_Note.framework in Frameworks */,
 				0B8C421E21C32A2300B68F4D /* StoreKit.framework in Frameworks */,
+				5DA18FE99EF9F4A4D5F49ED3 /* Pods_Email_Note.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,18 +73,18 @@
 			isa = PBXGroup;
 			children = (
 				0B8C421D21C32A2300B68F4D /* StoreKit.framework */,
-				D9E1134CB874E0C3C852E862 /* Pods_Email_Note.framework */,
+				6B81C71D186F6275ACF7CE63 /* Pods_Email_Note.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5DF38385F87E38877C366226 /* Pods */ = {
+		4726E7032E24AE460F6F6B07 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1F85F174635A8FF74A39B664 /* Pods-Email Note.debug.xcconfig */,
-				BEC5CDFB5A564AE16F1B8FD5 /* Pods-Email Note.release.xcconfig */,
+				B78414B622D908CB802408E0 /* Pods-Email Note.debug.xcconfig */,
+				A497449623A4A138CB6EB7F6 /* Pods-Email Note.release.xcconfig */,
 			);
-			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		D49CC1E82186992500B07B6D = {
@@ -90,10 +92,10 @@
 			children = (
 				D49CC1F32186992500B07B6D /* Email Note */,
 				D49CC1F22186992500B07B6D /* Products */,
-				5DF38385F87E38877C366226 /* Pods */,
 				4222A632D7B0420C7E40D748 /* Frameworks */,
 				0B2A922E21C82D2400A1955C /* Podfile */,
 				0B2A922C21C82B9000A1955C /* .gitignore */,
+				4726E7032E24AE460F6F6B07 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +130,7 @@
 				0BF626EC21C03133001E4551 /* SettingsTableViewController.swift */,
 				D44537E722F621AA00950419 /* SettingsTableViewController+Cells.swift */,
 				D44537E622F621AA00950419 /* EmailCell.swift */,
+				0BDD231122FB82AF00204D66 /* NewEmailCell.swift */,
 				0BF626F021C17148001E4551 /* AlertDarkMode.swift */,
 			);
 			path = "View Controllers";
@@ -159,11 +162,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D49CC2032186992700B07B6D /* Build configuration list for PBXNativeTarget "Email Note" */;
 			buildPhases = (
-				598E305927A31AABC61EF72D /* [CP] Check Pods Manifest.lock */,
+				12CD75F94CCB93609C7A9BFD /* [CP] Check Pods Manifest.lock */,
 				D49CC1ED2186992500B07B6D /* Sources */,
 				D49CC1EE2186992500B07B6D /* Frameworks */,
 				D49CC1EF2186992500B07B6D /* Resources */,
-				A6C712AC9CD0D74E6A2B918E /* [CP] Embed Pods Frameworks */,
+				46D9F8D33D5B137D687551CA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,7 +233,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		598E305927A31AABC61EF72D /* [CP] Check Pods Manifest.lock */ = {
+		12CD75F94CCB93609C7A9BFD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -252,7 +255,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A6C712AC9CD0D74E6A2B918E /* [CP] Embed Pods Frameworks */ = {
+		46D9F8D33D5B137D687551CA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -287,6 +290,7 @@
 				D44537E922F621AA00950419 /* SettingsTableViewController+Cells.swift in Sources */,
 				D44537E822F621AA00950419 /* EmailCell.swift in Sources */,
 				D49CC1F52186992500B07B6D /* AppDelegate.swift in Sources */,
+				0BDD231222FB82AF00204D66 /* NewEmailCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,7 +434,7 @@
 		};
 		D49CC2042186992700B07B6D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F85F174635A8FF74A39B664 /* Pods-Email Note.debug.xcconfig */;
+			baseConfigurationReference = B78414B622D908CB802408E0 /* Pods-Email Note.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -452,7 +456,7 @@
 		};
 		D49CC2052186992700B07B6D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BEC5CDFB5A564AE16F1B8FD5 /* Pods-Email Note.release.xcconfig */;
+			baseConfigurationReference = A497449623A4A138CB6EB7F6 /* Pods-Email Note.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

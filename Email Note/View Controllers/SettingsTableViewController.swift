@@ -13,8 +13,6 @@ import SVProgressHUD
 
 class SettingsTableViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
 
-    @IBOutlet weak var validateEmailButton: UIButton!
-    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var newEmailButton: UIButton!
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var darkModeLabel: UILabel!
@@ -32,35 +30,36 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     var productsAvailable: [SKProduct]?
     
     @IBAction func doneButtonPressed(_ sender: Any) {
-        if let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), User.isValidEmail(email) {
-            User.mainEmail = email
+        let rows = tableView.numberOfRows(inSection: 0)
+        var emails: [String] = []
+        var invalidEmail = false
+        for row in 0..<rows {
+            let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? EmailCell
+            if let emailCell = cell, let email = emailCell.emailField.text {
+                emails.append(email)
+                if !User.isValidEmail(email) {
+                    invalidEmail = true
+                }
+            }
+        }
+        
+        if !invalidEmail {
+            User.emails = emails
             if let subject = subjectTextField.text, subject != "" {
                 SecureMail.subject = subject
             }
             view.endEditing(true)
             dismiss(animated: true)
         } else {
-            let alertTitle = "Enter Email"
-            let alertMessage = "Please enter a valid email address"
+            var alertTitle = "Invalid Email"
+            var alertMessage = "One or more of the emails you entered was invalid"
+            if User.emails.count == 1 {
+                alertTitle = "Enter Email"
+                alertMessage = "Please enter a valid email address"
+            }
             let alertAction = UIAlertAction(title: "Ok", style: .default)
             self.presentDarkAlert(title: alertTitle, message: alertMessage, actions: [alertAction], darkMode: User.darkMode)
         }
-    }
-    
-    @IBAction func emailValueChanged(_ sender: Any) {
-        if User.emailsValidated.keys.contains(emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? " ") {
-            validateEmailButton.isEnabled = true
-            self.validateEmailButton.isUserInteractionEnabled = false
-            self.validateEmailButton.tintColor = UIColor.green
-        } else {
-            validateEmailButton.isEnabled = false
-        }
-    }
-    
-    @IBAction func validateEmail(_ sender: Any) {
-        User.validateRequest(email: User.mainEmail)
-        self.presentDarkAlert(title: "Request Sent", message: "Email validation request sent!",
-                              actions: [UIAlertAction(title: "Ok", style: .default)], darkMode: User.darkMode)
     }
     
     @IBAction func addNewEmailPressed(_ sender: Any) {
@@ -119,7 +118,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emailTextField.delegate = self
         subjectTextField.delegate = self
         
         NoteToSelfPro.validateReceipt()
@@ -157,14 +155,19 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        emailTextField.text = User.mainEmail
         subjectTextField.text = SecureMail.subject
         
         User.validatedEmails { (invalidEmails) in
-            self.validateEmailButton.isEnabled = true
-            if let mainEmail = self.emailTextField.text, !invalidEmails.contains(mainEmail) {
-                self.validateEmailButton.isUserInteractionEnabled = false
-                self.validateEmailButton.tintColor = UIColor.green
+            let rows = self.tableView.numberOfRows(inSection: 0)
+            for row in 0..<rows {
+                let cell = self.tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? EmailCell
+                if let emailCell = cell, let email = emailCell.emailField.text {
+                    emailCell.validateButton.isEnabled = true
+                    if !invalidEmails.contains(email) {
+                        emailCell.validateButton.isUserInteractionEnabled = false
+                        emailCell.tintColor = UIColor.green
+                    }
+                }
             }
         }
         
@@ -209,7 +212,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(tableView.headerView(forSection: indexPath.section)?.textLabel?.text as Any)
         if tableView.headerView(forSection: indexPath.section)?.textLabel?.text?.lowercased() == "support" {
             if indexPath.row == 0 {
                 if let url = URL(string: "https://notetoselfapp.com#privacy"){
@@ -236,7 +238,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         self.tableView.separatorColor = (on) ? UIColor.black : UIColor.lightGray
         self.navigationController?.navigationBar.barStyle = (on) ? .black : .default
         self.navigationController?.view.backgroundColor = (on) ? UIColor.black : UIColor.white
-        emailTextField.textColor = (on) ? UIColor.white : UIColor.black
         subjectTextField.textColor = (on) ? UIColor.white : UIColor.black
         darkModeLabel.textColor = (on) ? UIColor.white : UIColor.black
         remainingEmailsLabel.textColor = (on) ? UIColor.white : UIColor.black
@@ -244,8 +245,13 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         termsLabel.textColor = (on) ? UIColor.white : UIColor.black
         contactLabel.textColor = (on) ? UIColor.white : UIColor.black
         
-        emailTextField.keyboardAppearance = (on) ? .dark : .light
         subjectTextField.keyboardAppearance = (on) ? .dark : .light
+        
+        for row in 0..<tableView.numberOfRows(inSection: 0) {
+            if let emailCell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? EmailCell {
+                emailCell.darkMode(on: on)
+            }
+        }
         
         for cell in self.tableView.visibleCells {
             cell.backgroundColor = (on) ? UIColor.darkGray : UIColor.white

@@ -171,23 +171,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         super.viewWillAppear(animated)
         subjectTextField.text = SecureMail.subject
         
-        User.validatedEmails { (invalidEmails) in
-            let rows = self.tableView.numberOfRows(inSection: 0)
-            for row in 0..<rows {
-                let cell = self.tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? EmailCell
-                if let emailCell = cell, let email = emailCell.emailField.text {
-                    emailCell.validateSpinner.stopAnimating()
-                    emailCell.validateSpinner.isHidden = true
-                    emailCell.validateButton.isHidden = false
-                    emailCell.validateButton.isEnabled = true
-                    if !invalidEmails.contains(email) {
-                        emailCell.validateButton.isUserInteractionEnabled = false
-                        emailCell.validateButton.tintColor = UIColor.green
-                    }
-                }
-            }
-        }
-        
         NoteToSelfPro.store.requestProducts { (_, products) in
             self.productsAvailable = products
         }

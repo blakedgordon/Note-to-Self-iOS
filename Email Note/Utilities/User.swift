@@ -70,6 +70,29 @@ class User {
         return emailTest.evaluate(with: testStr)
     }
     
+    static func isEmailValidated(_ email: String, completionHandler: @escaping (Bool) -> ()) {
+        let validSet = Set(self.emailsValidated.keys)
+        if validSet.contains(email) {
+            completionHandler(true)
+            return
+        }
+        Auth.auth().fetchSignInMethods(forEmail: email) { (providers, error) in
+            if let prov = providers, prov.count > 0 {
+                Auth.auth().signIn(withEmail: email, password: email, completion: { (result, error) in
+                    if let user = result?.user, user.isEmailVerified {
+                        completionHandler(true)
+                        emailsValidated[email] = true
+                    } else {
+                        completionHandler(false)
+                    }
+                    self.signOut()
+                })
+            } else {
+                completionHandler(false)
+            }
+        }
+    }
+    
     static func validateRequest(email: String) {
         Auth.auth().fetchSignInMethods(forEmail: email) { (providers, error) in
             if let prov = providers, prov.count > 0 {

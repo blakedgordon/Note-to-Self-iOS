@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B04388022FCAA1D00F598D6 /* EmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B04387F22FCAA1D00F598D6 /* EmailCell.xib */; };
 		0B2A922D21C82B9000A1955C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0B2A922C21C82B9000A1955C /* .gitignore */; };
 		0B2A922F21C82D2400A1955C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0B2A922E21C82D2400A1955C /* Podfile */; };
+		0B4E13FB22FCADBE00A893D7 /* NewEmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4E13FA22FCADBE00A893D7 /* NewEmailCell.xib */; };
 		0B8C421A21C317CF00B68F4D /* NoteToSelfPro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C421921C317CF00B68F4D /* NoteToSelfPro.swift */; };
 		0B8C421C21C31DD100B68F4D /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C421B21C31DD100B68F4D /* IAPHelper.swift */; };
 		0B8C421E21C32A2300B68F4D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8C421D21C32A2300B68F4D /* StoreKit.framework */; };
@@ -30,8 +32,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B04387F22FCAA1D00F598D6 /* EmailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailCell.xib; sourceTree = "<group>"; };
 		0B2A922C21C82B9000A1955C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0B2A922E21C82D2400A1955C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0B4E13FA22FCADBE00A893D7 /* NewEmailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewEmailCell.xib; sourceTree = "<group>"; };
 		0B8C421921C317CF00B68F4D /* NoteToSelfPro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteToSelfPro.swift; sourceTree = "<group>"; };
 		0B8C421B21C31DD100B68F4D /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		0B8C421D21C32A2300B68F4D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -69,6 +73,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B4E13FC22FCAEB100A893D7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D49CC1F82186992500B07B6D /* Main.storyboard */,
+				0B04387F22FCAA1D00F598D6 /* EmailCell.xib */,
+				0B4E13FA22FCADBE00A893D7 /* NewEmailCell.xib */,
+				D49CC1FD2186992700B07B6D /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		4222A632D7B0420C7E40D748 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,9 +129,8 @@
 				D4FB9D4621C347E900F3A10E /* View Controllers */,
 				D4FB9D4721C3480600F3A10E /* In-App Purchase */,
 				D4FB9D4A21C3612600F3A10E /* Utilities */,
-				D49CC1F82186992500B07B6D /* Main.storyboard */,
 				D49CC1FB2186992700B07B6D /* Assets.xcassets */,
-				D49CC1FD2186992700B07B6D /* LaunchScreen.storyboard */,
+				0B4E13FC22FCAEB100A893D7 /* Views */,
 				D49CC2002186992700B07B6D /* Info.plist */,
 				D4FB9D4821C349BD00F3A10E /* GoogleService-Info.plist */,
 			);
@@ -222,7 +236,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B2A922F21C82D2400A1955C /* Podfile in Resources */,
+				0B04388022FCAA1D00F598D6 /* EmailCell.xib in Resources */,
 				0B2A922D21C82B9000A1955C /* .gitignore in Resources */,
+				0B4E13FB22FCADBE00A893D7 /* NewEmailCell.xib in Resources */,
 				D49CC1FF2186992700B07B6D /* LaunchScreen.storyboard in Resources */,
 				D4FB9D4921C349BD00F3A10E /* GoogleService-Info.plist in Resources */,
 				D49CC1FC2186992700B07B6D /* Assets.xcassets in Resources */,
@@ -438,7 +454,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = W28XDYH3BU;
 				INFOPLIST_FILE = "Email Note/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -460,7 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = W28XDYH3BU;
 				INFOPLIST_FILE = "Email Note/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

@@ -13,7 +13,6 @@ import SVProgressHUD
 
 class SettingsTableViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
 
-    @IBOutlet weak var newEmailButton: UIButton!
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var darkModeLabel: UILabel!
     @IBOutlet weak var darkModeSwitch: UISwitch!
@@ -24,8 +23,13 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     @IBOutlet weak var restorePurchasesButton: UIButton!
     @IBOutlet weak var remainingEmailsLabel: UILabel!
     
+    weak var newEmailCell: NewEmailCell?
+    var topHeader: UITableViewHeaderFooterView?
+    
     var timer: Timer? = nil
     let numberOfTotalSections = 5
+    
+    var emails: [String] = User.emails
     
     var productsAvailable: [SKProduct]?
     
@@ -36,8 +40,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         for row in 0..<rows {
             let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? EmailCell
             if let emailCell = cell, let email = emailCell.emailField.text {
-                emails.append(email)
-                if !User.isValidEmail(email) {
+                emails.append(email.trimmingCharacters(in: .whitespacesAndNewlines))
+                if !User.isValidEmail(email.trimmingCharacters(in: .whitespacesAndNewlines)) {
                     invalidEmail = true
                 }
             }
@@ -53,7 +57,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         } else {
             var alertTitle = "Invalid Email"
             var alertMessage = "One or more of the emails you entered was invalid"
-            if User.emails.count == 1 {
+            if self.emails.count == 1 {
                 alertTitle = "Enter Email"
                 alertMessage = "Please enter a valid email address"
             }
@@ -62,17 +66,15 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         }
     }
     
-    @IBAction func addNewEmailPressed(_ sender: Any) {
-        User.emails.append("")
-        tableView.reloadData()
-    }
-    
     @IBAction func darkSwitched(_ sender: UISwitch) {
         view.endEditing(true)
         User.darkMode = sender.isOn
         self.view.layoutIfNeeded()
         UIView.animate(withDuration: 0.75) {
             self.darkMode(on: User.darkMode)
+            if let noteView = self.presentingViewController as? NoteViewController {
+                noteView.darkMode(on: User.darkMode)
+            }
         }
     }
     
@@ -118,7 +120,12 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(UINib(nibName: "EmailCell", bundle: nil), forCellReuseIdentifier: "EmailCell")
+        tableView.register(UINib(nibName: "NewEmailCell", bundle: nil), forCellReuseIdentifier: "NewEmailCell")
+        
         subjectTextField.delegate = self
+        
+        emails = User.emails
         
         NoteToSelfPro.validateReceipt()
         upgradeProButton.layer.cornerRadius = 4
@@ -139,7 +146,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                                   darkMode: User.darkMode)
             self.tableView.reloadData()
             darkModeSwitch.isEnabled = true
-            newEmailButton.isEnabled = true
+            self.newEmailCell?.updateLabel()
         } else if result == "expired" {
             self.presentDarkAlert(title: "Expired",
                                   message: "Looks like your Pro subscription expired. Please renew your subscription by upgrading again.",
@@ -153,6 +160,13 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let header = self.tableView.headerView(forSection: 0) {
+            topHeader = header
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subjectTextField.text = SecureMail.subject
@@ -162,10 +176,13 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
             for row in 0..<rows {
                 let cell = self.tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? EmailCell
                 if let emailCell = cell, let email = emailCell.emailField.text {
+                    emailCell.validateSpinner.stopAnimating()
+                    emailCell.validateSpinner.isHidden = true
+                    emailCell.validateButton.isHidden = false
                     emailCell.validateButton.isEnabled = true
                     if !invalidEmails.contains(email) {
                         emailCell.validateButton.isUserInteractionEnabled = false
-                        emailCell.tintColor = UIColor.green
+                        emailCell.validateButton.tintColor = UIColor.green
                     }
                 }
             }
@@ -175,7 +192,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
             self.productsAvailable = products
         }
         
-        newEmailButton.isEnabled = (User.purchasedPro && User.emails.count < 5)
+        self.newEmailCell?.updateLabel()
         darkModeSwitch.isEnabled = User.purchasedPro
         darkModeSwitch.isOn = (User.purchasedPro) ? User.darkMode : false
         if !User.purchasedPro {
@@ -238,6 +255,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         self.tableView.separatorColor = (on) ? UIColor.black : UIColor.lightGray
         self.navigationController?.navigationBar.barStyle = (on) ? .black : .default
         self.navigationController?.view.backgroundColor = (on) ? UIColor.black : UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes =
+            (on) ? [.foregroundColor: UIColor.white] : [.foregroundColor: UIColor.black]
         subjectTextField.textColor = (on) ? UIColor.white : UIColor.black
         darkModeLabel.textColor = (on) ? UIColor.white : UIColor.black
         remainingEmailsLabel.textColor = (on) ? UIColor.white : UIColor.black
@@ -247,20 +266,22 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         
         subjectTextField.keyboardAppearance = (on) ? .dark : .light
         
-        for row in 0..<tableView.numberOfRows(inSection: 0) {
-            if let emailCell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? EmailCell {
-                emailCell.darkMode(on: on)
-            }
-        }
-        
-        for cell in self.tableView.visibleCells {
-            cell.backgroundColor = (on) ? UIColor.darkGray : UIColor.white
-        }
         for i in (0..<tableView.numberOfSections) {
             self.tableView.headerView(forSection: i)?.backgroundView?.backgroundColor = (on) ? UIColor.black :
                 UIColor.groupTableViewBackground
+            if let header = self.tableView.headerView(forSection: i), i == 0 {
+                topHeader = header
+            }
+            topHeader?.backgroundView?.backgroundColor = (on) ? UIColor.black : UIColor.groupTableViewBackground
             self.tableView.footerView(forSection: i)?.backgroundView?.backgroundColor = (on) ? UIColor.black :
                 UIColor.groupTableViewBackground
+            for row in 0..<tableView.numberOfRows(inSection: i) {
+                self.tableView.cellForRow(at: IndexPath(row: row, section: i))?.backgroundColor =
+                    (on) ? UIColor.darkGray : UIColor.white
+                if let emailCell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? EmailCell {
+                    emailCell.darkMode(on: on)
+                }
+            }
         }
     }
     

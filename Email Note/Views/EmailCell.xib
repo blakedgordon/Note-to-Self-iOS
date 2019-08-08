@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmailCell" id="CoU-Vv-UwK" customClass="EmailCell" customModule="Email_Note" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CoU-Vv-UwK" id="pfT-9i-UKe">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iW0-B4-2zR">
+                        <rect key="frame" x="38" y="0.0" width="338" height="44"/>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" textContentType="email"/>
+                        <connections>
+                            <action selector="emailValueChanged:" destination="CoU-Vv-UwK" eventType="editingChanged" id="AfX-Q4-kMW"/>
+                        </connections>
+                    </textField>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zh4-0k-Lua">
+                        <rect key="frame" x="8" y="11" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="1FI-xL-QgT"/>
+                            <constraint firstAttribute="height" constant="22" id="otJ-6X-YuF"/>
+                        </constraints>
+                        <color key="tintColor" red="0.94467798219999999" green="0.75202440670000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <connections>
+                            <action selector="validateEmail:" destination="CoU-Vv-UwK" eventType="touchUpInside" id="Zfy-GY-b42"/>
+                        </connections>
+                    </button>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="nzP-hf-JUs">
+                        <rect key="frame" x="8" y="11" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="Eza-c6-0yg"/>
+                            <constraint firstAttribute="width" constant="22" id="ZUL-B1-dTo"/>
+                        </constraints>
+                    </activityIndicatorView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9NK-MH-XNU">
+                        <rect key="frame" x="384" y="11" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="9NK-MH-XNU" secondAttribute="height" multiplier="1:1" id="To5-OS-PgA"/>
+                        </constraints>
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" image="xmark.circle" catalog="system"/>
+                        <connections>
+                            <action selector="clear:" destination="CoU-Vv-UwK" eventType="touchUpInside" id="xnq-79-aWc"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="nzP-hf-JUs" firstAttribute="leading" secondItem="pfT-9i-UKe" secondAttribute="leading" constant="8" id="1h3-3E-POJ"/>
+                    <constraint firstItem="zh4-0k-Lua" firstAttribute="leading" secondItem="pfT-9i-UKe" secondAttribute="leading" constant="8" id="3iE-Sc-LeI"/>
+                    <constraint firstItem="iW0-B4-2zR" firstAttribute="top" secondItem="pfT-9i-UKe" secondAttribute="top" id="Dei-De-pB9"/>
+                    <constraint firstItem="nzP-hf-JUs" firstAttribute="centerY" secondItem="pfT-9i-UKe" secondAttribute="centerY" id="OlD-8G-3lI"/>
+                    <constraint firstItem="9NK-MH-XNU" firstAttribute="centerY" secondItem="pfT-9i-UKe" secondAttribute="centerY" id="U56-Vn-0fm"/>
+                    <constraint firstItem="9NK-MH-XNU" firstAttribute="leading" secondItem="iW0-B4-2zR" secondAttribute="trailing" constant="8" id="fWd-P0-8Jr"/>
+                    <constraint firstItem="iW0-B4-2zR" firstAttribute="leading" secondItem="zh4-0k-Lua" secondAttribute="trailing" constant="8" id="je4-vT-ztj"/>
+                    <constraint firstAttribute="trailing" secondItem="9NK-MH-XNU" secondAttribute="trailing" constant="8" id="lIj-JR-Xtw"/>
+                    <constraint firstItem="zh4-0k-Lua" firstAttribute="centerY" secondItem="pfT-9i-UKe" secondAttribute="centerY" id="maH-SO-uHg"/>
+                    <constraint firstItem="iW0-B4-2zR" firstAttribute="leading" secondItem="nzP-hf-JUs" secondAttribute="trailing" constant="8" id="q9d-Fv-3Ls"/>
+                    <constraint firstAttribute="bottom" secondItem="iW0-B4-2zR" secondAttribute="bottom" id="wPf-c3-IHV"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="clearButton" destination="9NK-MH-XNU" id="8JN-tn-HPp"/>
+                <outlet property="emailField" destination="iW0-B4-2zR" id="d9h-Qb-5KI"/>
+                <outlet property="validateButton" destination="zh4-0k-Lua" id="agH-UH-l3H"/>
+                <outlet property="validateSpinner" destination="nzP-hf-JUs" id="yZt-iO-mbw"/>
+            </connections>
+            <point key="canvasLocation" x="-358" y="11"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="xmark.circle" catalog="system" width="64" height="62"/>
+    </resources>
+</document>

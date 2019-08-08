@@ -10,13 +10,18 @@ import UIKit
 
 class EmailCell: UITableViewCell {
     
-    @IBOutlet var validateButton: UIButton!
-    @IBOutlet var emailField: UITextField!
-    @IBOutlet var clearButton: UIButton!
+    @IBOutlet weak var validateSpinner: UIActivityIndicatorView!
+    @IBOutlet weak var validateButton: UIButton!
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var clearButton: UIButton!
     
     weak var viewController: UIViewController?
+    var row: Int?
     
     @IBAction func emailValueChanged(_ sender: Any) {
+        validateSpinner.stopAnimating()
+        validateSpinner.isHidden = true
+        validateButton.isHidden = false
         if User.emailsValidated.keys.contains(emailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? " ") {
             validateButton.isEnabled = true
             validateButton.isUserInteractionEnabled = false
@@ -32,14 +37,25 @@ class EmailCell: UITableViewCell {
                                          actions: [UIAlertAction(title: "Ok", style: .default)], darkMode: User.darkMode)
     }
     
-    func populateCell(row: Int, viewController: UIViewController) {
-        emailField.text = User.emails[row]
-        clearButton.isHidden = User.emails.count == 1
+    @IBAction func clear(_ sender: Any) {
+        if let view = viewController as? SettingsTableViewController, let index = row {
+            view.emails.remove(at: index)
+            view.tableView.reloadData()
+        }
+    }
+    
+    func populateCell(row: Int, viewController: SettingsTableViewController) {
+        self.row = row
+        emailField.text = viewController.emails[row]
+        clearButton.isHidden = viewController.emails.count == 1
         self.viewController = viewController
+        validateSpinner.startAnimating()
+        validateSpinner.isHidden = false
     }
     
     func darkMode(on: Bool) {
         emailField.textColor = (on) ? UIColor.white : UIColor.black
         emailField.keyboardAppearance = (on) ? .dark : .light
+        clearButton.tintColor = (on) ? UIColor.lightGray : UIColor.darkGray
     }
 }

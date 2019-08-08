@@ -56,7 +56,7 @@ class Emails {
                             let emailBody  = note
                             let parameters = [
                                 "from": SecureMail.email,
-                                "to": email,
+                                "to": email.trimmingCharacters(in: .whitespacesAndNewlines),
                                 "subject": SecureMail.subject,
                                 "text": emailBody
                             ]

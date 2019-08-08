@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewEmailCell" id="HLD-qD-g8k" customClass="NewEmailCell" customModule="Email_Note" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HLD-qD-g8k" id="e1T-gZ-sUE">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S01-cn-F6d">
+                        <rect key="frame" x="8" y="0.0" width="398" height="44"/>
+                        <state key="normal" title="+ Add New Email"/>
+                        <connections>
+                            <action selector="addNewEmailPressed:" destination="HLD-qD-g8k" eventType="touchUpInside" id="mYe-vi-gvZ"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="S01-cn-F6d" firstAttribute="leading" secondItem="e1T-gZ-sUE" secondAttribute="leading" constant="8" id="6ae-C5-Ci6"/>
+                    <constraint firstItem="S01-cn-F6d" firstAttribute="top" secondItem="e1T-gZ-sUE" secondAttribute="top" id="Gu2-ff-Rtn"/>
+                    <constraint firstAttribute="trailing" secondItem="S01-cn-F6d" secondAttribute="trailing" constant="8" id="LW1-c4-C8J"/>
+                    <constraint firstAttribute="bottom" secondItem="S01-cn-F6d" secondAttribute="bottom" id="wnn-2e-ptk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="newEmailButton" destination="S01-cn-F6d" id="O05-KQ-0g1"/>
+            </connections>
+            <point key="canvasLocation" x="107" y="149"/>
+        </tableViewCell>
+    </objects>
+</document>

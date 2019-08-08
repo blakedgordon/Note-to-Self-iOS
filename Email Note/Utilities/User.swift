@@ -23,10 +23,11 @@ class User {
     }
     static var emails: [String] {
         get {
-            return UserDefaults.standard.array(forKey: "email") as? [String] ?? [""]
+            let array = UserDefaults.standard.array(forKey: "email") as? [String] ?? [""]
+            return (User.purchasedPro) ? Array(array.prefix(5)) : [self.mainEmail]
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "email")
+            UserDefaults.standard.set(Array(newValue.prefix(5)), forKey: "email")
         }
     }
     

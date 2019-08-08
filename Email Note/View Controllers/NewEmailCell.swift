@@ -10,11 +10,17 @@ import UIKit
 
 class NewEmailCell: UITableViewCell {
     
-    weak var tableView: UITableView?
+    @IBOutlet weak var newEmailButton: UIButton!
+    
+    weak var settingsView: SettingsTableViewController?
     
     @IBAction func addNewEmailPressed(_ sender: Any) {
-        User.emails.append("")
-        tableView?.reloadData()
+        settingsView?.emails.append("")
+        settingsView?.tableView?.reloadData()
+    }
+    
+    func updateLabel() {
+        newEmailButton.isEnabled = (User.purchasedPro && settingsView?.emails.count ?? 5 < 5)
     }
     
 }

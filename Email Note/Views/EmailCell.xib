@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmailCell" id="CoU-Vv-UwK" customClass="EmailCell" customModule="Email_Note" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EmailCell" id="CoU-Vv-UwK" customClass="EmailCell" customModule="Email_Note" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CoU-Vv-UwK" id="pfT-9i-UKe">
@@ -23,6 +23,7 @@
                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" textContentType="email"/>
                         <connections>
                             <action selector="emailValueChanged:" destination="CoU-Vv-UwK" eventType="editingChanged" id="AfX-Q4-kMW"/>
+                            <action selector="setEmail:" destination="CoU-Vv-UwK" eventType="editingDidEnd" id="rHY-sf-Ish"/>
                         </connections>
                     </textField>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zh4-0k-Lua">
@@ -46,6 +47,7 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9NK-MH-XNU">
                         <rect key="frame" x="384" y="11" width="22" height="22"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="22" id="PrF-12-gka"/>
                             <constraint firstAttribute="width" secondItem="9NK-MH-XNU" secondAttribute="height" multiplier="1:1" id="To5-OS-PgA"/>
                         </constraints>
                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -58,9 +60,11 @@
                 <constraints>
                     <constraint firstItem="nzP-hf-JUs" firstAttribute="leading" secondItem="pfT-9i-UKe" secondAttribute="leading" constant="8" id="1h3-3E-POJ"/>
                     <constraint firstItem="zh4-0k-Lua" firstAttribute="leading" secondItem="pfT-9i-UKe" secondAttribute="leading" constant="8" id="3iE-Sc-LeI"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9NK-MH-XNU" secondAttribute="bottom" constant="8" id="D5G-51-w4I"/>
                     <constraint firstItem="iW0-B4-2zR" firstAttribute="top" secondItem="pfT-9i-UKe" secondAttribute="top" id="Dei-De-pB9"/>
                     <constraint firstItem="nzP-hf-JUs" firstAttribute="centerY" secondItem="pfT-9i-UKe" secondAttribute="centerY" id="OlD-8G-3lI"/>
                     <constraint firstItem="9NK-MH-XNU" firstAttribute="centerY" secondItem="pfT-9i-UKe" secondAttribute="centerY" id="U56-Vn-0fm"/>
+                    <constraint firstItem="9NK-MH-XNU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pfT-9i-UKe" secondAttribute="top" constant="8" id="YkZ-9B-Yxx"/>
                     <constraint firstItem="9NK-MH-XNU" firstAttribute="leading" secondItem="iW0-B4-2zR" secondAttribute="trailing" constant="8" id="fWd-P0-8Jr"/>
                     <constraint firstItem="iW0-B4-2zR" firstAttribute="leading" secondItem="zh4-0k-Lua" secondAttribute="trailing" constant="8" id="je4-vT-ztj"/>
                     <constraint firstAttribute="trailing" secondItem="9NK-MH-XNU" secondAttribute="trailing" constant="8" id="lIj-JR-Xtw"/>
@@ -71,6 +75,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="clearButton" destination="9NK-MH-XNU" id="8JN-tn-HPp"/>
+                <outlet property="clearButtonWidth" destination="PrF-12-gka" id="hAU-Mz-RFX"/>
                 <outlet property="emailField" destination="iW0-B4-2zR" id="d9h-Qb-5KI"/>
                 <outlet property="validateButton" destination="zh4-0k-Lua" id="agH-UH-l3H"/>
                 <outlet property="validateSpinner" destination="nzP-hf-JUs" id="yZt-iO-mbw"/>

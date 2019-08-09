@@ -199,6 +199,9 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         }
         
         darkMode(on: User.darkMode)
+        if let noteView = self.presentingViewController as? NoteViewController {
+            noteView.darkMode(on: User.darkMode)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -14,6 +14,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var validateButton: UIButton!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet weak var clearButtonWidth: NSLayoutConstraint!
     
     weak var viewController: SettingsTableViewController?
     var row: Int?
@@ -29,6 +30,13 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
             validateButton.tintColor = UIColor.green
         } else {
             validateButton.isEnabled = false
+        }
+    }
+    
+    @IBAction func setEmail(_ sender: Any) {
+        if let view = viewController, let index = row, let email = emailField.text {
+            view.emails[index] = email
+            checkEmail()
         }
     }
     
@@ -48,28 +56,39 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     func populateCell(row: Int, viewController: SettingsTableViewController) {
         self.viewController = viewController
         self.row = row
-        let email = viewController.emails[row]
-        emailField.text = email
+        
+        emailField.text = viewController.emails[row]
         clearButton.isHidden = viewController.emails.count == 1
+        clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 22
         
         emailField.delegate = self
         
-        validateSpinner.startAnimating()
-        validateSpinner.isHidden = false
-        validateButton.isHidden = true
-        print("EMAIL: \(email)")
-        User.isEmailValidated(email) { (valid) in
-            self.validateSpinner.stopAnimating()
-            self.validateButton.isHidden = false
-            self.validateButton.isEnabled = true
-            if email.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-                self.validateButton.isEnabled = false
-            } else if valid {
-                self.validateButton.isUserInteractionEnabled = false
-                self.validateButton.tintColor = UIColor.green
-            } else {
-                self.validateButton.isUserInteractionEnabled = true
-                self.validateButton.tintColor = UIColor.orange
+        checkEmail()
+    }
+    
+    func checkEmail() {
+        if let email = viewController?.emails[row ?? 0] {
+            validateButton.isHidden = true
+            validateSpinner.startAnimating()
+            validateSpinner.isHidden = false
+            User.isEmailValidated(email) { (valid, verificationEmail) in
+                self.validateSpinner.stopAnimating()
+                self.validateButton.isHidden = false
+                self.validateButton.isEnabled = true
+                if email.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+                    self.validateButton.isEnabled = false
+                } else if valid {
+                    self.validateButton.isUserInteractionEnabled = false
+                    self.validateButton.tintColor = UIColor.green
+                } else {
+                    self.validateButton.isUserInteractionEnabled = true
+                    self.validateButton.tintColor = UIColor.orange
+                    if let emailSent = verificationEmail, emailSent {
+                        self.viewController?.presentDarkAlert(title: "Request Sent",
+                                                         message: "Email validation request sent for this new email!",
+                                                         actions: [UIAlertAction(title: "Ok", style: .default)], darkMode: User.darkMode)
+                    }
+                }
             }
         }
     }

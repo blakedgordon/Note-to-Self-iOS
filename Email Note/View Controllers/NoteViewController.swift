@@ -35,9 +35,9 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
                         if emails.count > 1 {
                             emailString = "emails"
                         }
-                        var message = "Please validate your \(emailString):\n"
+                        var message = "Please validate your \(emailString):"
                         for email in emails {
-                            message.append(contentsOf: "\(email)\n")
+                            message.append(contentsOf: "\n\(email)")
                         }
                         self.presentDarkAlert(title: "Invalid \(emailString.capitalized)",
                             message: message,
@@ -86,6 +86,7 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
             
             self.bottomView(show: true, time: nil, completion: nil)
             
+            self.sendingProgress.isHidden = false
             self.sendingProgress.setProgress(0.05, animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 if self.sendingProgress.progress == 0.05 {

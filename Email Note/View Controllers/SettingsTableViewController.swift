@@ -255,36 +255,47 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     }
     
     func darkMode(on: Bool) {
-        self.view.backgroundColor = (on) ? UIColor.black : UIColor.groupTableViewBackground
-        self.tableView.separatorColor = (on) ? UIColor.black : UIColor.lightGray
+        self.view.backgroundColor = (on) ? .black : .groupTableViewBackground
+        self.tableView.separatorColor = (on) ? .black : .lightGray
         self.navigationController?.navigationBar.barStyle = (on) ? .black : .default
-        self.navigationController?.view.backgroundColor = (on) ? UIColor.black : UIColor.white
+        self.navigationController?.view.backgroundColor = (on) ? .black : .white
         self.navigationController?.navigationBar.titleTextAttributes =
             (on) ? [.foregroundColor: UIColor.white] : [.foregroundColor: UIColor.black]
-        subjectTextField.textColor = (on) ? UIColor.white : UIColor.black
-        darkModeLabel.textColor = (on) ? UIColor.white : UIColor.black
-        remainingEmailsLabel.textColor = (on) ? UIColor.white : UIColor.black
-        privacyLabel.textColor = (on) ? UIColor.white : UIColor.black
-        termsLabel.textColor = (on) ? UIColor.white : UIColor.black
-        contactLabel.textColor = (on) ? UIColor.white : UIColor.black
+        subjectTextField.textColor = (on) ? .white : .black
+        darkModeLabel.textColor = (on) ? .white : .black
+        remainingEmailsLabel.textColor = (on) ? .white : .black
+        privacyLabel.textColor = (on) ? .white : .black
+        termsLabel.textColor = (on) ? .white : .black
+        contactLabel.textColor = (on) ? .white : .black
         
         subjectTextField.keyboardAppearance = (on) ? .dark : .light
         
         tableView.separatorColor = (on) ? UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1) : UITableView().separatorColor
         for i in (0..<tableView.numberOfSections) {
-            self.tableView.headerView(forSection: i)?.backgroundView?.backgroundColor = (on) ? UIColor.black :
-                UIColor.groupTableViewBackground
+            self.tableView.headerView(forSection: i)?.backgroundView?.backgroundColor = (on) ? .black :
+                .groupTableViewBackground
             if let header = self.tableView.headerView(forSection: i), i == 0 {
                 topHeader = header
             }
-            topHeader?.backgroundView?.backgroundColor = (on) ? UIColor.black : UIColor.groupTableViewBackground
-            self.tableView.footerView(forSection: i)?.backgroundView?.backgroundColor = (on) ? UIColor.black :
-                UIColor.groupTableViewBackground
+            topHeader?.backgroundView?.backgroundColor = (on) ? .black : .groupTableViewBackground
+            self.tableView.footerView(forSection: i)?.backgroundView?.backgroundColor = (on) ? .black :
+                .groupTableViewBackground
             for row in 0..<tableView.numberOfRows(inSection: i) {
-                self.tableView.cellForRow(at: IndexPath(row: row, section: i))?.backgroundColor =
-                    (on) ? UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1) : UIColor.white
-                if let emailCell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? EmailCell {
-                    emailCell.darkMode(on: on)
+                if let cell = tableView.cellForRow(at: IndexPath(row: row, section: i)) {
+                    cell.backgroundColor = (on) ? UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1) : .white
+                    if i == 3 {
+                    if on && cell.selectionStyle != .none {
+                        let view = UIView()
+                        view.backgroundColor = .darkGray
+                        cell.selectedBackgroundView = view
+                    } else if cell.selectionStyle != .none {
+                        cell.selectionStyle = .default
+                        cell.selectedBackgroundView = nil
+                    }
+                    }
+                    if let emailCell = cell as? EmailCell {
+                        emailCell.darkMode(on: on)
+                    }
                 }
             }
         }

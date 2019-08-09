@@ -28,7 +28,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
             User.emailsValidated.keys.contains(email) && email != "" {
             validateButton.isEnabled = true
             validateButton.isUserInteractionEnabled = false
-            validateButton.tintColor = UIColor.green
+            validateButton.tintColor = .green
         } else {
             validateButton.isEnabled = false
         }
@@ -92,10 +92,10 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
                 } else if let valid = validEmail {
                     if valid {
                         self.validateButton.isUserInteractionEnabled = false
-                        self.validateButton.tintColor = UIColor.green
+                        self.validateButton.tintColor = .green
                     } else {
                         self.validateButton.isUserInteractionEnabled = true
-                        self.validateButton.tintColor = UIColor.orange
+                        self.validateButton.tintColor = .orange
                         if let emailSent = verificationEmail, emailSent {
                             self.viewController?.presentDarkAlert(title: "Request Sent",
                                                                   message: "Email validation request sent for this new email!",
@@ -105,20 +105,22 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
                     }
                 } else {
                     self.validateButton.isUserInteractionEnabled = false
-                    self.validateButton.tintColor = UIColor.red
-                    self.viewController?.presentDarkAlert(title: "Invalid Email",
-                                                          message: "Please enter a valid email address",
-                                                          actions: [UIAlertAction(title: "Ok", style: .default)],
-                                                          darkMode: User.darkMode)
+                    self.validateButton.tintColor = .red
+                    // There appears to be an issue on pre-iOS 13 devices where presenting this
+                    // alert causes it to appear then disappear
+//                    self.viewController?.presentDarkAlert(title: "Invalid Email",
+//                                                          message: "Please enter a valid email address",
+//                                                          actions: [UIAlertAction(title: "Ok", style: .default)],
+//                                                          darkMode: User.darkMode)
                 }
             }
         }
     }
     
     func darkMode(on: Bool) {
-        emailField.textColor = (on) ? UIColor.white : UIColor.black
+        emailField.textColor = (on) ? .white : .black
         emailField.keyboardAppearance = (on) ? .dark : .light
-        clearButton.tintColor = (on) ? UIColor.lightGray : UIColor.darkGray
+        clearButton.tintColor = (on) ? .lightGray : .darkGray
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

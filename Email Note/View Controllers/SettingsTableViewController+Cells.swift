@@ -33,19 +33,19 @@ extension SettingsTableViewController {
                 cell = emailCell
             }
         }
-        cell.backgroundColor = (User.darkMode) ? UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1) : UIColor.white
+        cell.backgroundColor = (User.darkMode) ? UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1) : .white
         return cell
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = super.tableView(tableView, viewForHeaderInSection: section)
-        view?.backgroundColor = (User.darkMode) ? UIColor.black : UIColor.groupTableViewBackground
+        view?.backgroundColor = (User.darkMode) ? .black : .groupTableViewBackground
         return view
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = super.tableView(tableView, viewForFooterInSection: section)
-        view?.backgroundColor = (User.darkMode) ? UIColor.black : UIColor.groupTableViewBackground
+        view?.backgroundColor = (User.darkMode) ? .black : .groupTableViewBackground
         return view
     }
 }

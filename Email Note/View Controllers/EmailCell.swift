@@ -18,6 +18,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     
     weak var viewController: SettingsTableViewController?
     var row: Int?
+    var clearing = false
     
     @IBAction func emailValueChanged(_ sender: Any) {
         validateSpinner.stopAnimating()
@@ -34,7 +35,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     }
     
     @IBAction func setEmail(_ sender: Any) {
-        if let view = viewController, let index = row, let email = emailField.text {
+        if let view = viewController, let index = row, let email = emailField.text, !clearing {
             view.emails[index] = email
             checkEmail()
         }
@@ -48,6 +49,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     
     @IBAction func clear(_ sender: Any) {
         if let index = row {
+            clearing = true
             viewController?.emails.remove(at: index)
             viewController?.tableView.reloadData()
         }
@@ -56,12 +58,22 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     func populateCell(row: Int, viewController: SettingsTableViewController) {
         self.viewController = viewController
         self.row = row
+        self.clearing = false
         
         emailField.text = viewController.emails[row]
         clearButton.isHidden = viewController.emails.count == 1
-        clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 22
         
         emailField.delegate = self
+        
+        if #available(iOS 13, *) {
+//            validateSpinner.style = .medium
+//            clearButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+//            clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 22
+        } else {
+            validateSpinner.style = .gray
+            clearButton.setImage(UIImage(named: "x-mark"), for: .normal)
+            clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 14
+        }
         
         checkEmail()
     }
@@ -71,23 +83,33 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
             validateButton.isHidden = true
             validateSpinner.startAnimating()
             validateSpinner.isHidden = false
-            User.isEmailValidated(email) { (valid, verificationEmail) in
+            User.isEmailValidated(email) { (validEmail, verificationEmail) in
                 self.validateSpinner.stopAnimating()
                 self.validateButton.isHidden = false
                 self.validateButton.isEnabled = true
                 if email.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
                     self.validateButton.isEnabled = false
-                } else if valid {
-                    self.validateButton.isUserInteractionEnabled = false
-                    self.validateButton.tintColor = UIColor.green
-                } else {
-                    self.validateButton.isUserInteractionEnabled = true
-                    self.validateButton.tintColor = UIColor.orange
-                    if let emailSent = verificationEmail, emailSent {
-                        self.viewController?.presentDarkAlert(title: "Request Sent",
-                                                         message: "Email validation request sent for this new email!",
-                                                         actions: [UIAlertAction(title: "Ok", style: .default)], darkMode: User.darkMode)
+                } else if let valid = validEmail {
+                    if valid {
+                        self.validateButton.isUserInteractionEnabled = false
+                        self.validateButton.tintColor = UIColor.green
+                    } else {
+                        self.validateButton.isUserInteractionEnabled = true
+                        self.validateButton.tintColor = UIColor.orange
+                        if let emailSent = verificationEmail, emailSent {
+                            self.viewController?.presentDarkAlert(title: "Request Sent",
+                                                                  message: "Email validation request sent for this new email!",
+                                                                  actions: [UIAlertAction(title: "Ok", style: .default)],
+                                                                  darkMode: User.darkMode)
+                        }
                     }
+                } else {
+                    self.validateButton.isUserInteractionEnabled = false
+                    self.validateButton.tintColor = UIColor.red
+                    self.viewController?.presentDarkAlert(title: "Invalid Email",
+                                                          message: "Please enter a valid email address",
+                                                          actions: [UIAlertAction(title: "Ok", style: .default)],
+                                                          darkMode: User.darkMode)
                 }
             }
         }

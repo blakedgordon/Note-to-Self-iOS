@@ -11,8 +11,8 @@ import MessageUI
 import StoreKit
 import SVProgressHUD
 
-class SettingsTableViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
-
+class SettingsTableViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, UIAdaptivePresentationControllerDelegate {
+    
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var darkModeLabel: UILabel!
     @IBOutlet weak var darkModeSwitch: UISwitch!
@@ -208,6 +208,24 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         super.viewWillDisappear(animated)
         timer?.invalidate()
     }
+    
+    // This function isn't being called when on iOS 13 the presentation controller is dismissing?
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        return (User.emails == self.emails && SecureMail.subject == subjectTextField.text)
+    }
+    
+    // This function isn't being called when on iOS 13 the presentation controller is dismissing?
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        let saveChangesAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        saveChangesAlert.addAction(UIAlertAction(title: "Save Changes", style: .default, handler: { (alert) in
+            self.doneButtonPressed(alert)
+        }))
+        saveChangesAlert.addAction(UIAlertAction(title: "Discard Changes", style: .destructive, handler: { (alert) in
+            self.view.endEditing(true)
+            self.dismiss(animated: true)
+        }))
+        self.present(saveChangesAlert, animated: true)
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         let sections = (User.purchasedPro) ? numberOfTotalSections - 1 : numberOfTotalSections
@@ -293,7 +311,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     // MARK: MFMailComposeViewControllerDelegate
     
     func mailComposeController(_ controller: MFMailComposeViewController,
-                                       didFinishWith result: MFMailComposeResult, error: Error?) {
+                               didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
         
     }

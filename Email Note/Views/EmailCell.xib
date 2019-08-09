@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iW0-B4-2zR">
-                        <rect key="frame" x="38" y="0.0" width="338" height="44"/>
+                        <rect key="frame" x="38" y="0.0" width="346" height="44"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" textContentType="email"/>
@@ -32,26 +32,27 @@
                             <constraint firstAttribute="width" constant="22" id="1FI-xL-QgT"/>
                             <constraint firstAttribute="height" constant="22" id="otJ-6X-YuF"/>
                         </constraints>
-                        <color key="tintColor" red="0.94467798219999999" green="0.75202440670000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <action selector="validateEmail:" destination="CoU-Vv-UwK" eventType="touchUpInside" id="Zfy-GY-b42"/>
                         </connections>
                     </button>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="nzP-hf-JUs">
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="nzP-hf-JUs">
                         <rect key="frame" x="8" y="11" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="Eza-c6-0yg"/>
                             <constraint firstAttribute="width" constant="22" id="ZUL-B1-dTo"/>
                         </constraints>
+                        <color key="color" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </activityIndicatorView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9NK-MH-XNU">
-                        <rect key="frame" x="384" y="11" width="22" height="22"/>
+                        <rect key="frame" x="392" y="15" width="14" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="22" id="PrF-12-gka"/>
+                            <constraint firstAttribute="width" constant="14" id="PrF-12-gka"/>
                             <constraint firstAttribute="width" secondItem="9NK-MH-XNU" secondAttribute="height" multiplier="1:1" id="To5-OS-PgA"/>
                         </constraints>
                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <state key="normal" image="xmark.circle" catalog="system"/>
+                        <state key="normal" image="x-mark"/>
                         <connections>
                             <action selector="clear:" destination="CoU-Vv-UwK" eventType="touchUpInside" id="xnq-79-aWc"/>
                         </connections>
@@ -84,6 +85,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="xmark.circle" catalog="system" width="64" height="62"/>
+        <image name="x-mark" width="28" height="28"/>
     </resources>
 </document>

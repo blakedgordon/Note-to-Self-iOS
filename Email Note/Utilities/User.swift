@@ -70,10 +70,15 @@ class User {
         return emailTest.evaluate(with: testStr)
     }
     
-    static func isEmailValidated(_ email: String, completionHandler: @escaping (_ verified: Bool, _ verificationSent: Bool?) -> ()) {
+    static func isEmailValidated(_ emailRaw: String, completionHandler: @escaping (_ verified: Bool?, _ verificationSent: Bool?) -> ()) {
         let validSet = Set(self.emailsValidated.keys)
+        let email = emailRaw.trimmingCharacters(in: .whitespacesAndNewlines)
         if validSet.contains(email) {
             completionHandler(true, nil)
+            return
+        }
+        if !isValidEmail(email) {
+            completionHandler(nil, nil)
             return
         }
         Auth.auth().fetchSignInMethods(forEmail: email) { (providers, error) in

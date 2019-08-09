@@ -33,7 +33,7 @@ extension SettingsTableViewController {
                 cell = emailCell
             }
         }
-        cell.backgroundColor = (User.darkMode) ? UIColor.darkGray : UIColor.white
+        cell.backgroundColor = (User.darkMode) ? UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1) : UIColor.white
         return cell
     }
     

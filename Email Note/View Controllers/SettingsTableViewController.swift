@@ -70,7 +70,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         view.endEditing(true)
         User.darkMode = sender.isOn
         self.view.layoutIfNeeded()
-        UIView.animate(withDuration: 0.75) {
+        UIView.animate(withDuration: 0.5) {
             self.darkMode(on: User.darkMode)
             if let noteView = self.presentingViewController as? NoteViewController {
                 noteView.darkMode(on: User.darkMode)
@@ -252,6 +252,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         
         subjectTextField.keyboardAppearance = (on) ? .dark : .light
         
+        tableView.separatorColor = (on) ? UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1) : UITableView().separatorColor
         for i in (0..<tableView.numberOfSections) {
             self.tableView.headerView(forSection: i)?.backgroundView?.backgroundColor = (on) ? UIColor.black :
                 UIColor.groupTableViewBackground
@@ -263,7 +264,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                 UIColor.groupTableViewBackground
             for row in 0..<tableView.numberOfRows(inSection: i) {
                 self.tableView.cellForRow(at: IndexPath(row: row, section: i))?.backgroundColor =
-                    (on) ? UIColor.darkGray : UIColor.white
+                    (on) ? UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1) : UIColor.white
                 if let emailCell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? EmailCell {
                     emailCell.darkMode(on: on)
                 }

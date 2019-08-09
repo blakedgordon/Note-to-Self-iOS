@@ -228,7 +228,7 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
     }
     
     func darkMode(on: Bool) {
-        self.view.backgroundColor = (on) ? UIColor.darkGray : UIColor.white
+        self.view.backgroundColor = (on) ? UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1) : UIColor.white
         self.bottomView.backgroundColor = (on) ? UIColor.black : UIColor.darkGray
         self.setNeedsStatusBarAppearanceUpdate()
         note.textColor = (on) ? UIColor.white : UIColor.black

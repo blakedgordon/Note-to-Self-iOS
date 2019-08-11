@@ -15,6 +15,7 @@
 		0B8C421C21C31DD100B68F4D /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C421B21C31DD100B68F4D /* IAPHelper.swift */; };
 		0B8C421E21C32A2300B68F4D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8C421D21C32A2300B68F4D /* StoreKit.framework */; };
 		0BDD231222FB82AF00204D66 /* NewEmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDD231122FB82AF00204D66 /* NewEmailCell.swift */; };
+		0BF39A702300DA6F0021DB8F /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF39A6F2300DA6F0021DB8F /* AboutTableViewController.swift */; };
 		0BF626EB21C01D43001E4551 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EA21C01D43001E4551 /* User.swift */; };
 		0BF626ED21C03133001E4551 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EC21C03133001E4551 /* SettingsTableViewController.swift */; };
 		0BF626EF21C03A75001E4551 /* Emails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EE21C03A75001E4551 /* Emails.swift */; };
@@ -40,6 +41,7 @@
 		0B8C421B21C31DD100B68F4D /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		0B8C421D21C32A2300B68F4D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0BDD231122FB82AF00204D66 /* NewEmailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEmailCell.swift; sourceTree = "<group>"; };
+		0BF39A6F2300DA6F0021DB8F /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		0BF626EA21C01D43001E4551 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0BF626EC21C03133001E4551 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		0BF626EE21C03A75001E4551 /* Emails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emails.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				D44537E722F621AA00950419 /* SettingsTableViewController+Cells.swift */,
 				D44537E622F621AA00950419 /* EmailCell.swift */,
 				0BDD231122FB82AF00204D66 /* NewEmailCell.swift */,
+				0BF39A6F2300DA6F0021DB8F /* AboutTableViewController.swift */,
 				0BF626F021C17148001E4551 /* AlertDarkMode.swift */,
 			);
 			path = "View Controllers";
@@ -296,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B8C421C21C31DD100B68F4D /* IAPHelper.swift in Sources */,
+				0BF39A702300DA6F0021DB8F /* AboutTableViewController.swift in Sources */,
 				0BF626EF21C03A75001E4551 /* Emails.swift in Sources */,
 				0BF626F121C17148001E4551 /* AlertDarkMode.swift in Sources */,
 				0BF626EB21C01D43001E4551 /* User.swift in Sources */,
@@ -454,7 +458,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = W28XDYH3BU;
 				INFOPLIST_FILE = "Email Note/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -476,7 +480,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = W28XDYH3BU;
 				INFOPLIST_FILE = "Email Note/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

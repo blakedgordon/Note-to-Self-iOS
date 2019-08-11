@@ -19,6 +19,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     @IBOutlet weak var privacyLabel: UILabel!
     @IBOutlet weak var termsLabel: UILabel!
     @IBOutlet weak var contactLabel: UILabel!
+    @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var upgradeProButton: UIButton!
     @IBOutlet weak var restorePurchasesButton: UIButton!
     @IBOutlet weak var remainingEmailsLabel: UILabel!
@@ -226,7 +227,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         }))
         self.present(saveChangesAlert, animated: true)
     }
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         let sections = (User.purchasedPro) ? numberOfTotalSections - 1 : numberOfTotalSections
         return sections
@@ -267,6 +268,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         privacyLabel.textColor = (on) ? .white : .black
         termsLabel.textColor = (on) ? .white : .black
         contactLabel.textColor = (on) ? .white : .black
+        aboutLabel.textColor = (on) ? .white : .black
         
         subjectTextField.keyboardAppearance = (on) ? .dark : .light
         
@@ -283,7 +285,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
             for row in 0..<tableView.numberOfRows(inSection: i) {
                 if let cell = tableView.cellForRow(at: IndexPath(row: row, section: i)) {
                     cell.backgroundColor = (on) ? UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1) : .white
-                    if i == 3 {
                     if on && cell.selectionStyle != .none {
                         let view = UIView()
                         view.backgroundColor = .darkGray
@@ -291,7 +292,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                     } else if cell.selectionStyle != .none {
                         cell.selectionStyle = .default
                         cell.selectedBackgroundView = nil
-                    }
                     }
                     if let emailCell = cell as? EmailCell {
                         emailCell.darkMode(on: on)

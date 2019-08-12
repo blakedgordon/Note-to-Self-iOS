@@ -65,15 +65,16 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
         
         emailField.delegate = self
         
-        if #available(iOS 13, *) {
+        // This won't build on XCode 10 because of the new style code
+//        if #available(iOS 13, *) {
 //            validateSpinner.style = .medium
 //            clearButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
 //            clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 22
-        } else {
-            validateSpinner.style = .gray
-            clearButton.setImage(UIImage(named: "x-mark"), for: .normal)
-            clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 14
-        }
+//        } else {
+        validateSpinner.style = .gray
+        clearButton.setImage(UIImage(named: "x-mark"), for: .normal)
+        clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 12
+//        }
         
         checkEmail()
     }
@@ -108,10 +109,12 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
                     self.validateButton.tintColor = .red
                     // There appears to be an issue on pre-iOS 13 devices where presenting this
                     // alert causes it to appear then disappear
-//                    self.viewController?.presentDarkAlert(title: "Invalid Email",
-//                                                          message: "Please enter a valid email address",
-//                                                          actions: [UIAlertAction(title: "Ok", style: .default)],
-//                                                          darkMode: User.darkMode)
+                    if #available(iOS 13.0, *) {
+                        self.viewController?.presentDarkAlert(title: "Invalid Email",
+                                                              message: "Please enter a valid email address",
+                                                              actions: [UIAlertAction(title: "Ok", style: .default)],
+                                                              darkMode: User.darkMode)
+                    }
                 }
             }
         }

@@ -20,7 +20,7 @@ class NewEmailCell: UITableViewCell {
     }
     
     func updateLabel() {
-        newEmailButton.isEnabled = (User.purchasedPro && settingsView?.emails.count ?? 5 < 5)
+        newEmailButton.isEnabled = (User.purchasedPro && (settingsView?.emails.count ?? 5) < 5)
     }
     
 }

@@ -27,18 +27,14 @@ extension UIViewController {
         
         self.setDark(alert: alert, darkModeOn: darkMode)
         
-        if let alertWindow = UIApplication.shared.windows.last?.rootViewController {
-            alertWindow.present(alert, animated: true, completion: nil)
-        } else {
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.present(alert, animated: true, completion: nil)
     }
     
     func setDark(alert: UIAlertController, darkModeOn: Bool) {
         // Change UIAlert to dark mode
         // found at: https://stackoverflow.com/questions/28500262/setting-background-color-for-uialertcontroller-in-swift
         if let subview = (alert.view.subviews.first?.subviews.first?.subviews.first), darkModeOn {
-            subview.backgroundColor = UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1)
+            subview.backgroundColor = UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 1)
         }
     }
 }

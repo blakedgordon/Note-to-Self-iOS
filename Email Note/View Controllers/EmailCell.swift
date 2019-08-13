@@ -18,7 +18,6 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     
     weak var viewController: SettingsTableViewController?
     var row: Int?
-    var clearing = false
     
     @IBAction func emailValueChanged(_ sender: Any) {
         validateSpinner.stopAnimating()
@@ -35,7 +34,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     }
     
     @IBAction func setEmail(_ sender: Any) {
-        if let view = viewController, let index = row, let email = emailField.text, !clearing {
+        if let view = viewController, let index = row, let email = emailField.text {
             view.emails[index] = email
             checkEmail()
         }
@@ -48,8 +47,8 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     }
     
     @IBAction func clear(_ sender: Any) {
+        viewController?.view.endEditing(true)
         if let index = row {
-            clearing = true
             viewController?.emails.remove(at: index)
             viewController?.tableView.reloadData()
         }
@@ -58,7 +57,6 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     func populateCell(row: Int, viewController: SettingsTableViewController) {
         self.viewController = viewController
         self.row = row
-        self.clearing = false
         
         emailField.text = viewController.emails[row]
         clearButton.isHidden = viewController.emails.count == 1
@@ -77,6 +75,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
 //        }
         
         checkEmail()
+        darkMode(on: User.darkMode)
     }
     
     func checkEmail() {
@@ -107,14 +106,10 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
                 } else {
                     self.validateButton.isUserInteractionEnabled = false
                     self.validateButton.tintColor = .red
-                    // There appears to be an issue on pre-iOS 13 devices where presenting this
-                    // alert causes it to appear then disappear
-                    if #available(iOS 13.0, *) {
-                        self.viewController?.presentDarkAlert(title: "Invalid Email",
-                                                              message: "Please enter a valid email address",
-                                                              actions: [UIAlertAction(title: "Ok", style: .default)],
-                                                              darkMode: User.darkMode)
-                    }
+                    self.viewController?.presentDarkAlert(title: "Invalid Email",
+                                                          message: "Please enter a valid email address",
+                                                          actions: [UIAlertAction(title: "Ok", style: .default)],
+                                                          darkMode: User.darkMode)
                 }
             }
         }
@@ -124,6 +119,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
         emailField.textColor = (on) ? .white : .black
         emailField.keyboardAppearance = (on) ? .dark : .light
         clearButton.tintColor = (on) ? .lightGray : .darkGray
+        validateSpinner.color = (on) ? .lightGray : .darkGray
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

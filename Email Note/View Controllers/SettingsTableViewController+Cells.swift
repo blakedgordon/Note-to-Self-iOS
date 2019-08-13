@@ -22,8 +22,8 @@ extension SettingsTableViewController {
         if indexPath.section == 0 {
             if tableView.numberOfRows(inSection: indexPath.section) == indexPath.row + 1 {
                 let newEmailCell = tableView.dequeueReusableCell(withIdentifier: "NewEmailCell", for: indexPath) as! NewEmailCell
-                newEmailCell.updateLabel()
                 newEmailCell.settingsView = self
+                newEmailCell.updateLabel()
                 self.newEmailCell = newEmailCell
                 cell = newEmailCell
             } else {
@@ -34,18 +34,26 @@ extension SettingsTableViewController {
             }
         }
         cell.backgroundColor = (User.darkMode) ? UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1) : .white
+        if User.darkMode && cell.selectionStyle != .none {
+            let view = UIView()
+            view.backgroundColor = .darkGray
+            cell.selectedBackgroundView = view
+        } else if cell.selectionStyle != .none {
+            cell.selectionStyle = .default
+            cell.selectedBackgroundView = nil
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = super.tableView(tableView, viewForHeaderInSection: section)
-        view?.backgroundColor = (User.darkMode) ? .black : .groupTableViewBackground
+        let view = UITableViewHeaderFooterView()
+        view.backgroundColor = (User.darkMode) ? .black : .groupTableViewBackground
         return view
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = super.tableView(tableView, viewForFooterInSection: section)
-        view?.backgroundColor = (User.darkMode) ? .black : .groupTableViewBackground
+        let view = UITableViewHeaderFooterView()
+        view.backgroundColor = (User.darkMode) ? .black : .groupTableViewBackground
         return view
     }
 }

@@ -25,7 +25,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     @IBOutlet weak var remainingEmailsLabel: UILabel!
     
     weak var newEmailCell: NewEmailCell?
-    var topHeader: UITableViewHeaderFooterView?
     
     var timer: Timer? = nil
     let numberOfTotalSections = 5
@@ -161,13 +160,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if let header = self.tableView.headerView(forSection: 0) {
-            topHeader = header
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subjectTextField.text = SecureMail.subject
@@ -272,33 +264,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         
         subjectTextField.keyboardAppearance = (on) ? .dark : .light
         
-        tableView.separatorColor = (on) ? UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1) : UITableView().separatorColor
-        for i in (0..<tableView.numberOfSections) {
-            self.tableView.headerView(forSection: i)?.backgroundView?.backgroundColor = (on) ? .black :
-                .groupTableViewBackground
-            if let header = self.tableView.headerView(forSection: i), i == 0 {
-                topHeader = header
-            }
-            topHeader?.backgroundView?.backgroundColor = (on) ? .black : .groupTableViewBackground
-            self.tableView.footerView(forSection: i)?.backgroundView?.backgroundColor = (on) ? .black :
-                .groupTableViewBackground
-            for row in 0..<tableView.numberOfRows(inSection: i) {
-                if let cell = tableView.cellForRow(at: IndexPath(row: row, section: i)) {
-                    cell.backgroundColor = (on) ? UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1) : .white
-                    if on && cell.selectionStyle != .none {
-                        let view = UIView()
-                        view.backgroundColor = .darkGray
-                        cell.selectedBackgroundView = view
-                    } else if cell.selectionStyle != .none {
-                        cell.selectionStyle = .default
-                        cell.selectedBackgroundView = nil
-                    }
-                    if let emailCell = cell as? EmailCell {
-                        emailCell.darkMode(on: on)
-                    }
-                }
-            }
-        }
+        tableView.separatorColor = (on) ? UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1) : UITableView().separatorColor        
+        tableView.reloadData()
     }
     
     // FUNCTIONS BELOW RECIEVED FROM STACK OVERFLOW TO SEND AN EMAIL

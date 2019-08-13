@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDelegate {
     
@@ -22,6 +23,7 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
     var sending = false
     var showingBottomView = false
     var showBottomViewTimer: Timer?
+    var timeRemainingTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +60,7 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
         super.viewWillAppear(animated)
         darkMode(on: User.darkMode)
         note.becomeFirstResponder()
+        sendingProgress.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,13 +77,14 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.sendingLabel.text = "Swipe left or right to send a note"
+        timeRemainingTimer?.invalidate()
     }
     
     @IBAction func sendEmail(_ sender: Any) {
         if !sending {
             self.sendingLabel.text = "Sending..."
             self.sendingProgress.isHidden = false
-            self.sendingProgress.progress = 0
+            self.sendingProgress.progress = 0.02
             
             self.sending = true
             
@@ -96,13 +100,18 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
             Emails.sendEmail(note: self.note.text) { (success, message, hideProgress, setTimer) in
                 if success {
                     self.note.text = ""
+                    var totalEmails = UserDefaults.standard.integer(forKey: "totalEmails")
+                    totalEmails += 1
+                    UserDefaults.standard.set(totalEmails, forKey: "totalEmails")
+                    if #available(iOS 10.3, *), totalEmails == 3 {
+                        SKStoreReviewController.requestReview()
+                    }
                 }
-                self.sendingProgress.setProgress(1, animated: true)
+                self.sendingProgress.setProgress(1.0, animated: true)
                 self.sendingLabel.text = message
                 self.sendingProgress.isHidden = hideProgress
-                var timer: Timer?
                 if setTimer {
-                    timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                    self.timeRemainingTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                         if message.contains("Please wait") {
                             self.sendingLabel.text = "Please wait \(Emails.remainingTime) to send email,\nor upgrade to Pro!"
                         } else {
@@ -113,7 +122,7 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
                 self.sending = false
                 self.bottomView(show: true, time: 10, completion: {
                     self.sendingProgress.isHidden = true
-                    timer?.invalidate()
+                    self.timeRemainingTimer?.invalidate()
                 })
             }
         }

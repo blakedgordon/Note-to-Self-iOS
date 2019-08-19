@@ -62,6 +62,8 @@ class NoteToSelfPro {
     static func handlePurchase(productID: String) {
         UserDefaults.standard.set(true, forKey: productID)
         store.purchasedProducts.insert(productID)
+        NoteToSelfPro.expireDate = Date(timeIntervalSinceNow: 120)
+        validateReceipt()
             
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: purchaseNotification), object: "success")
     }

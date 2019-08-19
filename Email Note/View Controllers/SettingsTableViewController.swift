@@ -145,7 +145,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                                   actions: [UIAlertAction(title: "Ok", style: .default)],
                                   darkMode: User.darkMode)
             self.tableView.reloadData()
-            darkModeSwitch.isEnabled = true
+            darkModeSwitch.isEnabled = User.purchasedPro
             self.newEmailCell?.updateLabel()
         } else if result == "expired" {
             self.presentDarkAlert(title: "Expired",

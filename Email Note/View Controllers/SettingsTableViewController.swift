@@ -16,6 +16,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var darkModeLabel: UILabel!
     @IBOutlet weak var darkModeSwitch: UISwitch!
+    @IBOutlet weak var darkIconLabel: UILabel!
+    @IBOutlet weak var darkIconSwitch: UISwitch!
     @IBOutlet weak var privacyLabel: UILabel!
     @IBOutlet weak var termsLabel: UILabel!
     @IBOutlet weak var contactLabel: UILabel!
@@ -74,6 +76,18 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
             self.darkMode(on: User.darkMode)
             if let noteView = self.presentingViewController as? NoteViewController {
                 noteView.darkMode(on: User.darkMode)
+            }
+        }
+    }
+    
+    @IBAction func darkAppIconSwitched(_ sender: UISwitch) {
+        view.endEditing(true)
+        UIApplication.shared.setAlternateIconName(sender.isOn ? "Dark-AppIcon" : nil) { (error) in
+            if error != nil {
+                self.presentDarkAlert(title: "Uh Oh",
+                                      message: "We had some trouble setting the app icon. Sorry about that! If this keeps happening, please contact support.",
+                                      actions: [UIAlertAction(title: "Ok", style: .default)],
+                                      darkMode: User.darkMode)
             }
         }
     }
@@ -146,6 +160,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                                   darkMode: User.darkMode)
             self.tableView.reloadData()
             darkModeSwitch.isEnabled = User.purchasedPro
+            darkIconSwitch.isEnabled = User.purchasedPro
             self.newEmailCell?.updateLabel()
         } else if result == "expired" {
             self.presentDarkAlert(title: "Expired",
@@ -171,6 +186,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         self.newEmailCell?.updateLabel()
         darkModeSwitch.isEnabled = User.purchasedPro
         darkModeSwitch.isOn = (User.purchasedPro) ? User.darkMode : false
+        darkIconSwitch.isEnabled = User.purchasedPro
+        darkIconSwitch.isOn = UIApplication.shared.alternateIconName != nil
         if !User.purchasedPro {
             if Emails.remainingEmails > 0 {
                 var emailText = (Emails.remainingEmails == 1) ? "email" : "emails"
@@ -256,6 +273,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
             (on) ? [.foregroundColor: UIColor.white] : [.foregroundColor: UIColor.black]
         subjectTextField.textColor = (on) ? .white : .black
         darkModeLabel.textColor = (on) ? .white : .black
+        darkIconLabel.textColor = (on) ? .white : .black
         remainingEmailsLabel.textColor = (on) ? .white : .black
         privacyLabel.textColor = (on) ? .white : .black
         termsLabel.textColor = (on) ? .white : .black

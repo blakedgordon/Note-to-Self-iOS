@@ -21,6 +21,8 @@
 		0BF626EF21C03A75001E4551 /* Emails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EE21C03A75001E4551 /* Emails.swift */; };
 		0BF626F121C17148001E4551 /* AlertDarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626F021C17148001E4551 /* AlertDarkMode.swift */; };
 		5DA18FE99EF9F4A4D5F49ED3 /* Pods_Email_Note.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B81C71D186F6275ACF7CE63 /* Pods_Email_Note.framework */; };
+		D43A7D92231629ED00D817DC /* Dark-AppIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D43A7D91231629ED00D817DC /* Dark-AppIcon@2x.png */; };
+		D43A7D9423162A0800D817DC /* Dark-AppIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D43A7D9323162A0800D817DC /* Dark-AppIcon@3x.png */; };
 		D44537E822F621AA00950419 /* EmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44537E622F621AA00950419 /* EmailCell.swift */; };
 		D44537E922F621AA00950419 /* SettingsTableViewController+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44537E722F621AA00950419 /* SettingsTableViewController+Cells.swift */; };
 		D44537EB22F6220900950419 /* SecureMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44537EA22F6220900950419 /* SecureMail.swift */; };
@@ -49,6 +51,8 @@
 		6B81C71D186F6275ACF7CE63 /* Pods_Email_Note.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Email_Note.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A497449623A4A138CB6EB7F6 /* Pods-Email Note.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Email Note.release.xcconfig"; path = "Target Support Files/Pods-Email Note/Pods-Email Note.release.xcconfig"; sourceTree = "<group>"; };
 		B78414B622D908CB802408E0 /* Pods-Email Note.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Email Note.debug.xcconfig"; path = "Target Support Files/Pods-Email Note/Pods-Email Note.debug.xcconfig"; sourceTree = "<group>"; };
+		D43A7D91231629ED00D817DC /* Dark-AppIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dark-AppIcon@2x.png"; sourceTree = "<group>"; };
+		D43A7D9323162A0800D817DC /* Dark-AppIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dark-AppIcon@3x.png"; sourceTree = "<group>"; };
 		D44537E622F621AA00950419 /* EmailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailCell.swift; sourceTree = "<group>"; };
 		D44537E722F621AA00950419 /* SettingsTableViewController+Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SettingsTableViewController+Cells.swift"; sourceTree = "<group>"; };
 		D44537EA22F6220900950419 /* SecureMail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureMail.swift; sourceTree = "<group>"; };
@@ -104,6 +108,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D43A7D90231629AE00D817DC /* Dark-AppIcon */ = {
+			isa = PBXGroup;
+			children = (
+				D43A7D91231629ED00D817DC /* Dark-AppIcon@2x.png */,
+				D43A7D9323162A0800D817DC /* Dark-AppIcon@3x.png */,
+			);
+			path = "Dark-AppIcon";
+			sourceTree = "<group>";
+		};
 		D49CC1E82186992500B07B6D = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +145,7 @@
 				D4FB9D4721C3480600F3A10E /* In-App Purchase */,
 				D4FB9D4A21C3612600F3A10E /* Utilities */,
 				D49CC1FB2186992700B07B6D /* Assets.xcassets */,
+				D43A7D90231629AE00D817DC /* Dark-AppIcon */,
 				0B4E13FC22FCAEB100A893D7 /* Views */,
 				D49CC2002186992700B07B6D /* Info.plist */,
 				D4FB9D4821C349BD00F3A10E /* GoogleService-Info.plist */,
@@ -238,12 +252,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D43A7D9423162A0800D817DC /* Dark-AppIcon@3x.png in Resources */,
 				0B2A922F21C82D2400A1955C /* Podfile in Resources */,
 				0B04388022FCAA1D00F598D6 /* EmailCell.xib in Resources */,
 				0B2A922D21C82B9000A1955C /* .gitignore in Resources */,
 				0B4E13FB22FCADBE00A893D7 /* NewEmailCell.xib in Resources */,
 				D49CC1FF2186992700B07B6D /* LaunchScreen.storyboard in Resources */,
 				D4FB9D4921C349BD00F3A10E /* GoogleService-Info.plist in Resources */,
+				D43A7D92231629ED00D817DC /* Dark-AppIcon@2x.png in Resources */,
 				D49CC1FC2186992700B07B6D /* Assets.xcassets in Resources */,
 				D49CC1FA2186992500B07B6D /* Main.storyboard in Resources */,
 			);
@@ -461,7 +477,7 @@
 				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = W28XDYH3BU;
 				INFOPLIST_FILE = "Email Note/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -483,7 +499,7 @@
 				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = W28XDYH3BU;
 				INFOPLIST_FILE = "Email Note/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

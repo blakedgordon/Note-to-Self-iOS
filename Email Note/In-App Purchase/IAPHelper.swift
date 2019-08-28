@@ -92,24 +92,38 @@ extension IAPHelper: SKProductsRequestDelegate {
             if prod.productIdentifier == NoteToSelfPro.proProductKey {
                 var priceString = "\(prod.priceLocale.currencySymbol ?? "$")\(prod.price.floatValue)"
                 if #available(iOS 11.2, *) {
-                    let subscriptionPeriod = prod.subscriptionPeriod?.unit.rawValue
-                    var periodString = "/mo"
-                    switch subscriptionPeriod {
-                    case 0:
-                        periodString = "/day"
-                    case 1:
-                        periodString = "/wk"
-                    case 2:
-                        periodString = "/mo"
-                    case 3:
-                        periodString = "/yr"
-                    default:
-                        periodString = ""
+                    let subscriptionPeriod = prod.subscriptionPeriod?.unit.rawValue ?? 9999
+                    priceString.append(subscriptionUnitToString(period: subscriptionPeriod, shortened: true, plural: false))
+                    
+                    if let introPrice = prod.introductoryPrice {
+                        if introPrice.price == 0 {
+                            priceString = "Free Trial"
+                        } else {
+                            let introSubscription = introPrice.subscriptionPeriod.unit.rawValue
+                            let introLength = subscriptionUnitToString(period: introSubscription,
+                                                                       shortened: false,
+                                                                       plural: introPrice.subscriptionPeriod.numberOfUnits > 1)
+                            priceString = "\(introPrice.priceLocale.currencySymbol ?? "$")\(introPrice.price.floatValue) for \(introPrice.subscriptionPeriod.numberOfUnits) \(introLength)"
+                        }
                     }
-                    priceString.append(periodString)
                 }
                 NoteToSelfPro.proPriceLabel = priceString
             }
+        }
+    }
+    
+    private func subscriptionUnitToString(period: UInt, shortened: Bool, plural: Bool) -> String {
+        switch period {
+        case 0:
+            return (shortened) ? "/day" : (plural) ? "days" : "day"
+        case 1:
+            return (shortened) ? "/wk" : (plural) ? "weeks" : "week"
+        case 2:
+            return (shortened) ? "/mo" : (plural) ? "months" : "month"
+        case 3:
+            return (shortened) ? "/yr" : (plural) ? "years" : "year"
+        default:
+            return""
         }
     }
     

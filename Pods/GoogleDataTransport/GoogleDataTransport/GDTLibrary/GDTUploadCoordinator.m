@@ -17,9 +17,9 @@
 #import "GDTLibrary/Private/GDTUploadCoordinator.h"
 
 #import <GoogleDataTransport/GDTClock.h>
+#import <GoogleDataTransport/GDTConsoleLogger.h>
 
 #import "GDTLibrary/Private/GDTAssert.h"
-#import "GDTLibrary/Private/GDTConsoleLogger.h"
 #import "GDTLibrary/Private/GDTReachability.h"
 #import "GDTLibrary/Private/GDTRegistrar_Private.h"
 #import "GDTLibrary/Private/GDTStorage.h"
@@ -163,16 +163,23 @@ static NSString *const ktargetToInFlightPackagesKey =
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
   GDTUploadCoordinator *sharedCoordinator = [GDTUploadCoordinator sharedInstance];
-  sharedCoordinator->_targetToInFlightPackages =
-      [aDecoder decodeObjectOfClass:[NSMutableDictionary class]
-                             forKey:ktargetToInFlightPackagesKey];
+  @try {
+    sharedCoordinator->_targetToInFlightPackages =
+        [aDecoder decodeObjectOfClass:[NSMutableDictionary class]
+                               forKey:ktargetToInFlightPackagesKey];
+
+  } @catch (NSException *exception) {
+    sharedCoordinator->_targetToInFlightPackages = [NSMutableDictionary dictionary];
+  }
   return sharedCoordinator;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
   // All packages that have been given to uploaders need to be tracked so that their expiration
   // timers can be called.
-  [aCoder encodeObject:_targetToInFlightPackages forKey:ktargetToInFlightPackagesKey];
+  if (_targetToInFlightPackages.count > 0) {
+    [aCoder encodeObject:_targetToInFlightPackages forKey:ktargetToInFlightPackagesKey];
+  }
 }
 
 #pragma mark - GDTLifecycleProtocol
@@ -192,10 +199,16 @@ static NSString *const ktargetToInFlightPackagesKey =
 
   // Create an immediate background task to run until the end of the current queue of work.
   __block GDTBackgroundIdentifier bgID = [app beginBackgroundTaskWithExpirationHandler:^{
-    [app endBackgroundTask:bgID];
+    if (bgID != GDTBackgroundIdentifierInvalid) {
+      [app endBackgroundTask:bgID];
+      bgID = GDTBackgroundIdentifierInvalid;
+    }
   }];
   dispatch_async(_coordinationQueue, ^{
-    [app endBackgroundTask:bgID];
+    if (bgID != GDTBackgroundIdentifierInvalid) {
+      [app endBackgroundTask:bgID];
+      bgID = GDTBackgroundIdentifierInvalid;
+    }
   });
 }
 
@@ -208,29 +221,52 @@ static NSString *const ktargetToInFlightPackagesKey =
 #pragma mark - GDTUploadPackageProtocol
 
 - (void)packageDelivered:(GDTUploadPackage *)package successful:(BOOL)successful {
+  if (!_coordinationQueue) {
+    return;
+  }
   dispatch_async(_coordinationQueue, ^{
     NSNumber *targetNumber = @(package.target);
-    [self->_targetToInFlightPackages removeObjectForKey:targetNumber];
-    id<GDTPrioritizer> prioritizer = self->_registrar.targetToPrioritizer[targetNumber];
-    NSAssert(prioritizer, @"A prioritizer should be registered for this target: %@", targetNumber);
-    if ([prioritizer respondsToSelector:@selector(packageDelivered:successful:)]) {
-      [prioritizer packageDelivered:package successful:successful];
+    NSMutableDictionary<NSNumber *, GDTUploadPackage *> *targetToInFlightPackages =
+        self->_targetToInFlightPackages;
+    GDTRegistrar *registrar = self->_registrar;
+    if (targetToInFlightPackages) {
+      [targetToInFlightPackages removeObjectForKey:targetNumber];
+    }
+    if (registrar) {
+      id<GDTPrioritizer> prioritizer = registrar.targetToPrioritizer[targetNumber];
+      if (!prioritizer) {
+        GDTLogError(GDTMCEPrioritizerError,
+                    @"A prioritizer should be registered for this target: %@", targetNumber);
+      }
+      if ([prioritizer respondsToSelector:@selector(packageDelivered:successful:)]) {
+        [prioritizer packageDelivered:package successful:successful];
+      }
     }
     [self.storage removeEvents:package.events];
   });
 }
 
 - (void)packageExpired:(GDTUploadPackage *)package {
+  if (!_coordinationQueue) {
+    return;
+  }
   dispatch_async(_coordinationQueue, ^{
     NSNumber *targetNumber = @(package.target);
-    [self->_targetToInFlightPackages removeObjectForKey:targetNumber];
-    id<GDTPrioritizer> prioritizer = self->_registrar.targetToPrioritizer[targetNumber];
-    id<GDTUploader> uploader = self->_registrar.targetToUploader[targetNumber];
-    if ([prioritizer respondsToSelector:@selector(packageExpired:)]) {
-      [prioritizer packageExpired:package];
+    NSMutableDictionary<NSNumber *, GDTUploadPackage *> *targetToInFlightPackages =
+        self->_targetToInFlightPackages;
+    GDTRegistrar *registrar = self->_registrar;
+    if (targetToInFlightPackages) {
+      [targetToInFlightPackages removeObjectForKey:targetNumber];
     }
-    if ([uploader respondsToSelector:@selector(packageExpired:)]) {
-      [uploader packageExpired:package];
+    if (registrar) {
+      id<GDTPrioritizer> prioritizer = registrar.targetToPrioritizer[targetNumber];
+      id<GDTUploader> uploader = registrar.targetToUploader[targetNumber];
+      if ([prioritizer respondsToSelector:@selector(packageExpired:)]) {
+        [prioritizer packageExpired:package];
+      }
+      if ([uploader respondsToSelector:@selector(packageExpired:)]) {
+        [uploader packageExpired:package];
+      }
     }
   });
 }

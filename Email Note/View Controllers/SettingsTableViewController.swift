@@ -138,6 +138,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         tableView.register(UINib(nibName: "NewEmailCell", bundle: nil), forCellReuseIdentifier: "NewEmailCell")
         
         subjectTextField.delegate = self
+        navigationController?.presentationController?.delegate = self
         
         emails = User.emails
         
@@ -219,12 +220,10 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         timer?.invalidate()
     }
     
-    // This function isn't being called when on iOS 13 the presentation controller is dismissing?
     func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
         return (User.emails == self.emails && SecureMail.subject == subjectTextField.text)
     }
     
-    // This function isn't being called when on iOS 13 the presentation controller is dismissing?
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         let saveChangesAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         saveChangesAlert.addAction(UIAlertAction(title: "Save Changes", style: .default, handler: { (alert) in

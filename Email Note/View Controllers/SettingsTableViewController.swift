@@ -159,10 +159,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                                   message: "Thanks for purchasing Pro!",
                                   actions: [UIAlertAction(title: "Ok", style: .default)],
                                   darkMode: User.darkMode)
-            self.tableView.reloadData()
-            darkModeSwitch.isEnabled = User.purchasedPro
-            darkIconSwitch.isEnabled = User.purchasedPro
-            self.newEmailCell?.updateLabel()
         } else if result == "expired" {
             self.presentDarkAlert(title: "Expired",
                                   message: "Looks like your Pro subscription expired. Please renew your subscription by upgrading again.",
@@ -174,6 +170,18 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                                   actions: [UIAlertAction(title: "Ok", style: .default)],
                                   darkMode: User.darkMode)
         }
+
+        self.tableView.reloadData()
+        darkMode(on: User.darkMode)
+        darkModeSwitch.isEnabled = User.purchasedPro
+        darkModeSwitch.isOn = (User.purchasedPro) ? User.darkMode : false
+        darkIconSwitch.isEnabled = User.purchasedPro
+        let prevIconSwitch = darkIconSwitch.isOn
+        darkIconSwitch.isOn = (User.purchasedPro) ? UIApplication.shared.alternateIconName != nil : false
+        if prevIconSwitch != darkIconSwitch.isOn {
+            darkAppIconSwitched(darkIconSwitch)
+        }
+        self.newEmailCell?.updateLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -188,7 +196,10 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         darkModeSwitch.isEnabled = User.purchasedPro
         darkModeSwitch.isOn = (User.purchasedPro) ? User.darkMode : false
         darkIconSwitch.isEnabled = User.purchasedPro
-        darkIconSwitch.isOn = UIApplication.shared.alternateIconName != nil
+        darkIconSwitch.isOn = (User.purchasedPro) ? UIApplication.shared.alternateIconName != nil : false
+        if darkIconSwitch.isOn != (UIApplication.shared.alternateIconName != nil) {
+            darkAppIconSwitched(darkIconSwitch)
+        }
         if !User.purchasedPro {
             if Emails.remainingEmails > 0 {
                 var emailText = (Emails.remainingEmails == 1) ? "email" : "emails"
@@ -233,6 +244,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
             self.view.endEditing(true)
             self.dismiss(animated: true)
         }))
+        saveChangesAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         self.present(saveChangesAlert, animated: true)
     }
     

@@ -64,15 +64,15 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
         emailField.delegate = self
         
         // This won't build on XCode 10 because of the new style code
-//        if #available(iOS 13, *) {
-//            validateSpinner.style = .medium
-//            clearButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
-//            clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 22
-//        } else {
-        validateSpinner.style = .gray
-        clearButton.setImage(UIImage(named: "x-mark"), for: .normal)
-        clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 12
-//        }
+        if #available(iOS 13, *) {
+            validateSpinner.style = .medium
+            clearButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+            clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 22
+        } else {
+            validateSpinner.style = .gray
+            clearButton.setImage(UIImage(named: "x-mark"), for: .normal)
+            clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 12
+        }
         
         checkEmail()
         darkMode(on: User.darkMode)

@@ -50,6 +50,8 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
             }
         }
         
+        note.becomeFirstResponder()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown),
                                                name: UIWindow.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appBecameActive),
@@ -59,7 +61,9 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         darkMode(on: User.darkMode)
-        note.becomeFirstResponder()
+        if self.view.isFocused {
+            note.becomeFirstResponder()
+        }
         sendingProgress.isHidden = true
     }
     
@@ -70,7 +74,9 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
     
     @objc func appBecameActive(notification: NSNotification) {
         darkMode(on: User.darkMode)
-        note.becomeFirstResponder()
+        if self.view.isFocused {
+            note.becomeFirstResponder()
+        }
         bottomView(show: true, time: 5, completion: nil)
     }
     

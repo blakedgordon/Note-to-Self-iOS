@@ -95,17 +95,18 @@ extension IAPHelper: SKProductsRequestDelegate {
                     let subscriptionPeriod = prod.subscriptionPeriod?.unit.rawValue ?? 9999
                     priceString.append(subscriptionUnitToString(period: subscriptionPeriod, shortened: true, plural: false))
                     
-                    if let introPrice = prod.introductoryPrice {
-                        if introPrice.price == 0 {
-                            priceString = "Free Trial"
-                        } else {
-                            let introSubscription = introPrice.subscriptionPeriod.unit.rawValue
-                            let introLength = subscriptionUnitToString(period: introSubscription,
-                                                                       shortened: false,
-                                                                       plural: introPrice.subscriptionPeriod.numberOfUnits > 1)
-                            priceString = "\(introPrice.priceLocale.currencySymbol ?? "$")\(introPrice.price.floatValue) for \(introPrice.subscriptionPeriod.numberOfUnits) \(introLength)"
-                        }
-                    }
+                    // Apple rejected as misleading user on pricing
+//                    if let introPrice = prod.introductoryPrice {
+//                        if introPrice.price == 0 {
+//                            priceString = "Free Trial"
+//                        } else {
+//                            let introSubscription = introPrice.subscriptionPeriod.unit.rawValue
+//                            let introLength = subscriptionUnitToString(period: introSubscription,
+//                                                                       shortened: false,
+//                                                                       plural: introPrice.subscriptionPeriod.numberOfUnits > 1)
+//                            priceString = "\(introPrice.priceLocale.currencySymbol ?? "$")\(introPrice.price.floatValue) for \(introPrice.subscriptionPeriod.numberOfUnits) \(introLength)"
+//                        }
+//                    }
                 }
                 NoteToSelfPro.proPriceLabel = priceString
             }

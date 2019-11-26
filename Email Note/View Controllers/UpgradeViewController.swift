@@ -12,6 +12,7 @@ import SVProgressHUD
 
 class UpgradeViewController: UIViewController {
 
+    @IBOutlet weak var proImage: UIImageView!
     @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var freeTrialLabel: UILabel!
     @IBOutlet weak var subscribeButton: UIButton!
@@ -28,6 +29,8 @@ class UpgradeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        proImage.layer.cornerRadius = 5
         
         subscriptionLabel.text = NoteToSelfPro.proPriceLabel
         

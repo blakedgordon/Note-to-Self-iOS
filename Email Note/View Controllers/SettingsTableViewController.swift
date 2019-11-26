@@ -16,8 +16,10 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var darkModeLabel: UILabel!
     @IBOutlet weak var darkModeSwitch: UISwitch!
+    @IBOutlet weak var darkModeButtonOverlay: UIButton!
     @IBOutlet weak var darkIconLabel: UILabel!
     @IBOutlet weak var darkIconSwitch: UISwitch!
+    @IBOutlet weak var darkIconButtonOverlay: UIButton!
     @IBOutlet weak var privacyLabel: UILabel!
     @IBOutlet weak var termsLabel: UILabel!
     @IBOutlet weak var contactLabel: UILabel!
@@ -89,6 +91,10 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                                       darkMode: User.darkMode)
             }
         }
+    }
+    
+    @IBAction func showUpgradeVC(_ sender: Any) {
+        self.performSegue(withIdentifier: "showUpgrade", sender: sender)
     }
     
     @IBAction func upgradeToProPressed(_ sender: Any) {

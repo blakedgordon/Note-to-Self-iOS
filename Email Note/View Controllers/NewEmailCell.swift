@@ -19,6 +19,12 @@ class NewEmailCell: UITableViewCell {
         settingsView?.tableView?.reloadData()
     }
     
+    @IBAction func showUpgradeVC(_ sender: Any) {
+        if let view = settingsView {
+            view.performSegue(withIdentifier: "showUpgrade", sender: sender)
+        }
+    }
+    
     func updateLabel() {
         newEmailButton.isEnabled = (User.purchasedPro && (settingsView?.emails.count ?? 5) < 5)
     }

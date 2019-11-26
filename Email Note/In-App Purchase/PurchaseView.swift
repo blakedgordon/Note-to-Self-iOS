@@ -35,6 +35,9 @@ struct PurchaseView {
         SVProgressHUD.dismiss()
         let result = notification.object as? String ?? ""
         if result == "success" {
+            if let v = view as? UpgradeViewController {
+                v.dismiss(animated: true)
+            }
             view.presentDarkAlert(title: "Purchased",
                                   message: "Thanks for purchasing Pro!",
                                   actions: [UIAlertAction(title: "Ok", style: .default)],

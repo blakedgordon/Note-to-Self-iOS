@@ -124,6 +124,8 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
                             self.sendingLabel.text = message
                         }
                     }
+                    
+                    self.performSegue(withIdentifier: "showUpgradeFromHome", sender: nil)
                 }
                 self.sending = false
                 self.bottomView(show: true, time: 10, completion: {

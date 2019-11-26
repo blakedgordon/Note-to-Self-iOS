@@ -99,6 +99,7 @@
                         <outlet property="sendingProgress" destination="Rbu-kP-xwf" id="heN-WT-9QD"/>
                         <outlet property="settingsButton" destination="aUd-UL-itq" id="3ge-vz-Ged"/>
                         <outlet property="viewHeight" destination="ND7-SI-VqD" id="Hnh-EJ-QLE"/>
+                        <segue destination="dHk-eO-CoY" kind="presentation" identifier="showUpgradeFromHome" modalPresentationStyle="pageSheet" id="izj-8K-5LU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -460,6 +461,16 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X29-cF-hPk">
+                                                    <rect key="frame" x="346" y="6" width="54" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="31" id="60N-Ut-59g"/>
+                                                        <constraint firstAttribute="width" constant="54" id="YQS-ZJ-xiM"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="showUpgradeVC:" destination="zeu-dI-Smr" eventType="touchUpInside" id="4Fn-PA-RLE"/>
+                                                    </connections>
+                                                </button>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FUm-XY-N7U">
                                                     <rect key="frame" x="349" y="6.5" width="51" height="31"/>
                                                     <connections>
@@ -470,8 +481,10 @@
                                             <constraints>
                                                 <constraint firstItem="oP1-nn-e4w" firstAttribute="leading" secondItem="08R-jJ-Ytk" secondAttribute="leadingMargin" id="4SA-QD-xex"/>
                                                 <constraint firstItem="FUm-XY-N7U" firstAttribute="centerY" secondItem="08R-jJ-Ytk" secondAttribute="centerY" id="G7R-Rd-8ms"/>
+                                                <constraint firstItem="X29-cF-hPk" firstAttribute="top" secondItem="08R-jJ-Ytk" secondAttribute="top" constant="6" id="UvF-NF-549"/>
                                                 <constraint firstAttribute="trailing" secondItem="FUm-XY-N7U" secondAttribute="trailing" constant="16" id="VEg-Ya-PLe"/>
                                                 <constraint firstItem="FUm-XY-N7U" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oP1-nn-e4w" secondAttribute="trailing" constant="8" id="Z5R-nB-i7Q"/>
+                                                <constraint firstAttribute="trailing" secondItem="X29-cF-hPk" secondAttribute="trailing" constant="14" id="dim-rB-7yc"/>
                                                 <constraint firstItem="oP1-nn-e4w" firstAttribute="centerY" secondItem="08R-jJ-Ytk" secondAttribute="centerY" id="hqP-yp-YyH"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -489,6 +502,16 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1H-NH-LJl">
+                                                    <rect key="frame" x="346" y="7" width="54" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="54" id="7ow-Yg-JNp"/>
+                                                        <constraint firstAttribute="height" constant="31" id="fED-WA-LpE"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="showUpgradeVC:" destination="zeu-dI-Smr" eventType="touchUpInside" id="pbx-jA-Z8I"/>
+                                                    </connections>
+                                                </button>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gCd-dP-NKA">
                                                     <rect key="frame" x="349" y="6.5" width="51" height="31"/>
                                                     <connections>
@@ -497,7 +520,9 @@
                                                 </switch>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="j1H-NH-LJl" secondAttribute="trailing" constant="14" id="3YB-1w-tJ0"/>
                                                 <constraint firstItem="sCX-Ho-izE" firstAttribute="centerY" secondItem="mtv-0g-wHB" secondAttribute="centerY" id="Cvj-L1-0ZN"/>
+                                                <constraint firstAttribute="bottom" secondItem="j1H-NH-LJl" secondAttribute="bottom" constant="6" id="E5a-Ni-yQb"/>
                                                 <constraint firstItem="gCd-dP-NKA" firstAttribute="centerY" secondItem="mtv-0g-wHB" secondAttribute="centerY" id="TeZ-t6-dFO"/>
                                                 <constraint firstAttribute="trailing" secondItem="gCd-dP-NKA" secondAttribute="trailing" constant="16" id="VgI-Td-raI"/>
                                                 <constraint firstItem="gCd-dP-NKA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sCX-Ho-izE" secondAttribute="trailing" constant="8" id="lyC-YE-meq"/>
@@ -642,7 +667,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="dHk-eO-CoY" kind="presentation" id="hl6-3C-BmG"/>
+                                            <segue destination="dHk-eO-CoY" kind="presentation" identifier="showUpgrade" id="hl6-3C-BmG"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="f01-L4-hrj">
@@ -654,7 +679,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restore Purchases" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Msb-QL-oRV">
                                                     <rect key="frame" x="8" y="11" width="367" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -671,7 +696,7 @@
                                         <rect key="frame" x="0.0" y="994.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h9z-V4-YhA" id="DYj-DC-joc">
-                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send 5 more emails for the next 00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmN-Hi-sMc">
@@ -707,8 +732,10 @@
                     <connections>
                         <outlet property="aboutLabel" destination="e3e-eZ-lfo" id="YZm-QS-aCk"/>
                         <outlet property="contactLabel" destination="opJ-kh-jV0" id="KIQ-1s-iVe"/>
+                        <outlet property="darkIconButtonOverlay" destination="j1H-NH-LJl" id="ghj-zv-Wnf"/>
                         <outlet property="darkIconLabel" destination="sCX-Ho-izE" id="kTU-VU-9zR"/>
                         <outlet property="darkIconSwitch" destination="gCd-dP-NKA" id="RF4-MZ-q0k"/>
+                        <outlet property="darkModeButtonOverlay" destination="X29-cF-hPk" id="oWX-lC-Fpp"/>
                         <outlet property="darkModeLabel" destination="oP1-nn-e4w" id="yth-7s-y9q"/>
                         <outlet property="darkModeSwitch" destination="FUm-XY-N7U" id="zFN-G5-rNb"/>
                         <outlet property="privacyLabel" destination="b2T-ol-D4P" id="uJO-zl-U6Z"/>
@@ -846,4 +873,7 @@
         <image name="moon.fill" catalog="system" width="64" height="60"/>
         <image name="tray.and.arrow.up.fill" catalog="system" width="64" height="56"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="izj-8K-5LU"/>
+    </inferredMetricsTieBreakers>
 </document>

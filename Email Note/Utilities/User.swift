@@ -72,8 +72,8 @@ class User {
     
     static func isEmailValidated(_ emailRaw: String, completionHandler: @escaping (_ verified: Bool?, _ verificationSent: Bool?) -> ()) {
         let validSet = Set(self.emailsValidated.keys)
-        let email = emailRaw.trimmingCharacters(in: .whitespacesAndNewlines)
-        if validSet.contains(email) {
+        let email = emailRaw.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        if containsCaseInsensitive(email, Array(validSet)) {
             completionHandler(true, nil)
             return
         }
@@ -103,7 +103,8 @@ class User {
         }
     }
     
-    static func validateRequest(email: String) {
+    static func validateRequest(rawEmail: String) {
+        let email = rawEmail.lowercased()
         Auth.auth().fetchSignInMethods(forEmail: email) { (providers, error) in
             if let prov = providers, prov.count > 0 {
                 Auth.auth().signIn(withEmail: email, password: email, completion: { (result, error) in
@@ -123,11 +124,12 @@ class User {
         var invalidEmails = [String]()
         let emailsSet = Set(self.emails)
         let validSet = Set(self.emailsValidated.keys)
-        if emailsSet.isSubset(of: validSet) {
+        if User.isSubsetCaseInsensitive(emailsSet, validSet) {
             completionHandler(invalidEmails)
             return
         }
-        for (index, email) in self.emails.enumerated() {
+        for (index, emailRaw) in self.emails.enumerated() {
+            let email = emailRaw.lowercased()
             Auth.auth().fetchSignInMethods(forEmail: email) { (providers, error) in
                 if let prov = providers, prov.count > 0 {
                     Auth.auth().signIn(withEmail: email, password: email, completion: { (result, error) in
@@ -158,7 +160,7 @@ class User {
         if !verified {
             emailsVar.append(email)
         } else {
-            emailsValidated[email] = true
+            emailsValidated[email.lowercased()] = true
         }
         self.signOut()
         return emailsVar
@@ -170,5 +172,27 @@ class User {
         } catch {
             print("Not signed in")
         }
+    }
+    
+    static func containsCaseInsensitive(_ string: String, _ array: [String]) -> Bool {
+        for a in array {
+            if a.lowercased() == string.lowercased() {
+                return true
+            }
+        }
+        return false
+    }
+    
+    static func isSubsetCaseInsensitive(_ array1: Set<String>, _ array2: Set<String>) -> Bool {
+        var set1 = Set<String>()
+        for s in array1 {
+            set1.insert(s.lowercased())
+        }
+        var set2 = Set<String>()
+        for s in array2 {
+            set2.insert(s.lowercased())
+        }
+        
+        return set1.isSubset(of: set2)
     }
 }

@@ -24,7 +24,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
         validateSpinner.isHidden = true
         validateButton.isHidden = false
         if let email = emailField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            User.emailsValidated.keys.contains(email) && email != "" {
+            User.containsCaseInsensitive(email, Array(User.emailsValidated.keys)) && email != "" {
             validateButton.isEnabled = true
             validateButton.isUserInteractionEnabled = false
             validateButton.tintColor = .green
@@ -41,7 +41,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     }
     
     @IBAction func validateEmail(_ sender: Any) {
-        User.validateRequest(email: User.mainEmail)
+        User.validateRequest(rawEmail: User.mainEmail)
         viewController?.presentDarkAlert(title: "Request Sent", message: "Email validation request sent!",
                                          actions: [UIAlertAction(title: "Ok", style: .default)], darkMode: User.darkMode)
     }

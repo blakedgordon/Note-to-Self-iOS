@@ -30,7 +30,7 @@ class UpgradeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        proImage.layer.cornerRadius = 5
+        proImage.layer.cornerRadius = 7
         
         subscriptionLabel.text = NoteToSelfPro.proPriceLabel
         

@@ -23,7 +23,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     @IBOutlet weak var contactLabel: UILabel!
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var upgradeProButton: UIButton!
-    @IBOutlet weak var restorePurchasesButton: UIButton!
     @IBOutlet weak var remainingEmailsLabel: UILabel!
     
     weak var newEmailCell: NewEmailCell?
@@ -93,26 +92,10 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     }
     
     @IBAction func upgradeToProPressed(_ sender: Any) {
-        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
-        SVProgressHUD.show(withStatus: "Processing...")
-        if NoteToSelfPro.proAvailable(products: productsAvailable) {
-            NoteToSelfPro.store.buyProduct(
-                NoteToSelfPro.getProduct(NoteToSelfPro.proProductKey, products: productsAvailable)!)
-        } else {
-            self.presentDarkAlert(title: "Unavailable",
-                                  message: "Looks like we've hit a snag and we can't seem to purchase this. Please contact support.",
-                                  actions: [UIAlertAction(title: "Ok", style: .default)],
-                                  darkMode: User.darkMode)
-            SVProgressHUD.dismiss()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 90) {
-            if SVProgressHUD.isVisible() {
-                SVProgressHUD.showError(withStatus: "Timeout Error")
-            }
-        }
+        PurchaseView.upgrade(self, productsAvailable: productsAvailable)
     }
     
-    @IBAction func restorePurchasesPressed(_ sender: Any) {
+    func restorePurchasesPressed() {
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
         SVProgressHUD.show(withStatus: "Processing...")
         if productsAvailable?.count ?? 0 > 0 {
@@ -143,8 +126,9 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         emails = User.emails
         
         NoteToSelfPro.validateReceipt()
-        upgradeProButton.layer.cornerRadius = 4
-        upgradeProButton.setTitle(NoteToSelfPro.proPriceLabel, for: .normal)
+        upgradeProButton.layer.cornerRadius = 5
+        let upgradeProText = (NoteToSelfPro.proTrialExists ?? false) ? "Free Trial" : NoteToSelfPro.proPriceLabel
+        upgradeProButton.setTitle(upgradeProText, for: .normal)
         upgradeProButton.updateConstraints()
         
         NotificationCenter.default.addObserver(self, selector: #selector(purchase),
@@ -152,24 +136,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     }
     
     @objc func purchase(notification: NSNotification) {
-        SVProgressHUD.dismiss()
-        let result = notification.object as? String ?? ""
-        if result == "success" {
-            self.presentDarkAlert(title: "Purchased",
-                                  message: "Thanks for purchasing Pro!",
-                                  actions: [UIAlertAction(title: "Ok", style: .default)],
-                                  darkMode: User.darkMode)
-        } else if result == "expired" {
-            self.presentDarkAlert(title: "Expired",
-                                  message: "Looks like your Pro subscription expired. Please renew your subscription by upgrading again.",
-                                  actions: [UIAlertAction(title: "Ok", style: .default)],
-                                  darkMode: User.darkMode)
-        } else {
-            self.presentDarkAlert(title: "Failure",
-                                  message: "Looks like we've hit a snag and we can't seem to purchase this. Please check your network and App Store account.",
-                                  actions: [UIAlertAction(title: "Ok", style: .default)],
-                                  darkMode: User.darkMode)
-        }
+        PurchaseView.purchase(self, notification: notification)
 
         self.tableView.reloadData()
         darkMode(on: User.darkMode)
@@ -246,28 +213,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         }))
         saveChangesAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         self.present(saveChangesAlert, animated: true)
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        let sections = (User.purchasedPro) ? numberOfTotalSections - 1 : numberOfTotalSections
-        return sections
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.headerView(forSection: indexPath.section)?.textLabel?.text?.lowercased() == "support" {
-            if indexPath.row == 0 {
-                if let url = URL(string: "https://notetoselfapp.com#privacy"){
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            } else if indexPath.row == 1 {
-                if let url = URL(string: "https://notetoselfapp.com/terms.html"){
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            } else if indexPath.row == 2 {
-                sendEmailButtonTapped()
-            }
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

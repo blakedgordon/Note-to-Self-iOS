@@ -42,6 +42,10 @@ class NoteToSelfPro {
         }
     }
     
+    static var proTrialExists: Bool?
+    
+    static var proTrialString: String?
+    
     static func proAvailable(products: [SKProduct]?) -> Bool {
         return products?.contains(where: { (product) -> Bool in
             return product.productIdentifier == proProductKey

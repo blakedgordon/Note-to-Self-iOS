@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.3'
+platform :ios, '13.0'
 use_frameworks!
 
 target 'Email Note' do

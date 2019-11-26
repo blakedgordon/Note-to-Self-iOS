@@ -96,17 +96,18 @@ extension IAPHelper: SKProductsRequestDelegate {
                     priceString.append(subscriptionUnitToString(period: subscriptionPeriod, shortened: true, plural: false))
                     
                     // Apple rejected as misleading user on pricing
-//                    if let introPrice = prod.introductoryPrice {
-//                        if introPrice.price == 0 {
-//                            priceString = "Free Trial"
-//                        } else {
-//                            let introSubscription = introPrice.subscriptionPeriod.unit.rawValue
-//                            let introLength = subscriptionUnitToString(period: introSubscription,
-//                                                                       shortened: false,
-//                                                                       plural: introPrice.subscriptionPeriod.numberOfUnits > 1)
-//                            priceString = "\(introPrice.priceLocale.currencySymbol ?? "$")\(introPrice.price.floatValue) for \(introPrice.subscriptionPeriod.numberOfUnits) \(introLength)"
-//                        }
-//                    }
+                    NoteToSelfPro.proTrialExists = prod.introductoryPrice != nil
+                    if let introPrice = prod.introductoryPrice {
+                        let introSubscription = introPrice.subscriptionPeriod.unit.rawValue
+                        let introLength = subscriptionUnitToString(period: introSubscription,
+                                                                   shortened: false,
+                                                                   plural: introPrice.subscriptionPeriod.numberOfUnits > 1)
+                        if introPrice.price == 0 {
+                            NoteToSelfPro.proTrialString = "Free Trial for \(introPrice.subscriptionPeriod.numberOfUnits) \(introLength)"
+                        } else {
+                            NoteToSelfPro.proTrialString = "\(introPrice.priceLocale.currencySymbol ?? "$")\(introPrice.price.floatValue) for \(introPrice.subscriptionPeriod.numberOfUnits) \(introLength)"
+                        }
+                    }
                 }
                 NoteToSelfPro.proPriceLabel = priceString
             }

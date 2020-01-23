@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         NoteToSelfPro.validateReceipt()
+        window?.overrideUserInterfaceStyle = (User.darkMode) ? .dark : .light
         // Request products to load the price of Pro
         NoteToSelfPro.store.requestProducts { (_, nil) in
             return
@@ -40,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         NoteToSelfPro.validateReceipt()
+        window?.overrideUserInterfaceStyle = (User.darkMode) ? .dark : .light
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

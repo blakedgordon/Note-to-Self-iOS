@@ -33,8 +33,12 @@ class User {
     
     static var purchasedPro: Bool {
         get {
+            #if DEBUG
+            return true
+            #else
             return (UserDefaults.standard.bool(forKey: NoteToSelfPro.proProductKey) &&
                 (NoteToSelfPro.expireDate > Date() || NoteToSelfPro.expireDateCode > Date()))
+            #endif
         }
         set {
             UserDefaults.standard.set(newValue, forKey: NoteToSelfPro.proProductKey)
@@ -46,11 +50,15 @@ class User {
             return (User.purchasedPro && UserDefaults.standard.bool(forKey: "darkMode"))
         }
         set {
+            #if DEBUG
+            UserDefaults.standard.set(newValue, forKey: "darkMode")
+            #else
             if UserDefaults.standard.bool(forKey: NoteToSelfPro.proProductKey) && User.purchasedPro {
                 UserDefaults.standard.set(newValue, forKey: "darkMode")
             } else {
                 UserDefaults.standard.set(false, forKey: "darkMode")
             }
+            #endif
         }
     }
     

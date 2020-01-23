@@ -42,8 +42,8 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     
     @IBAction func validateEmail(_ sender: Any) {
         User.validateRequest(rawEmail: User.mainEmail)
-        viewController?.presentDarkAlert(title: "Request Sent", message: "Email validation request sent!",
-                                         actions: [UIAlertAction(title: "Ok", style: .default)], darkMode: User.darkMode)
+        viewController?.presentAlert(title: "Request Sent", message: "Email validation request sent!",
+                                     actions: [UIAlertAction(title: "Ok", style: .default)])
     }
     
     @IBAction func clear(_ sender: Any) {
@@ -63,19 +63,11 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
         
         emailField.delegate = self
         
-        // This won't build on XCode 10 because of the new style code
-        if #available(iOS 13, *) {
-            validateSpinner.style = .medium
-            clearButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
-            clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 22
-        } else {
-            validateSpinner.style = .gray
-            clearButton.setImage(UIImage(named: "x-mark"), for: .normal)
-            clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 12
-        }
+        validateSpinner.style = .medium
+        clearButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+        clearButtonWidth.constant = (clearButton.isHidden) ? 0 : 22
         
         checkEmail()
-        darkMode(on: User.darkMode)
     }
     
     func checkEmail() {
@@ -97,29 +89,20 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
                         self.validateButton.isUserInteractionEnabled = true
                         self.validateButton.tintColor = .orange
                         if let emailSent = verificationEmail, emailSent {
-                            self.viewController?.presentDarkAlert(title: "Request Sent",
-                                                                  message: "Email validation request sent for this new email!",
-                                                                  actions: [UIAlertAction(title: "Ok", style: .default)],
-                                                                  darkMode: User.darkMode)
+                            self.viewController?.presentAlert(title: "Request Sent",
+                                                              message: "Email validation request sent for this new email!",
+                                                              actions: [UIAlertAction(title: "Ok", style: .default)])
                         }
                     }
                 } else {
                     self.validateButton.isUserInteractionEnabled = false
                     self.validateButton.tintColor = .red
-                    self.viewController?.presentDarkAlert(title: "Invalid Email",
-                                                          message: "Please enter a valid email address",
-                                                          actions: [UIAlertAction(title: "Ok", style: .default)],
-                                                          darkMode: User.darkMode)
+                    self.viewController?.presentAlert(title: "Invalid Email",
+                                                      message: "Please enter a valid email address",
+                                                      actions: [UIAlertAction(title: "Ok", style: .default)])
                 }
             }
         }
-    }
-    
-    func darkMode(on: Bool) {
-        emailField.textColor = (on) ? .white : .black
-        emailField.keyboardAppearance = (on) ? .dark : .light
-        clearButton.tintColor = (on) ? .lightGray : .darkGray
-        validateSpinner.color = (on) ? .lightGray : .darkGray
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

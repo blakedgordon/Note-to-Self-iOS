@@ -41,10 +41,8 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
                         for email in emails {
                             message.append(contentsOf: "\n\(email)")
                         }
-                        self.presentDarkAlert(title: "Invalid \(emailString.capitalized)",
-                            message: message,
-                            actions: [UIAlertAction(title: "Ok", style: .default, handler: nil)],
-                            darkMode: User.darkMode)
+                        self.presentAlert(title: "Invalid \(emailString.capitalized)", message: message,
+                                          actions: [UIAlertAction(title: "Ok", style: .default, handler: nil)])
                     }
                 })
             }
@@ -60,7 +58,6 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        darkMode(on: User.darkMode)
         if self.view.isFocused {
             note.becomeFirstResponder()
         }
@@ -73,7 +70,6 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
     }
     
     @objc func appBecameActive(notification: NSNotification) {
-        darkMode(on: User.darkMode)
         if self.view.isFocused {
             note.becomeFirstResponder()
         }
@@ -149,11 +145,9 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
                                                     message: "Please enter a valid email address",
                                                     preferredStyle: .alert)
                 noEmailText.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-                    self.setDark(alert: setUserEmail, darkModeOn: User.darkMode)
                     self.present(setUserEmail, animated: true, completion: nil)
                 }))
                 
-                self.setDark(alert: noEmailText, darkModeOn: User.darkMode)
                 self.present(noEmailText, animated: true, completion: nil)
             } else {
                 User.mainEmail = email
@@ -162,10 +156,9 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
                 
                 User.validatedEmails(completionHandler: { (invalid) in
                     if invalid.contains(email) {
-                        self.presentDarkAlert(title: "Verify Email",
-                                              message: "An email has been sent to your address, please verify your email",
-                                              actions: [UIAlertAction(title: "Ok", style: .default, handler: nil)],
-                                              darkMode: User.darkMode)
+                        self.presentAlert(title: "Verify Email",
+                                          message: "An email has been sent to your address, please verify your email",
+                                          actions: [UIAlertAction(title: "Ok", style: .default, handler: nil)])
                     }
                 })
             }
@@ -179,7 +172,6 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
         textField.keyboardType = UIKeyboardType.emailAddress
         textField.returnKeyType = UIReturnKeyType.done
         
-        self.setDark(alert: setUserEmail, darkModeOn: User.darkMode)
         self.present(setUserEmail, animated: true, completion: nil)
     }
     
@@ -205,13 +197,11 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
                 self.sendingLabel.isHidden = false
             }
             self.sendingLabel.alpha = show ? 0 : 1
-            self.settingsButton.alpha = show ? 0 : 1
             
             self.view.layoutIfNeeded()
             UIView.animate(withDuration: 0.5, animations: {
                 self.viewHeight.constant = show ? 50 : 0
                 self.sendingLabel.alpha = show ? 1 : 0
-                self.settingsButton.alpha = show ? 1 : 0
                 self.view.layoutIfNeeded()
             }, completion: { _ in
                 if self.viewHeight.constant == 0 {
@@ -235,25 +225,8 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
     
     @objc func keyboardWasShown(notification: NSNotification) {
         if let kbSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.size {
-            if #available(iOS 11.0, *) {
-                bottomConstraint.constant = kbSize.height - view.safeAreaInsets.bottom
-            } else {
-                // Fallback on earlier versions
-                bottomConstraint.constant = kbSize.height
-            }
+            bottomConstraint.constant = kbSize.height - view.safeAreaInsets.bottom
         }
-    }
-    
-    func darkMode(on: Bool) {
-        self.view.backgroundColor = (on) ? UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1) : UIColor.white
-        self.bottomView.backgroundColor = (on) ? UIColor.black : UIColor.darkGray
-        self.setNeedsStatusBarAppearanceUpdate()
-        note.textColor = (on) ? UIColor.white : UIColor.black
-        note.keyboardAppearance = (on) ? .dark : .light
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return (User.darkMode) ? .lightContent : .default
     }
 }
 

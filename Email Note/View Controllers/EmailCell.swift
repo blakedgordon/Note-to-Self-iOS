@@ -34,7 +34,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     }
     
     @IBAction func setEmail(_ sender: Any) {
-        if let view = viewController, let index = row, let email = emailField.text {
+        if let view = viewController, let index = row, let email = emailField.text, email != "" {
             view.emails[index] = email
             checkEmail()
         }

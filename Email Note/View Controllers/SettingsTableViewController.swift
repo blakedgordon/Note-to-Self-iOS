@@ -65,7 +65,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                 alertMessage = "Please enter a valid email address"
             }
             let alertAction = UIAlertAction(title: "Ok", style: .default)
-            self.presentDarkAlert(title: alertTitle, message: alertMessage, actions: [alertAction], darkMode: User.darkMode)
+            self.presentAlert(title: alertTitle, message: alertMessage, actions: [alertAction])
         }
     }
     
@@ -73,22 +73,16 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         view.endEditing(true)
         User.darkMode = sender.isOn
         self.view.layoutIfNeeded()
-        UIView.animate(withDuration: 0.5) {
-            self.darkMode(on: User.darkMode)
-            if let noteView = self.presentingViewController as? NoteViewController {
-                noteView.darkMode(on: User.darkMode)
-            }
-        }
+        setDark()
     }
     
     @IBAction func darkAppIconSwitched(_ sender: UISwitch) {
         view.endEditing(true)
         UIApplication.shared.setAlternateIconName(sender.isOn ? "Dark-AppIcon" : nil) { (error) in
             if error != nil {
-                self.presentDarkAlert(title: "Uh Oh",
-                                      message: "We had some trouble setting the app icon. Sorry about that! If this keeps happening, please contact support.",
-                                      actions: [UIAlertAction(title: "Ok", style: .default)],
-                                      darkMode: User.darkMode)
+                self.presentAlert(title: "Uh Oh",
+                                  message: "We had some trouble setting the app icon. Sorry about that! If this keeps happening, please contact support.",
+                                  actions: [UIAlertAction(title: "Ok", style: .default)])
             }
         }
     }
@@ -107,10 +101,9 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         if productsAvailable?.count ?? 0 > 0 {
             NoteToSelfPro.store.restorePurchases()
         } else {
-            self.presentDarkAlert(title: "Unavailable",
-                                  message: "Looks like we've hit a snag and we can't seem to restore any purchases. Please contact support.",
-                                  actions: [UIAlertAction(title: "Ok", style: .default)],
-                                  darkMode: User.darkMode)
+            self.presentAlert(title: "Unavailable",
+                              message: "Looks like we've hit a snag and we can't seem to restore any purchases. Please contact support.",
+                              actions: [UIAlertAction(title: "Ok", style: .default)])
             SVProgressHUD.dismiss()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
@@ -131,6 +124,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         
         emails = User.emails
         
+        darkIconSwitch.isOn = (User.purchasedPro) ? UIApplication.shared.alternateIconName != nil : false
+        
         NoteToSelfPro.validateReceipt()
         upgradeProButton.layer.cornerRadius = 5
         let upgradeProText = (NoteToSelfPro.proTrialExists ?? false) ? "Free Trial" : NoteToSelfPro.proPriceLabel
@@ -145,7 +140,10 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         PurchaseView.purchase(self, notification: notification)
 
         self.tableView.reloadData()
-        darkMode(on: User.darkMode)
+        updateSwitches()
+    }
+    
+    func updateSwitches() {
         darkModeSwitch.isEnabled = User.purchasedPro
         darkModeSwitch.isOn = (User.purchasedPro) ? User.darkMode : false
         darkIconSwitch.isEnabled = User.purchasedPro
@@ -160,6 +158,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subjectTextField.text = SecureMail.subject
+        
+        setDark()
         
         NoteToSelfPro.store.requestProducts { (_, products) in
             self.productsAvailable = products
@@ -192,16 +192,16 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                 }
             }
         }
-        
-        darkMode(on: User.darkMode)
-        if let noteView = self.presentingViewController as? NoteViewController {
-            noteView.darkMode(on: User.darkMode)
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         timer?.invalidate()
+    }
+    
+    func setDark() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.overrideUserInterfaceStyle = (User.darkMode) ? .dark : .light
     }
     
     func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
@@ -224,28 +224,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
-    }
-    
-    func darkMode(on: Bool) {
-        self.view.backgroundColor = (on) ? .black : .groupTableViewBackground
-        self.tableView.separatorColor = (on) ? .black : .lightGray
-        self.navigationController?.navigationBar.barStyle = (on) ? .black : .default
-        self.navigationController?.view.backgroundColor = (on) ? .black : .white
-        self.navigationController?.navigationBar.titleTextAttributes =
-            (on) ? [.foregroundColor: UIColor.white] : [.foregroundColor: UIColor.black]
-        subjectTextField.textColor = (on) ? .white : .black
-        darkModeLabel.textColor = (on) ? .white : .black
-        darkIconLabel.textColor = (on) ? .white : .black
-        remainingEmailsLabel.textColor = (on) ? .white : .black
-        privacyLabel.textColor = (on) ? .white : .black
-        termsLabel.textColor = (on) ? .white : .black
-        contactLabel.textColor = (on) ? .white : .black
-        aboutLabel.textColor = (on) ? .white : .black
-        
-        subjectTextField.keyboardAppearance = (on) ? .dark : .light
-        
-        tableView.separatorColor = (on) ? UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1) : UITableView().separatorColor        
-        tableView.reloadData()
     }
     
     // FUNCTIONS BELOW RECIEVED FROM STACK OVERFLOW TO SEND AN EMAIL

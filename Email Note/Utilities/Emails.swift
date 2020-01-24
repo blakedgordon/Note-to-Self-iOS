@@ -31,6 +31,26 @@ class Emails {
             return emailLimit - sentDates.count
         }
     }
+    static var sentEmails: [Email] {
+        get {
+            do {
+                guard let data = UserDefaults.standard.data(forKey: "sentEmails") else { return [] }
+                let array = try JSONDecoder().decode([Email].self, from: data)
+                return array
+            } catch {
+                return []
+            }
+        }
+        set {
+            let sortedValue = newValue.sorted { $0.date > $1.date }
+            do {
+                try UserDefaults.standard.set(JSONEncoder().encode(sortedValue), forKey: "sentEmails")
+                UserDefaults.standard.synchronize()
+            } catch {
+                print(error)
+            }
+        }
+    }
     
     static func sendEmail(note: String,
                           completionHandler: @escaping (_ success: Bool, _ message: String, _ hideProgress: Bool, _ setTimer: Bool) -> ()) {
@@ -54,9 +74,10 @@ class Emails {
                         for (index, email) in User.emails.enumerated() {
                             let key = SecureMail.apiKey
                             let emailBody  = note
+                            let toEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
                             let parameters = [
                                 "from": SecureMail.email,
-                                "to": email.trimmingCharacters(in: .whitespacesAndNewlines),
+                                "to": toEmail,
                                 "subject": SecureMail.subject,
                                 "text": emailBody
                             ]
@@ -71,6 +92,7 @@ class Emails {
                                     switch statusCode {
                                     case 200:
                                         // Sent! Success recorded later
+                                        sentEmails.insert(Email(to: toEmail, message: emailBody), at: 0)
                                         break
                                     default:
                                         errorEmails.append(email)

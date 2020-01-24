@@ -33,19 +33,9 @@ extension SettingsTableViewController {
                 cell = newEmailCell
             } else {
                 let emailCell = tableView.dequeueReusableCell(withIdentifier: "EmailCell", for: indexPath) as! EmailCell
-                emailCell.darkMode(on: User.darkMode)
                 emailCell.populateCell(row: indexPath.row, viewController: self)
                 cell = emailCell
             }
-        }
-        cell.backgroundColor = (User.darkMode) ? UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1) : .white
-        if User.darkMode && cell.selectionStyle != .none {
-            let view = UIView()
-            view.backgroundColor = .darkGray
-            cell.selectedBackgroundView = view
-        } else if cell.selectionStyle != .none {
-            cell.selectionStyle = .default
-            cell.selectedBackgroundView = nil
         }
         return cell
     }
@@ -69,17 +59,5 @@ extension SettingsTableViewController {
         }
         // Deselect the row
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UITableViewHeaderFooterView()
-        view.backgroundColor = (User.darkMode) ? .black : .groupTableViewBackground
-        return view
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UITableViewHeaderFooterView()
-        view.backgroundColor = (User.darkMode) ? .black : .groupTableViewBackground
-        return view
     }
 }

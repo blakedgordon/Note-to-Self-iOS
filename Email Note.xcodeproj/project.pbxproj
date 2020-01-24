@@ -26,6 +26,7 @@
 		0BF626EF21C03A75001E4551 /* Emails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626EE21C03A75001E4551 /* Emails.swift */; };
 		0BF626F121C17148001E4551 /* AlertDarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF626F021C17148001E4551 /* AlertDarkMode.swift */; };
 		435D7A7D43A03E89DD106D81 /* Pods_Email_Note.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8D2286A18C08C9627ACA80 /* Pods_Email_Note.framework */; };
+		D41804C523DA810800A19081 /* SentEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41804C423DA810800A19081 /* SentEmailViewController.swift */; };
 		D43A7D92231629ED00D817DC /* Dark-AppIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D43A7D91231629ED00D817DC /* Dark-AppIcon@2x.png */; };
 		D43A7D9423162A0800D817DC /* Dark-AppIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D43A7D9323162A0800D817DC /* Dark-AppIcon@3x.png */; };
 		D44537E822F621AA00950419 /* EmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44537E622F621AA00950419 /* EmailCell.swift */; };
@@ -60,6 +61,7 @@
 		0BF626EE21C03A75001E4551 /* Emails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emails.swift; sourceTree = "<group>"; };
 		0BF626F021C17148001E4551 /* AlertDarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDarkMode.swift; sourceTree = "<group>"; };
 		5C476D7C752785A623DC0E36 /* Pods-Email Note.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Email Note.debug.xcconfig"; path = "Target Support Files/Pods-Email Note/Pods-Email Note.debug.xcconfig"; sourceTree = "<group>"; };
+		D41804C423DA810800A19081 /* SentEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentEmailViewController.swift; sourceTree = "<group>"; };
 		D43A7D91231629ED00D817DC /* Dark-AppIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dark-AppIcon@2x.png"; sourceTree = "<group>"; };
 		D43A7D9323162A0800D817DC /* Dark-AppIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dark-AppIcon@3x.png"; sourceTree = "<group>"; };
 		D44537E622F621AA00950419 /* EmailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailCell.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				0BF39A6F2300DA6F0021DB8F /* AboutTableViewController.swift */,
 				0B2F60B323DA66010004A3E8 /* HistoryTableViewController.swift */,
 				0B2F60B523DA66B40004A3E8 /* SentEmailCell.swift */,
+				D41804C423DA810800A19081 /* SentEmailViewController.swift */,
 				0BF626F021C17148001E4551 /* AlertDarkMode.swift */,
 			);
 			path = "View Controllers";
@@ -333,6 +336,7 @@
 				0BF39A702300DA6F0021DB8F /* AboutTableViewController.swift in Sources */,
 				0BF626EF21C03A75001E4551 /* Emails.swift in Sources */,
 				0BEB4886238D9A3A007EF360 /* PurchaseView.swift in Sources */,
+				D41804C523DA810800A19081 /* SentEmailViewController.swift in Sources */,
 				0BF626F121C17148001E4551 /* AlertDarkMode.swift in Sources */,
 				0BF626EB21C01D43001E4551 /* User.swift in Sources */,
 				0B8C421A21C317CF00B68F4D /* NoteToSelfPro.swift in Sources */,
@@ -494,7 +498,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = W28XDYH3BU;
 				INFOPLIST_FILE = "Email Note/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -516,7 +520,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = W28XDYH3BU;
 				INFOPLIST_FILE = "Email Note/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

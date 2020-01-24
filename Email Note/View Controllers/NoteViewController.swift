@@ -25,6 +25,14 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
     var showBottomViewTimer: Timer?
     var timeRemainingTimer: Timer?
     
+    @IBAction func showHistoryPressed(_ sender: Any) {
+        if User.purchasedPro {
+            self.performSegue(withIdentifier: "showHistory", sender: nil)
+        } else {
+            self.performSegue(withIdentifier: "showUpgradeFromHome", sender: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -62,6 +70,8 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
             note.becomeFirstResponder()
         }
         sendingProgress.isHidden = true
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.overrideUserInterfaceStyle = (User.darkMode) ? .dark : .light
     }
     
     override func viewDidAppear(_ animated: Bool) {

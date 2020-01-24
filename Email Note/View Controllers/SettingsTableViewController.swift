@@ -73,8 +73,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         view.endEditing(true)
         User.darkMode = sender.isOn
         self.view.layoutIfNeeded()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.overrideUserInterfaceStyle = (User.darkMode) ? .dark : .light
+        setDark()
     }
     
     @IBAction func darkAppIconSwitched(_ sender: UISwitch) {
@@ -160,6 +159,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         super.viewWillAppear(animated)
         subjectTextField.text = SecureMail.subject
         
+        setDark()
+        
         NoteToSelfPro.store.requestProducts { (_, products) in
             self.productsAvailable = products
         }
@@ -196,6 +197,11 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         timer?.invalidate()
+    }
+    
+    func setDark() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.overrideUserInterfaceStyle = (User.darkMode) ? .dark : .light
     }
     
     func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {

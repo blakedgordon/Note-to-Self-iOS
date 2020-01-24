@@ -61,6 +61,7 @@
                                     <constraint firstAttribute="width" secondItem="aUd-UL-itq" secondAttribute="height" multiplier="1:1" id="YcI-37-KlC"/>
                                     <constraint firstAttribute="width" constant="22" id="elU-n3-2Xm"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="gear" catalog="system"/>
                                 <connections>
@@ -73,10 +74,11 @@
                                     <constraint firstAttribute="width" constant="22" id="TuE-4W-gt0"/>
                                     <constraint firstAttribute="width" secondItem="Ekb-55-sWu" secondAttribute="height" multiplier="1:1" id="nZM-Y1-0SC"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="archivebox" catalog="system"/>
                                 <connections>
-                                    <segue destination="YbJ-3X-lXa" kind="show" identifier="showHistory" id="50M-sD-D43"/>
+                                    <action selector="showHistoryPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1GA-me-OXw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -110,6 +112,7 @@
                         <outlet property="settingsButton" destination="aUd-UL-itq" id="3ge-vz-Ged"/>
                         <outlet property="viewHeight" destination="ND7-SI-VqD" id="Hnh-EJ-QLE"/>
                         <segue destination="dHk-eO-CoY" kind="presentation" identifier="showUpgradeFromHome" modalPresentationStyle="pageSheet" id="izj-8K-5LU"/>
+                        <segue destination="YbJ-3X-lXa" kind="show" identifier="showHistory" id="lEP-gV-cz2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -124,7 +127,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+            <point key="canvasLocation" x="135" y="133"/>
         </scene>
         <!--Upgrade View Controller-->
         <scene sceneID="dDM-nW-gUG">
@@ -728,7 +731,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send 5 more emails for the next 00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmN-Hi-sMc">
-                                                    <rect key="frame" x="8" y="8" width="304" height="28"/>
+                                                    <rect key="frame" x="8" y="8" width="398" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -949,7 +952,6 @@
                                     <outlet property="dateLabel" destination="h1q-Yg-rv6" id="UTm-MG-XPh"/>
                                     <outlet property="messageLabel" destination="ggc-ZB-gzi" id="nfJ-kF-D71"/>
                                     <outlet property="toEmailLabel" destination="5wQ-2i-Ui2" id="A12-az-dgP"/>
-                                    <segue destination="AHr-bk-WRq" kind="show" id="YWC-6w-OZw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -958,16 +960,25 @@
                             <outlet property="delegate" destination="UdA-Lh-7ct" id="dvC-Cv-ZiY"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="History" largeTitleDisplayMode="never" id="jTU-no-NpU"/>
+                    <navigationItem key="navigationItem" title="History" largeTitleDisplayMode="never" id="jTU-no-NpU">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="uiO-ex-13z">
+                            <connections>
+                                <action selector="donePressed:" destination="UdA-Lh-7ct" id="ouZ-Go-OuI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="AHr-bk-WRq" kind="show" identifier="showSentEmail" id="W1R-8M-bOv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N25-0Y-Ntn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="134.78260869565219" y="-563.16964285714278"/>
         </scene>
-        <!--View Controller-->
+        <!--Sent Email View Controller-->
         <scene sceneID="N33-qw-27J">
             <objects>
-                <viewController id="AHr-bk-WRq" sceneMemberID="viewController">
+                <viewController id="AHr-bk-WRq" customClass="SentEmailViewController" customModule="Email_Note" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tf3-RN-ed7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1009,6 +1020,11 @@
                         <viewLayoutGuide key="safeArea" id="Q0G-nl-v8Z"/>
                     </view>
                     <navigationItem key="navigationItem" id="tgn-Dm-xxN"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="HRd-a9-RQc" id="FM0-7N-22J"/>
+                        <outlet property="messageLabel" destination="T55-6G-bRb" id="oY8-sC-8hJ"/>
+                        <outlet property="toEmailLabel" destination="UL2-7C-rfp" id="GH2-T9-XYg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1d-JQ-NCc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

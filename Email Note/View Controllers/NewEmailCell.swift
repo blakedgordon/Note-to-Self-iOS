@@ -10,6 +10,7 @@ import UIKit
 
 class NewEmailCell: UITableViewCell {
     
+    @IBOutlet weak var newEmailButtonOverlay: UIButton!
     @IBOutlet weak var newEmailButton: UIButton!
     
     weak var settingsView: SettingsTableViewController?
@@ -27,6 +28,7 @@ class NewEmailCell: UITableViewCell {
     
     func updateLabel() {
         newEmailButton.isEnabled = (User.purchasedPro && (settingsView?.emails.count ?? 5) < 5)
+        newEmailButtonOverlay.isEnabled = !User.purchasedPro
     }
     
 }

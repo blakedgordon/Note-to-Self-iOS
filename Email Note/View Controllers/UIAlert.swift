@@ -9,7 +9,12 @@
 import UIKit
 
 extension UIViewController {
-    func presentAlert(title: String, message: String, actions: [UIAlertAction]) {
+    /// Shorthand method for presenting UIAlertController
+    /// - Parameters:
+    ///   - title: Title of the UIAlertController
+    ///   - message: Message to present in the UIAlertController
+    ///   - actions: Any desired actions for the UIAlertController ([] for no actions)
+    func presentAlert(title: String, message: String, actions: [UIAlertAction] = []) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         for action in actions {
             alert.addAction(action)

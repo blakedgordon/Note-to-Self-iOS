@@ -31,6 +31,14 @@ class Emails {
             return emailLimit - sentDates.count
         }
     }
+    static var subject: String {
+        get{
+            return UserDefaults.standard.string(forKey: "subject") ?? "Note to Self"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "subject")
+        }
+    }
     static var sentEmails: [Email] {
         get {
             do {
@@ -53,8 +61,9 @@ class Emails {
     }
     
     static func sendEmail(note: String,
-                          completionHandler: @escaping (_ success: Bool, _ message: String, _ hideProgress: Bool, _ setTimer: Bool) -> ()) {
-        SecureMail.validateCode(text: note)
+                          completionHandler: @escaping (_ success: Bool,
+        _ message: String, _ hideProgress: Bool, _ setTimer: Bool) -> ()) {
+        SecureMail.validate(note)
         var success = false
         var message = ""
         var hideProgress = false
@@ -78,7 +87,7 @@ class Emails {
                             let parameters = [
                                 "from": SecureMail.email,
                                 "to": toEmail,
-                                "subject": SecureMail.subject,
+                                "subject": subject,
                                 "text": emailBody
                             ]
                             let url = SecureMail.url as URLConvertible

@@ -53,7 +53,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         if !invalidEmail {
             User.emails = emails
             if let subject = subjectTextField.text, subject != "" {
-                SecureMail.subject = subject
+                Emails.subject = subject
             }
             view.endEditing(true)
             dismiss(animated: true)
@@ -89,10 +89,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     
     @IBAction func showUpgradeVC(_ sender: Any) {
         self.performSegue(withIdentifier: "showUpgrade", sender: sender)
-    }
-    
-    @IBAction func upgradeToProPressed(_ sender: Any) {
-        PurchaseView.upgrade(self, productsAvailable: productsAvailable)
     }
     
     func restorePurchasesPressed() {
@@ -157,7 +153,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        subjectTextField.text = SecureMail.subject
+        subjectTextField.text = Emails.subject
         
         setDark()
         
@@ -205,7 +201,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     }
     
     func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
-        return (User.emails == self.emails && SecureMail.subject == subjectTextField.text)
+        return (User.emails == self.emails && Emails.subject == subjectTextField.text)
     }
     
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {

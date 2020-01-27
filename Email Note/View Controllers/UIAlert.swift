@@ -13,7 +13,7 @@ extension UIViewController {
     /// - Parameters:
     ///   - title: Title of the UIAlertController
     ///   - message: Message to present in the UIAlertController
-    ///   - actions: Any desired actions for the UIAlertController ([] for no actions)
+    ///   - actions: Any desired actions for the UIAlertController
     func presentAlert(title: String, message: String, actions: [UIAlertAction] = []) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         for action in actions {

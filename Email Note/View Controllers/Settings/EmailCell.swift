@@ -20,11 +20,9 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     var row: Int?
     
     @IBAction func emailValueChanged(_ sender: Any) {
-        validateSpinner.stopAnimating()
-        validateSpinner.isHidden = true
-        validateButton.isHidden = false
+        spinner(animate: false)
         if let email = emailField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            User.containsCaseInsensitive(email, Array(User.emailsValidated.keys)) && email != "" {
+            Comparison.containsCaseInsensitive(email, Array(User.emailsValidated.keys)) && email != "" {
             validateButton.isEnabled = true
             validateButton.isUserInteractionEnabled = false
             validateButton.tintColor = .green
@@ -41,9 +39,21 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     }
     
     @IBAction func validateEmail(_ sender: Any) {
-        User.validateRequest(rawEmail: User.mainEmail)
-        viewController?.presentAlert(title: "Request Sent", message: "Email validation request sent!",
-                                     actions: [UIAlertAction(title: "Ok", style: .default)])
+        spinner(animate: true)
+        if let index = row, let emails = viewController?.emails, index < emails.count {
+            User.validateRequest(email: User.mainEmail) { error in
+                if error == nil {
+                    self.viewController?.presentAlert(title: "Request Sent", message: "Email validation request sent!",
+                                             actions: [UIAlertAction(title: "Ok", style: .default)])
+                } else {
+                    self.unableToSendVerificationEmailAlert()
+                }
+                self.spinner(animate: false)
+            }
+        } else {
+            unableToSendVerificationEmailAlert()
+            spinner(animate: false)
+        }
     }
     
     @IBAction func clear(_ sender: Any) {
@@ -72,12 +82,9 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     
     func checkEmail() {
         if let email = viewController?.emails[row ?? 0] {
-            validateButton.isHidden = true
-            validateSpinner.startAnimating()
-            validateSpinner.isHidden = false
+            spinner(animate: true)
             User.isEmailValidated(email) { (validEmail, verificationEmail) in
-                self.validateSpinner.stopAnimating()
-                self.validateButton.isHidden = false
+                self.spinner(animate: false)
                 self.validateButton.isEnabled = true
                 if email.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
                     self.validateButton.isEnabled = false
@@ -92,6 +99,8 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
                             self.viewController?.presentAlert(title: "Request Sent",
                                                               message: "Email validation request sent for this new email!",
                                                               actions: [UIAlertAction(title: "Ok", style: .default)])
+                        } else if verificationEmail != nil {
+                            self.unableToSendVerificationEmailAlert()
                         }
                     }
                 } else {
@@ -103,6 +112,18 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
                 }
             }
         }
+    }
+    
+    private func spinner(animate: Bool) {
+        validateButton.isHidden = animate
+        (animate) ? validateSpinner.startAnimating() : validateSpinner.stopAnimating()
+        validateSpinner.isHidden = !animate
+    }
+    
+    private func unableToSendVerificationEmailAlert() {
+        self.viewController?.presentAlert(title: "Hmm",
+                                          message: "There seems to be an issue sending the verification email. Please try again later.",
+                                          actions: [UIAlertAction(title: "Ok", style: .default)])
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -35,7 +35,7 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             if !User.isValidEmail(User.mainEmail) {
                 self.emailAddress(self)
             } else {
@@ -164,13 +164,13 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
                 self.sendingLabel.text = "Email set to:\n" + User.mainEmail
                 self.bottomView(show: true, time: 5, completion: nil)
                 
-                User.validatedEmails(completionHandler: { (invalid) in
-                    if invalid.contains(email) {
+                User.isEmailValidated(email) { (verified, emailSent) in
+                    if let verify = verified, let sent = emailSent, !verify && sent {
                         self.presentAlert(title: "Verify Email",
                                           message: "An email has been sent to your address, please verify your email",
                                           actions: [UIAlertAction(title: "Ok", style: .default, handler: nil)])
                     }
-                })
+                }
             }
         }))
         

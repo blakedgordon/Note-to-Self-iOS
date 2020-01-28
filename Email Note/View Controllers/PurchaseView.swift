@@ -27,8 +27,7 @@ struct PurchaseView {
                 NoteToSelfPro.getProduct(NoteToSelfPro.proProductKey, products: productsAvailable)!)
         } else {
             view.presentAlert(title: "Unavailable",
-                              message: "Looks like we've hit a snag and we can't seem to purchase this. Please contact support.",
-                              actions: [UIAlertAction(title: "Ok", style: .default)])
+                              message: "Looks like we've hit a snag and we can't seem to purchase this. Please contact support.")
             SVProgressHUD.dismiss()
         }
         
@@ -64,6 +63,6 @@ struct PurchaseView {
             title = "Expired"
             message = "Looks like your Pro subscription expired. Please renew your subscription by upgrading again."
         }
-        view.presentAlert(title: title, message: message, actions: [UIAlertAction(title: "Ok", style: .default)])
+        view.presentAlert(title: title, message: message)
     }
 }

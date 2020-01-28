@@ -37,16 +37,10 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     var productsAvailable: [SKProduct]?
     
     @IBAction func doneButtonPressed(_ sender: Any) {
-        let rows = tableView.numberOfRows(inSection: 0)
-        var emails: [String] = []
         var invalidEmail = false
-        for row in 0..<rows {
-            let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? EmailCell
-            if let emailCell = cell, let email = emailCell.emailField.text {
-                emails.append(email.trimmingCharacters(in: .whitespacesAndNewlines))
-                if !User.isValidEmail(email.trimmingCharacters(in: .whitespacesAndNewlines)) {
-                    invalidEmail = true
-                }
+        for email in emails {
+            if !User.isValidEmail(email) {
+                invalidEmail = true
             }
         }
         
@@ -64,16 +58,15 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
                 alertTitle = "Enter Email"
                 alertMessage = "Please enter a valid email address"
             }
-            let alertAction = UIAlertAction(title: "Ok", style: .default)
-            self.presentAlert(title: alertTitle, message: alertMessage, actions: [alertAction])
+            self.presentAlert(title: alertTitle, message: alertMessage)
         }
     }
     
     @IBAction func darkSwitched(_ sender: UISwitch) {
         view.endEditing(true)
         User.darkMode = sender.isOn
-        self.view.layoutIfNeeded()
-        setDark()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.overrideUserInterfaceStyle = (User.darkMode) ? .dark : .light
     }
     
     @IBAction func darkAppIconSwitched(_ sender: UISwitch) {
@@ -81,8 +74,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         UIApplication.shared.setAlternateIconName(sender.isOn ? "Dark-AppIcon" : nil) { (error) in
             if error != nil {
                 self.presentAlert(title: "Uh Oh",
-                                  message: "We had some trouble setting the app icon. Sorry about that! If this keeps happening, please contact support.",
-                                  actions: [UIAlertAction(title: "Ok", style: .default)])
+                                  message: "We had some trouble setting the app icon. Sorry about that! If this keeps happening, please contact support.")
             }
         }
     }
@@ -98,8 +90,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
             NoteToSelfPro.store.restorePurchases()
         } else {
             self.presentAlert(title: "Unavailable",
-                              message: "Looks like we've hit a snag and we can't seem to restore any purchases. Please contact support.",
-                              actions: [UIAlertAction(title: "Ok", style: .default)])
+                              message: "Looks like we've hit a snag and we can't seem to restore any purchases. Please contact support.")
             SVProgressHUD.dismiss()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
@@ -136,14 +127,14 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         PurchaseView.purchase(self, notification: notification)
 
         self.tableView.reloadData()
-        updateSwitches()
+        updateSwitches(loadView: false)
     }
     
-    func updateSwitches() {
+    func updateSwitches(loadView: Bool) {
         darkModeSwitch.isEnabled = User.purchasedPro
         darkModeSwitch.isOn = (User.purchasedPro) ? User.darkMode : false
         darkIconSwitch.isEnabled = User.purchasedPro
-        let prevIconSwitch = darkIconSwitch.isOn
+        let prevIconSwitch = (loadView) ? UIApplication.shared.alternateIconName != nil : darkIconSwitch.isOn
         darkIconSwitch.isOn = (User.purchasedPro) ? UIApplication.shared.alternateIconName != nil : false
         if prevIconSwitch != darkIconSwitch.isOn {
             darkAppIconSwitched(darkIconSwitch)
@@ -155,20 +146,11 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
         super.viewWillAppear(animated)
         subjectTextField.text = Emails.subject
         
-        setDark()
-        
         NoteToSelfPro.store.requestProducts { (_, products) in
             self.productsAvailable = products
         }
         
-        self.newEmailCell?.updateLabel()
-        darkModeSwitch.isEnabled = User.purchasedPro
-        darkModeSwitch.isOn = (User.purchasedPro) ? User.darkMode : false
-        darkIconSwitch.isEnabled = User.purchasedPro
-        darkIconSwitch.isOn = (User.purchasedPro) ? UIApplication.shared.alternateIconName != nil : false
-        if darkIconSwitch.isOn != (UIApplication.shared.alternateIconName != nil) {
-            darkAppIconSwitched(darkIconSwitch)
-        }
+        updateSwitches(loadView: true)
         if !User.purchasedPro {
             if Emails.remainingEmails > 0 {
                 var emailText = (Emails.remainingEmails == 1) ? "email" : "emails"
@@ -193,11 +175,6 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, M
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         timer?.invalidate()
-    }
-    
-    func setDark() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.overrideUserInterfaceStyle = (User.darkMode) ? .dark : .light
     }
     
     func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {

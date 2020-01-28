@@ -179,7 +179,7 @@
 				D49CC1F42186992500B07B6D /* AppDelegate.swift */,
 				D4FB9D4621C347E900F3A10E /* View Controllers */,
 				D4FB9D4721C3480600F3A10E /* In-App Purchase */,
-				D4FB9D4A21C3612600F3A10E /* User */,
+				D4FB9D4A21C3612600F3A10E /* Model */,
 				0B4E13FC22FCAEB100A893D7 /* Views */,
 				D49CC1FB2186992700B07B6D /* Assets.xcassets */,
 				D43A7D90231629AE00D817DC /* Dark-AppIcon */,
@@ -211,7 +211,7 @@
 			path = "In-App Purchase";
 			sourceTree = "<group>";
 		};
-		D4FB9D4A21C3612600F3A10E /* User */ = {
+		D4FB9D4A21C3612600F3A10E /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				0BF626EA21C01D43001E4551 /* User.swift */,
@@ -220,7 +220,7 @@
 				0B2F60B123DA61F30004A3E8 /* SentEmail.swift */,
 				D44537EA22F6220900950419 /* SecureMail.swift */,
 			);
-			path = User;
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -518,7 +518,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 42;
 				DEVELOPMENT_TEAM = W28XDYH3BU;
 				INFOPLIST_FILE = "Email Note/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -540,7 +540,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 42;
 				DEVELOPMENT_TEAM = W28XDYH3BU;
 				INFOPLIST_FILE = "Email Note/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

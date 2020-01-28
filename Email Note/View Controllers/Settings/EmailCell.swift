@@ -32,7 +32,9 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     }
     
     @IBAction func setEmail(_ sender: Any) {
-        if let view = viewController, let index = row, let email = emailField.text, email != "" {
+        if let view = viewController, let index = row,
+            let email = emailField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            email != "" {
             view.emails[index] = email
             checkEmail()
         }
@@ -43,8 +45,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
         if let index = row, let emails = viewController?.emails, index < emails.count {
             User.validateRequest(email: User.mainEmail) { error in
                 if error == nil {
-                    self.viewController?.presentAlert(title: "Request Sent", message: "Email validation request sent!",
-                                             actions: [UIAlertAction(title: "Ok", style: .default)])
+                    self.viewController?.presentAlert(title: "Request Sent", message: "Email validation request sent!")
                 } else {
                     self.unableToSendVerificationEmailAlert()
                 }
@@ -97,8 +98,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
                         self.validateButton.tintColor = .orange
                         if let emailSent = verificationEmail, emailSent {
                             self.viewController?.presentAlert(title: "Request Sent",
-                                                              message: "Email validation request sent for this new email!",
-                                                              actions: [UIAlertAction(title: "Ok", style: .default)])
+                                                              message: "Email validation request sent for this new email!")
                         } else if verificationEmail != nil {
                             self.unableToSendVerificationEmailAlert()
                         }
@@ -107,8 +107,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
                     self.validateButton.isUserInteractionEnabled = false
                     self.validateButton.tintColor = .red
                     self.viewController?.presentAlert(title: "Invalid Email",
-                                                      message: "Please enter a valid email address",
-                                                      actions: [UIAlertAction(title: "Ok", style: .default)])
+                                                      message: "Please enter a valid email address")
                 }
             }
         }
@@ -122,8 +121,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     
     private func unableToSendVerificationEmailAlert() {
         self.viewController?.presentAlert(title: "Hmm",
-                                          message: "There seems to be an issue sending the verification email. Please try again later.",
-                                          actions: [UIAlertAction(title: "Ok", style: .default)])
+                                          message: "There seems to be an issue sending the verification email. Please try again later.")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

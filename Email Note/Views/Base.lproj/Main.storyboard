@@ -212,10 +212,10 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yqK-aT-3Hm">
-                                <rect key="frame" x="0.0" y="150" width="414" height="501"/>
+                                <rect key="frame" x="0.0" y="150" width="414" height="491"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v24-CN-QNN">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="501"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="491"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's Included:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybE-M9-ybY">
                                                 <rect key="frame" x="8" y="8" width="398" height="18"/>
@@ -347,10 +347,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="teg-nU-AsP">
-                                <rect key="frame" x="16" y="659" width="382" height="30"/>
+                                <rect key="frame" x="16" y="649" width="382" height="40"/>
                                 <color key="backgroundColor" red="0.20562759041786194" green="0.47037732601165771" blue="0.96475392580032349" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="PzX-wD-nCz"/>
+                                    <constraint firstAttribute="height" constant="40" id="PzX-wD-nCz"/>
                                 </constraints>
                                 <state key="normal" title="Subscribe to Pro">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

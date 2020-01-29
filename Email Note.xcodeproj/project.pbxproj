@@ -14,6 +14,8 @@
 		0B2F60B423DA66010004A3E8 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2F60B323DA66010004A3E8 /* HistoryTableViewController.swift */; };
 		0B2F60B623DA66B40004A3E8 /* SentEmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2F60B523DA66B40004A3E8 /* SentEmailCell.swift */; };
 		0B4E13FB22FCADBE00A893D7 /* NewEmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4E13FA22FCADBE00A893D7 /* NewEmailCell.xib */; };
+		0B5743F723E0F6DD00DD4FC8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B5743F623E0F6DD00DD4FC8 /* README.md */; };
+		0B5743F923E102E100DD4FC8 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5743F823E102E100DD4FC8 /* LICENSE.txt */; };
 		0B8C421A21C317CF00B68F4D /* NoteToSelfPro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C421921C317CF00B68F4D /* NoteToSelfPro.swift */; };
 		0B8C421C21C31DD100B68F4D /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C421B21C31DD100B68F4D /* IAPHelper.swift */; };
 		0B8C421E21C32A2300B68F4D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8C421D21C32A2300B68F4D /* StoreKit.framework */; };
@@ -50,6 +52,8 @@
 		0B2F60B323DA66010004A3E8 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		0B2F60B523DA66B40004A3E8 /* SentEmailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentEmailCell.swift; sourceTree = "<group>"; };
 		0B4E13FA22FCADBE00A893D7 /* NewEmailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewEmailCell.xib; sourceTree = "<group>"; };
+		0B5743F623E0F6DD00DD4FC8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0B5743F823E102E100DD4FC8 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		0B8C421921C317CF00B68F4D /* NoteToSelfPro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteToSelfPro.swift; sourceTree = "<group>"; };
 		0B8C421B21C31DD100B68F4D /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		0B8C421D21C32A2300B68F4D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -161,6 +165,8 @@
 				4222A632D7B0420C7E40D748 /* Frameworks */,
 				0B2A922E21C82D2400A1955C /* Podfile */,
 				0B2A922C21C82B9000A1955C /* .gitignore */,
+				0B5743F823E102E100DD4FC8 /* LICENSE.txt */,
+				0B5743F623E0F6DD00DD4FC8 /* README.md */,
 				4726E7032E24AE460F6F6B07 /* Pods */,
 			);
 			sourceTree = "<group>";
@@ -289,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B5743F923E102E100DD4FC8 /* LICENSE.txt in Resources */,
 				D43A7D9423162A0800D817DC /* Dark-AppIcon@3x.png in Resources */,
 				0B2A922F21C82D2400A1955C /* Podfile in Resources */,
 				0B04388022FCAA1D00F598D6 /* EmailCell.xib in Resources */,
@@ -298,6 +305,7 @@
 				D4FB9D4921C349BD00F3A10E /* GoogleService-Info.plist in Resources */,
 				D43A7D92231629ED00D817DC /* Dark-AppIcon@2x.png in Resources */,
 				D49CC1FC2186992700B07B6D /* Assets.xcassets in Resources */,
+				0B5743F723E0F6DD00DD4FC8 /* README.md in Resources */,
 				D49CC1FA2186992500B07B6D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

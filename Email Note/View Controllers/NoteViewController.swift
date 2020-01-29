@@ -35,9 +35,9 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             if !User.isValidEmail(User.mainEmail) {
-                self.emailAddress(self)
+                self.emailAddress()
             } else {
                 User.validatedEmails(completionHandler: { (emails) in
                     if emails.count > 0 {
@@ -49,8 +49,7 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
                         for email in emails {
                             message.append(contentsOf: "\n\(email)")
                         }
-                        self.presentAlert(title: "Invalid \(emailString.capitalized)", message: message,
-                                          actions: [UIAlertAction(title: "Ok", style: .default, handler: nil)])
+                        self.presentAlert(title: "Invalid \(emailString.capitalized)", message: message)
                     }
                 })
             }
@@ -70,20 +69,18 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
             note.becomeFirstResponder()
         }
         sendingProgress.isHidden = true
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.overrideUserInterfaceStyle = (User.darkMode) ? .dark : .light
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        bottomView(show: true, time: 5, completion: nil)
+        bottomView(show: true, time: 5)
     }
     
     @objc func appBecameActive(notification: NSNotification) {
         if self.view.isFocused {
             note.becomeFirstResponder()
         }
-        bottomView(show: true, time: 5, completion: nil)
+        bottomView(show: true, time: 5)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -100,7 +97,7 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
             
             self.sending = true
             
-            self.bottomView(show: true, time: nil, completion: nil)
+            self.bottomView(show: true, time: nil)
             
             self.sendingProgress.isHidden = false
             self.sendingProgress.setProgress(0.05, animated: true)
@@ -142,7 +139,8 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
         }
     }
     
-    func emailAddress(_ sender: Any) {
+    /// Prompt the user to provide an email address to enable us to send to
+    func emailAddress() {
         let setUserEmail = UIAlertController(title: "Set Email",
                                              message: "Please enter your email to send notes to yourself",
                                              preferredStyle: .alert)
@@ -151,26 +149,21 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
             let email = setUserEmail.textFields![0].text!.trimmingCharacters(in: .whitespacesAndNewlines)
             
             if !User.isValidEmail(email) {
-                let noEmailText = UIAlertController(title: "Enter Email",
-                                                    message: "Please enter a valid email address",
-                                                    preferredStyle: .alert)
-                noEmailText.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-                    self.present(setUserEmail, animated: true, completion: nil)
-                }))
-                
-                self.present(noEmailText, animated: true, completion: nil)
+                let action = UIAlertAction(title: "Ok", style: .default, handler: { action in
+                    self.present(setUserEmail, animated: true)
+                })
+                self.presentAlert(title: "Enter Email", message: "Please enter a valid email address", actions: [action])
             } else {
                 User.mainEmail = email
                 self.sendingLabel.text = "Email set to:\n" + User.mainEmail
-                self.bottomView(show: true, time: 5, completion: nil)
+                self.bottomView(show: true, time: 5)
                 
-                User.validatedEmails(completionHandler: { (invalid) in
-                    if invalid.contains(email) {
+                User.isEmailValidated(email) { (verified, emailSent) in
+                    if let verify = verified, let sent = emailSent, !verify && sent {
                         self.presentAlert(title: "Verify Email",
-                                          message: "An email has been sent to your address, please verify your email",
-                                          actions: [UIAlertAction(title: "Ok", style: .default, handler: nil)])
+                                          message: "An email has been sent to your address, please verify your email")
                     }
-                })
+                }
             }
         }))
         
@@ -182,7 +175,7 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
         textField.keyboardType = UIKeyboardType.emailAddress
         textField.returnKeyType = UIReturnKeyType.done
         
-        self.present(setUserEmail, animated: true, completion: nil)
+        self.present(setUserEmail, animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -192,7 +185,7 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
         
         // If we're at the end of the scroll view
         if scrollOffset + scrollViewHeight > scrollContentSizeHeight {
-            bottomView(show: true, time: 5, completion: nil)
+            bottomView(show: true, time: 5)
         }
     }
     
@@ -200,7 +193,12 @@ class NoteViewController: UIViewController, UIScrollViewDelegate, UITextViewDele
         return !sending
     }
     
-    func bottomView(show: Bool, time: TimeInterval?, completion: (() -> Void)?) {
+    /// This recursive function is the determining factor on showing or hiding the bottom view
+    /// - Parameters:
+    ///   - show: Set the bottom view to show or hide
+    ///   - time: The length of time to show or hide the bottom view (`nil` sets it to stay that way)
+    ///   - completion: A completion block to specify something to do after the time is complete
+    func bottomView(show: Bool, time: TimeInterval?, completion: (() -> Void)? = nil) {
         if showingBottomView != show {
             self.showingBottomView = show
             if show {

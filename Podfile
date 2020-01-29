@@ -4,7 +4,6 @@ use_frameworks!
 
 target 'Email Note' do
     pod 'Alamofire', '~> 4.7'
-    pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'SVProgressHUD'
 end

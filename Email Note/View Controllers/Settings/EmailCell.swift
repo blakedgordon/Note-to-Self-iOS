@@ -22,7 +22,7 @@ class EmailCell: UITableViewCell, UITextFieldDelegate {
     @IBAction func emailValueChanged(_ sender: Any) {
         spinner(animate: false)
         if let email = emailField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            Comparison.containsCaseInsensitive(email, Array(User.emailsValidated.keys)) && email != "" {
+            Comparison.containsCaseInsensitive(email, User.emailsValidated) && email != "" {
             validateButton.isEnabled = true
             validateButton.isUserInteractionEnabled = false
             validateButton.tintColor = .green

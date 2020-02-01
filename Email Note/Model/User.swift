@@ -61,9 +61,14 @@ class User {
     ///
     /// This is for caching emails that the device knows have already been validated, to reduce the need
     /// of polling Firebase for validated emails
-    static var emailsValidated: [String: Bool] {
+    static var emailsValidated: [String] {
         get {
-            return UserDefaults.standard.object(forKey: "validatedEmails") as? [String: Bool] ?? ["": false]
+            if let validatedArray = UserDefaults.standard.object(forKey: "validatedEmails") as? [String] {
+                return validatedArray
+            }
+            // At one point, pre-v1.3.1 this object was a [String: Bool] dict, but was apparent that it should just be
+            // a string array, and has changed. This is to ensure backwards compatability.
+            return Array((UserDefaults.standard.object(forKey: "validatedEmails") as? [String: Bool] ?? ["": false]).keys)
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "validatedEmails")
@@ -91,12 +96,11 @@ extension User {
     ///   - verified: If true, the user has verified the email. `nil` indicates an invalid email string
     ///   - verificationSent: Whether or not a new verification email was sent to the user
     static func isEmailValidated(_ email: String, completionHandler: @escaping (_ verified: Bool?, _ verificationSent: Bool?) -> ()) {
-        let validSet = Set(self.emailsValidated.keys)
         let formattedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         
         // If the email is already in the emailsValidated array, then it's already
         // valid, and complete with verified set to true
-        if Comparison.containsCaseInsensitive(formattedEmail, Array(validSet)) {
+        if Comparison.containsCaseInsensitive(formattedEmail, emailsValidated) {
             completionHandler(true, nil)
             return
         }
@@ -115,7 +119,7 @@ extension User {
                 Auth.auth().signIn(withEmail: formattedEmail, password: formattedEmail, completion: { (result, error) in
                     if let user = result?.user, user.isEmailVerified {
                         completionHandler(true, nil)
-                        emailsValidated[formattedEmail] = true
+                        emailsValidated.append(formattedEmail)
                     } else {
                         completionHandler(false, nil)
                     }
@@ -161,18 +165,22 @@ extension User {
     /// - Parameter emailsNotValidated: An array of all the user's emails that are not validated
     static func validatedEmails(completionHandler: @escaping (_ emailsNotValidated: [String]) -> ()) {
         var invalidEmails = [String]()
-        let emailsSet = Set(self.emails)
-        let validSet = Set(self.emailsValidated.keys)
-        if Comparison.isSubsetCaseInsensitive(emailsSet, validSet) {
+        if Comparison.isSubsetCaseInsensitive(emails, emailsValidated) {
             completionHandler(invalidEmails)
             return
         }
-        for (index, email) in self.emails.enumerated() {
-            self.isEmailValidated(email) { validated, _ in
+        for (index, email) in emails.enumerated() {
+            isEmailValidated(email) { validated, _ in
                 if !(validated ?? false) {
                     invalidEmails.append(email)
                 }
-                if index == self.emails.count - 1 {
+                
+                /*
+                 Necessary to check if this is the last item in the array, since calling
+                 the completion handler after the for block doesn't work properly because
+                 isEmailValidated is an asynchronous function
+                */
+                if index == emails.count - 1 {
                     completionHandler(invalidEmails)
                 }
             }

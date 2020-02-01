@@ -150,7 +150,7 @@ extension Emails {
                             ]
                             
                             // Using the API, send a request to send the email
-                            let req = Alamofire.request(url, method: .post, parameters: parameters).authenticate(user: "api", password: key)
+                            let req = Alamofire.request(url, method: .post, parameters: parameters).authenticate(user: SecureMail.username, password: key)
                             req.response { response in
                                 if response.error != nil || response.response == nil {
                                     // Add an email if there was an error associated with the address

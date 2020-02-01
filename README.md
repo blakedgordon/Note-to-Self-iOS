@@ -15,6 +15,7 @@ You can start by forking this repository and creating pull requests on the maste
 Additional setup is required for this project to work compile. While all of the pods are intentionally included in the repo, there is a `SecureMail.swift` file that is included in the `.gitignore` which contains the API and API Key for Note to Self. To ensure that this project runs, please create a `SecureMail.swift` file with the following variables and function as shown in the example below
 ```swift
 class SecureMail {
+    static let username = "<API USERNAME>"
     static let apiKey = "<API KEY>"
     static let email = "<DESIRED EMAIL ADDRESS TO SEND FROM>"
     static let url = "<URL TO THE API>"
@@ -25,7 +26,7 @@ class SecureMail {
     static func validate(_ text: String) { ... }
 }
 ```
-The API should accept a POST request with the following parameters, and authenticating with the user "api" and the API Key as the password.
+The API should accept a POST request with the following parameters, and authenticating with the username and the API Key as the password.
 ```
 {
   "from": <DESIRED EMAIL ADDRESS TO SEND FROM>,

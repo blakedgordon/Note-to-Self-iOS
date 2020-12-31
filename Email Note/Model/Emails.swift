@@ -139,6 +139,7 @@ extension Emails {
                             let emailBody  = note
                             let toEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
                             let url = SecureMail.url as URLConvertible
+                            let user = SecureMail.username
                             let key = SecureMail.apiKey
                             
                             // The API service expects the items below in a POST request to send the email
@@ -150,7 +151,7 @@ extension Emails {
                             ]
                             
                             // Using the API, send a request to send the email
-                            let req = Alamofire.request(url, method: .post, parameters: parameters).authenticate(user: SecureMail.username, password: key)
+                            let req = Alamofire.request(url, method: .post, parameters: parameters).authenticate(user: user, password: key)
                             req.response { response in
                                 if response.error != nil || response.response == nil {
                                     // Add an email if there was an error associated with the address

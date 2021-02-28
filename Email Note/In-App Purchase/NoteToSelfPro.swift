@@ -145,7 +145,7 @@ class NoteToSelfPro {
     private static func updateExpirationDate(jsonResponse: Dictionary<String, Any>) {
         let receipts = jsonResponse["latest_receipt_info"] as? [[String: Any]] ?? [[String: Any]]()
         var expirationDate: Date?
-        if var expirationString = receipts.last?["expires_date"] as? String {
+        if var expirationString = receipts.first?["expires_date"] as? String {
             let stringArray = expirationString.split(separator: " ")
             if let date = stringArray.first, stringArray.count > 1 {
                 let time = stringArray[1]
@@ -157,7 +157,9 @@ class NoteToSelfPro {
             }
         }
         
-        NoteToSelfPro.expireDate = expirationDate ?? Date.distantPast
+        if let validExpDate = expirationDate, NoteToSelfPro.expireDate != validExpDate {
+            NoteToSelfPro.expireDate = validExpDate
+        }
         
         if NoteToSelfPro.expireDate > Date() {
             User.purchasedPro = true
